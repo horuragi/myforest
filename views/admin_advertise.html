@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>광고 관리</title>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="/semantic.min.css">
+  <script src="/semantic.min.js"></script>
+  <script src="/js/admin_page.js"></script>
+
+  <style>
+    body {
+      font-family: "Nanum Gothic", sans-serif;
+    }
+    #hide {
+      display: none;
+    }
+  </style>
+
+</head>
+<body >
+	<% include admin_header.html %>
+	<div class="ui" style="margin:15px">
+          <table class="ui small striped table" style="text-align: center">
+                    <thead>
+                      <tr>
+                        <th width="8%">번호</th>
+                        <th width="35%">파일이름(간판)</th>
+                        <th width="35%">광고링크</th>
+                        <th width="22%">작업</th>
+                      </tr>
+                    </thead>
+                    <tbody class="adlist">
+
+                    </tbody>
+                  </table>
+<form class="ui form" id="adform" method="post" enctype="multipart/form-data" action="">
+  <a class="item">
+    <div class="ui red horizontal label">파일첨부</div>
+	<input type="file" id="file1" name="file1">
+  </a>
+  <a class="item">
+    <div class="ui purple horizontal label">광고링크</div>
+        <input type="text" id="adurl" name="adurl" placeholder="광고링크를 입력해주세요.">
+  </a>
+    <button class="ui positive button" type="button" onclick="uploadFile()" style="margin:15px">광고 업로드</button>
+</form>
+<br>
+</div>
+
+<script>
+     $( document ).ready( function() {
+        $.get( "/admin/adlist", function(result) {
+            result.result.forEach(function (item, index) {
+                var idx = index+1;
+            $( '.adlist' ).append( ' <tr><td>'+idx+'</td><td>'+item.filename+'</td><td>'+item.adurl+'</td><td><a href="/admin/addel/'+idx+'" style="color:green">삭제</a></td></tr>' );
+});
+}, 'json')
+
+      } );
+
+function uploadFile(){
+    var adurl =  $('#adform').find('input[name="adurl"]').val();
+    var encodedurl = encodeURIComponent(adurl);
+    var file1 = $('#adform').find('input[name="file1"]')[0].files[0];
+    var formData = new FormData();
+    formData.append('file1',file1);
+    //formData.append("file1", $("#file1")[0].files[0]);
+
+    $.ajax({
+        url: '/admin/adadd/'+encodedurl,
+        dataType: 'json',
+                processData: false,
+                contentType: false,
+                data: formData,
+                type: 'POST',
+                success: function(result){
+                    location.href="/admin/admin_advertise"
+                }
+        });
+}
+
+active_check('advertise');
+
+</script>
+</body>
+</html>

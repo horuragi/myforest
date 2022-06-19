@@ -1,0 +1,18 @@
+FROM node:12.18.0
+
+# Create Work Directory
+WORKDIR /app
+
+# Install script for database waiting
+ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh ./
+RUN chmod +x wait-for-it.sh
+
+# Install nodemon
+RUN npm install -g nodemon
+
+# npm install
+COPY package*.json ./
+RUN npm install
+
+# Docker Demon Port Mapping
+EXPOSE 80

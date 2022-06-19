@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>광고 관리</title>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="/semantic.min.css">
+  <script src="/semantic.min.js"></script>
+  <script src="/js/admin_page.js"></script>
+
+  <style>
+    body {
+      font-family: "Nanum Gothic", sans-serif;
+    }
+    #hide {
+      display: none;
+    }
+  </style>
+
+</head>
+<body >
+	<% include admin_header.html %>
+<div class="ui" style="margin:15px">
+<table class="ui small striped table" style="text-align: center">
+<thead>
+<tr>
+<th width="8%">번호</th>
+<th width="15%">유저식별자(네이버)</th>
+<th width="20%">닉네임</th>
+<th width="20%">이름</th>
+<th width="25%">등록일</th>
+<th width="12%">작업</th>
+</tr>
+</thead>
+<tbody>
+
+<% data.forEach(function (item,index){ %>
+<tr>
+<td>
+<%= item.idx %>
+</td>
+<td>
+<%= item.id %>
+</td>
+<td>
+<%= item.nickname %>
+</td>
+<td>
+        <%= item.name %>
+        </td>
+<td>
+        <%= item.regdate %>
+</td>
+<td>
+	<a href="/admin/admin_users/delete/<%= item.idx%>" style="color:green">삭제</a>
+</td>
+</tr>
+<% })%>
+</tbody>
+</table>
+</div>
+<div class="ui container" style="text-align: center">
+<ul class="pager">
+
+
+
+<%
+var curSet = pasing.curSet
+var endPage = pasing.endPage
+var startPage = pasing.startPage
+var totalSet = pasing.totalSet
+var totalPage = pasing.totalPage
+var page_list_size = pasing.page_list_size
+var page_size = pasing.page_size
+var curPage = pasing.curPage
+%>
+
+
+<%
+if(curSet > 1){
+%>
+<a href='/admin/admin_users/pasing/<%= ( startPage - 1) %>' style="margin-left:10px;color:black">이전페이지</a>
+
+<%
+}
+%>
+
+
+<%
+for(var i = startPage; i <= endPage; i++){
+if(i > totalPage){break;}
+
+if(i == curPage){
+%>
+
+<a href='/admin/admin_users/pasing/<%= i %>' style="margin-left:10px;color:green;font-size: 2em">
+<%= i %>
+</a>
+
+<%
+}else{
+%>
+
+
+<a href='/admin/admin_users/pasing/<%= i %>' style="margin-left:10px;color:black">
+<%= i %>
+</a>
+
+
+<%
+}
+%>
+
+<%
+}
+%>
+
+<%
+if(curSet < totalSet){
+%>
+
+<a href='/admin/admin_users/pasing/<%= ( endPage + 1) %>' style="margin-left:10px;color:black">다음페이지</a>
+
+<%
+}
+%>
+
+</ul>
+</div>
+	<script>
+		active_check('users');
+	</script>
+</body>
+</html>

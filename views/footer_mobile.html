@@ -1,0 +1,54 @@
+<footer>
+        <div class="row" style="background: rgb(73, 73, 73);color: white">
+            <div class="col-md-6 mt-3">
+                <p><font size=2 style="margin-bottom: 10px">대표 : 장택순 | 사업
+자번호:308-08-38385 | <a href="#" onclick="$('#collection_detail').modal('show');">회원이용약관</a>| <a href="#" onclick="$('#provision_detail').modal('show');">개인정보관리방침</a></font>
+                <font size=2> | 주소: 충남 부여군 옥산면 차동로 30번길 10</font>
+                <font size=2> | 통신판매신고번호:충남부여 2019-66</font></p>
+                <p> <font size=2>COPYRIGHT(c) 2019 내안의숲 ALL RIGHTS RESERVERD.</font></p>
+            </div>
+        </div>
+    </footer>
+
+<div class="modal fade" id="collection_detail">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+        회원이용약관(필수)
+</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+    <% include personal_information_terms.html %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="provision_detail">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+           개인정보 수집 및 이용동의(필수)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% include collect_use_terms.html %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

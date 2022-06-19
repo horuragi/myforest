@@ -1,0 +1,9 @@
+.env.db
+.env.sms
+.env.naver_login
+.env.admin
+.vscode/
+.git/
+node_modules/
+db/data/
+db/initdb.d/

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+			<link rel="stylesheet" type="text/css" href="/semantic.min.css">
+			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+			<script src="/semantic.min.js"></script>
+			<link rel="stylesheet" type="text/css" href="/zoomslider.css" />
+			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+			<script type="text/javascript" src="/modernizr-2.6.2.min.js"></script>
+			<script>
+					$(document)
+						.ready(function() {
+				
+							// fix main menu to page on passing
+					 
+							// show dropdown on hover
+							$('.ui.dropdown').dropdown({
+								on: 'hover',
+								action:'nothing'
+							});
+						})
+					;
+					</script>
+			<style>
+			#menu{
+				margin-right: 50px;
+				color: black;
+				height: 60px;
+				font-size: 18px;
+				font-weight: bold;
+				margin-bottom: 0px;
+			}
+			#top{
+				width: 100%;
+				background-color: rgb(107, 107, 107);
+				height: 35px;
+			}
+			#topmenu{
+				margin-top:0px;
+				height: 35px;
+			}
+			#main{
+				margin-top:0;
+				width: 100%;
+				height: 100%;
+			}
+			#main_menu{
+				height: 50px;
+				background-color: white;
+			}
+
+			#border{
+				height: 10px;
+				background: rgb(71, 175, 71);
+				margin-bottom: 5px;
+			}
+
+			#border2{
+				height: 1px;
+				background: rgb(107, 107, 107);
+			}
+
+			#demo-1 {
+			overflow: hidden; /* to bound the empty top space created by inner element's top margin */
+			position: relative; /* can either be relative, absolute or fixed. If position is not set (i.e. static), it would be set to "relative" by script */
+			width: 100%;
+			height: 500px;
+			background-color: #f0f0f0;
+		}
+		#submenu{
+			font-size: 15px;
+		}
+		.demo-inner-content {
+			position: relative; /* if position is not set, the script will set it to 'relative'. */
+			z-index: 2; /* if z-index is not set, the script will set it to '2'. */
+			margin: 70px auto;
+			padding: 40px;
+			max-height: 500px;
+			color: #fff;
+			text-align: center;
+			font-size: 1.5em;
+		}
+
+		.demo-inner-content h1 {
+			font-size: 2.5em;
+			margin: 0;
+		}
+		#container{
+			width: 100%;
+			height: 140px;
+		}
+		#container2{
+			min-height: 400px auto;
+		}
+		#footer{
+			font-style: normal;
+			height: 120px;
+		}
+#content_left{
+	width:25%;	
+}
+
+#content_right{
+	width:75%;
+}
+
+#load {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	display: block;
+	opacity: 1.0;
+	background: white;
+	z-index: 99;
+	text-align: center;
+}
+
+#img {
+	position: absolute;
+	top: 45%;
+	left: 48%;
+	z-index: 100;
+}
+#load > p {
+	position: relative;
+	z-index: 100;
+}
+
+.top_box1{
+	float: left;
+	width: 50%;
+	height: 100%;
+}
+.top_box2{
+	display: inline-block;
+	width: 50%;
+	height: 100%;
+	text-align: right;
+}
+
+			</style>
+<script>
+	function loading_show(){
+	$('#load').show();
+	}
+	function loading_hide(){
+	//$('#load').hide();
+	$('#load')
+.transition({animation:'fade',duration:'600ms'})
+;
+	}
+	function page_move(renderpage){
+				location.href=renderpage;
+			}
+
+			function mouse_on(obj){
+				obj.style.background = "#cecece";
+				obj.style.fontWeight= "bold";
+				var tag = obj.getElementsByTagName('i');
+				tag[0].style.display = "inline";
+			}
+
+			function mouse_off(obj){
+				obj.style.background = "white";
+				obj.style.fontWeight= "lighter";
+				var tag = obj.getElementsByTagName('i');
+				tag[0].style.display = "none";
+			}
+	</script>
+  </head>
+	<body>
+			<div id="load">
+					<div id="img"><img src="/images/loading1.gif" alt="loading..."><br><strong>Loading...</strong></div>	
+				</div>
+		<div id="main">
+				<% include header.html %>
+			<div id="border" ></div>
+			<div id="border2" ></div>
+			<div id=container style="background:url('/images/introtop.jpg');background-size:cover;background-repeat: no-repeat;">
+		</div>
+		<div id="container2" class="ui container">
+					<div class="ui stackable two column grid">
+							<div id="content_left" class="column">
+									<table border=1 cellspacing="0" cellpadding="20px" style="width:100%;border-collapse:collapse; border:1px;border-color: rgb(148, 148, 148)">
+										<tr><td style="height:100px;text-align: center;color:white;background:green;font-size:18px;"><strong>커뮤니티</strong></td></tr>
+										<tr><td style= "cursor:pointer" onmouseover="mouse_on(this)" onmouseout="mouse_off(this)" onclick="location.href='/notice'">
+                                            <i class="fas fa-check" style="margin-right: 10px;display:none;"></i>
+                                        공지사항</td></tr>
+                                    <tr><td style= "cursor:pointer" onmouseover="mouse_on(this)" onmouseout="mouse_off(this)" onclick="location.href='/photo'">
+                                            <i class="fas fa-check" style="margin-right: 10px;display:none;"></i>
+                                        포토갤러리</td></tr>
+                                        <tr><td style="background: #cecece;">
+                                                <i class="fas fa-check" style="margin-right: 10px;display:inline"></i>
+                                                <strong>내안의 숲 후기</strong></td></tr>
+                                    <tr><td style= "cursor:pointer" onmouseover="mouse_on(this)" onmouseout="mouse_off(this)" onclick="location.href='/qna'">
+                                            <i class="fas fa-check" style="margin-right: 10px;display:none;"></i>
+                                        문의게시판</td></tr>
+										
+										</table>
+							</div>
+							<div id="content_right" class="column">
+                                    <table border=0 cellspacing="0" cellpadding="15px" style="margin-top:20px;width:100%;border-collapse:collapse; border:1px;border-color: rgb(148, 148, 148)">
+                                            <tr><td style="width: 50%"><strong><h2>내안의 숲 후기</h2></strong><p style="margin-top:10px">후기 게시판입니다.</p>
+                                                <hr align="left" style="width: 15%;border:solid 2px green"></td>
+                                                <td  style="width: 50%;text-align: right;vertical-align: text-top"><i class="fas fa-home" style="color: green"></i>
+                                                    &nbsp;&nbsp;HOME&nbsp;&nbsp;<i class="fas fa-angle-right"></i>&nbsp;&nbsp;커뮤니티&nbsp;&nbsp;
+                                                    <i class="fas fa-angle-right"></i>&nbsp;&nbsp;내안의 숲 후기&nbsp;&nbsp;</td></tr>
+                                            </table>
+                                            <% include board_insert.html %>
+							</div>
+						</div>
+						<div>&nbsp;</div>
+			<!--내안의숲소개 캠핑장안내도 요금안내 예약하기 예약확인
+				공지사항ㅡ문의사항 찾아오시는길-->
+			</div>
+		<!--footer-->
+		<% include footer.html %>
+	</div>
+
+	</body>
+	<script type="text/javascript" src="/jquery.zoomslider.min.js"></script>
+	<script>
+			setTimeout(function(){
+						loading_hide();
+					},400);
+					</script>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html> 
+<head>
+    <meta charset="utf-8">
+ 
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/js/swiper/swiper.css">
+    <link rel="stylesheet" href="/js/swiper/swiper.min.css">
+   <script type="text/javascript" src="/js/booking_check_mobile.js"></script>
+
+    <script src="/js/swiper/swiper.js"></script>
+    <script src="/js/swiper/swiper.min.js"></script>
+    <script src="/js/booking.js"></script>
+    <link rel="stylesheet" href="/css/booking_mobile.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+
+<body>
+	<% include header_mobile.html %>
+
+        <div class="container">
+                <div class="row">
+                  <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 col-12">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                               <%
+                            if(data[4].picture==""){
+%>
+<li class="swiper-slide"><img src="/images/noimage.gif"></li>
+<%
+}else{
+var arr = JSON.parse(data[4].picture); 
+arr.forEach((item,index)=>{
+%>
+<li class="swiper-slide"><img src="/camp_image/<%=item.filename %>"></li>
+<%
+});
+}
+%>
+                        </div>
+                        
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div><!--col-md-12-->
+            </div><!--row-->
+
+
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 col-12" style="text-align:center">
+                       <ul class="list-group">
+                          <li class="list-group-item list-group-item-info"><span><strong>[방갈로] 소쩍새</strong></span></li>
+                        <!--<div class="calendar_select">
+-->
+                          <li class="list-group-item">
+                            <span> 입실일 : <span id="first_select_day"> <%= f_day %></span></span>
+                          </li>
+                          <li class="list-group-item">
+                            <span> 퇴실일 : <span id="last_select_day"> <%= l_day %></span></span>
+                          </li>
+                        <!--</div>-->
+
+                        <!--<div class="alert_day">
+-->
+                          <li class="list-group-item list-group-item-success">
+                            예약기간 : <span id="alert_days"><%= days %></span>
+                          </li>
+                        <!--</div>
+-->
+                        </ul>
+<div class="icon" id="icon1">
+                            <div class="icon_labeld" >
+                                <img src="/icon/refrigerator.png">
+                                <p class="icon_text">냉장고</p>
+                            </div>
+
+                            <div class="icon_labeld">
+                                <img src="/icon/fan.png">
+                                <p class="icon_text">선풍기</p>
+                            </div>
+                            
+                            <div class="icon_labeld">
+                                <img src="/icon/cooler.png">
+                                <p class="icon_text">에어컨</p>
+                            </div>
+
+                            <div class="icon_labeld">
+                                <img src="/icon/electricity.png">
+                                <p class="icon_text">전기</p>
+                            </div>
+
+                            <div class="icon_labeld">
+                                <img src="/icon/ondol.png">
+                                <p class="icon_text">전기 온돌</p>
+                            </div>
+
+
+                        </div>
+
+                        <div class="icon">   
+                            <div class="icon_labeld">
+                                <img src="/icon/water_sink.png"> 
+                                <p class="icon_text">개수대</p>
+                            </div>
+
+                            <div class="icon_labeld">
+                                <img src="/icon/toilet.png"> 
+                                <p class="icon_text">화장실</p>
+                            </div>
+
+                            <div class="icon_labeld">
+                                <img src="/icon/shower.png"> 
+                                <p class="icon_text">샤워 시설</p>
+                            </div>
+
+                            <div class="icon_labeld">
+                                <img src="/icon/hot_water.png"> 
+                                <p class="icon_text">온수 제공</p>
+                            </div>  
+
+                            <div class="icon_labeld">
+                                <img src="/icon/chair.png">
+                                <p class="icon_text">야외 테라스</p>
+                            </div>
+                        </div>
+
+
+
+
+                </div>
+            </div><!--row-->
+
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 col-12">
+                    <div class="room_info">
+<strong>기준 숙박인원 <%= data[4].standnum %>명 / 최대 숙박인원 <%= data[4].maxnum %>명</strong><br>
+                       <%- data[4].pagetext %>
+
+                    </div>
+                </div>
+            </div><!--row-->
+
+
+          
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 col-12">
+                  <ul class="list-group">
+<li class="list-group-item list-group-item-primary"><strong>예약정보</strong></li>                    
+                        <form name="sec_room" action="/reserve/room_reserve" method="post">
+                            <input type="hidden" name="f_day" value=<%= f_day %>>
+                            <input type="hidden" name="l_day" value=<%= l_day %>>
+                            <input type="hidden" name="s_day" value=<%= sec_day%>> 
+                            <input type="hidden" name="room_name">
+                            <input type="hidden" name="room_type" value="scops_owl">
+                            <input type="hidden" name="last_field" value="0">
+
+<li class="list-group-item">                    
+					<%if(!session.name||session.name==""||session.logined!="yes") {%>
+						<input type="text" class="form-control" name="user_name" placeholder="예약자 성함을 입력해주세요.">
+					<input type="hidden" name="user_id" value="nologin" >
+					<%}else{%>
+					<%if(session.name!="annoymous"){%>
+					<input type="text" name="user_name" value="<%=session.name%>">
+					<%}else{%>
+						<input type="text" name="user_name" placeholder="예약자 성함을 입력해주세요.">
+						<%}%>
+					<input type="hidden" name="user_id" value="<%=session.userid%>" >
+					<%}%>
+</li>
+<li class="list-group-item">                    
+					<input type="text" name="user_phone" onKeyup="inputPhoneNumber(this);" class="form-control" placeholder="휴대폰 번호를 입력해주세요." >
+</li>
+                        </form>
+                </div>  
+            </div><!--row-->
+                
+
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 col-12">
+                <div class="room_index">
+                    <ul class="list-group">
+<li class="list-group-item list-group-item-info"><strong>방 구역 선택</strong>
+</li>
+</ul>
+                    <div class="select_room_index">
+                    </div>
+                </div> 
+                <div class="price_data" style="display:none"><%= price %></div>
+
+                <div class="select_info">
+                    <ul class="list-group">
+<li class="list-group-item list-group-item-info"><strong>
+                    선택 내역
+</strong></li>
+<li class="list-group-item">
+                            <span style="padding-right:10px;"> 기본 요금 </span><span class="default_price"><%= price %></span>
+</li>
+<li class="list-group-item">
+                            <span style="padding-right:10px;">합계 금액 </span><span class="sum_price"><%= price %></span>
+</li>
+</ul>
+                </div>
+                </div>
+            </div>
+
+ 
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 col-12">
+                    <ul class="list-group">
+<li class="list-group-item list-group-item-info"><strong>
+                    결제 방식</strong></li>
+<li class="list-group-item">
+                        농협은행 / 463131-52-138136 / 장택순( 010 5691 5058 )
+</li>
+</ul>
+                </div>
+            </div><!--row-->
+
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 col-12">
+                <div class="terms">
+                    <ul class="list-group">
+<li class="list-group-item list-group-item-info"><strong>
+이용약관
+</strong></li></ul>
+
+                    <div class="terms_agree">
+                        <div class="ui checkbox">
+                            <input type="checkbox" id="checkboxcontroll">
+                            <label><strong>약관 전체 동의</strong></label>
+                        </div>
+                    </div>
+
+                        <div class="terms_info">        
+                            <div class="ui checkbox">
+                                <input type="checkbox" name="booking_terms" id="terms_1">
+                                <label>개인정보 수집 동의 <p id="collection">(상세 보기)</p> </label>
+                            </div>
+
+                            
+                            <div class="ui checkbox">
+                                <input type="checkbox" name="booking_terms" id="terms_2">
+                                <label>개인정보 제공 동의 <p id="provision">(상세 보기)</p></label>
+                            </div>
+
+                            <div class="ui checkbox" id="cancel_terms">
+                                <input type="checkbox" name="booking_terms" id="terms_3"> 
+                                <label>취소/환뷸 규정 동의</label>
+
+                                <table style="font-size:12px">
+                                    <colgroup>
+                                        <col>
+                                        <col>
+                                    </colgroup>
+                                    <tobdy>
+                                        <tr>
+                                            <td scope="col" class="td_left">이용 10일 전까지</td>
+                                            <td scope="col" class="td_right">취소 수수료 없음</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td scope="col" class="td_left">이용 &nbsp;&nbsp;7일 전까지</td>
+                                            <td scope="col" class="td_right">총 결제 금액의 10% 차감</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td scope="col" class="td_left">이용 &nbsp;&nbsp;5일 전까지</td>
+                                            <td scope="col" class="td_right">총 결제 금액의 30% 차감</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td scope="col" class="td_left">이용 &nbsp;&nbsp;3일 전까지</td>
+                                            <td scope="col" class="td_right">총 결제 금액의 50% 차감</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td scope="col" class="td_left">이용 &nbsp;&nbsp;1일 전까지</td>
+                                            <td scope="col" class="td_right">총 결제 금액의 80% 차감</td>
+                                        </tr>
+                                    </tobdy>
+                                </table>
+                                <div class="cancel_info">
+                                    <p style="font-size:12px">
+                                        - 실시간 예약의 특성상 100% 일치할 수 없으며 경우에 따라 중복예약이 발생할 수 있습니다.<br>
+                                        - 중복 예약 발생시 먼저 결제 된 예약이 우선시 됩니다.<br>
+					- 예약 신청 후 12시간 이내 입금 확인이 이루어지지 않으면 예약이 자동으로 취소됩니다.<br>
+                                        - 객실 요금은 기준 인원에 대한 요금이며 인원 추가시 추가 요금이 발생합니다. <br>
+                                        - 추가 요금 발생시 내안의숲 오토캠핑장의 사정에 따라서 현장 결제가 가능합니다.<br>
+                                        - 예약 취소시 환불 기준에 맞춰 환불됩니다.<br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                </div>
+            </div><!--row-->
+   
+            <div class="row" style="margin-bottom:10px">
+                <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 col-12">
+			<button class="btn btn-success btn-lg btn-block" onclick=javascript:<%if (session.name!="annoymous") {%>terms();<%}else{%>anno_terms();<%}%> > 예약 신청</button>
+				
+                </div>
+            </div>  
+<% include footer_mobile.html %>
+    </div>
+
+<div class="modal fade" id="collection_detail">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+        회원이용약관(필수)
+</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+    <% include personal_information_terms.html %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="provision_detail">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+           개인정보 수집 및 이용동의(필수)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% include collect_use_terms.html %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var swiper = new Swiper('.swiper-container', {
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+});
+</script>
+</body>
+
+</head>
+</html>
