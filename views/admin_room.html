@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>관리자 방 관리</title>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="/semantic.min.css">
+  <script src="/semantic.min.js"></script>
+  <script src="/js/admin_page.js"></script>
+
+  <style>
+    body {
+      font-family: "Nanum Gothic", sans-serif;
+    }
+
+    #hide {
+      display: none;
+    }
+  </style>
+
+
+</head>
+<body onload=room()>
+	<% include admin_header.html %>
+  <div id="reservation" class="ui fluid container" style="padding:2rem;">
+    <form name="frm" method="post" action="/reser/room_insert">
+      <div class="ui mini left icon input">
+        <select class="ui dropdown" id="room_type" name="room_type" onchange="Select()">
+          <option >지역 선택을 선택해주세요.</option>
+          <option value="bluebird">파랑새</option>
+          <option value="cuckoo">뻐꾸기</option>
+          <option value="nightingale">꾀꼬리</option>
+          <option value="owl">부엉이</option>
+          <option value="pension">펜션</option>
+          <option value="raccoon">너구리</option>
+          <option value="scops_owl">소쩍새</option>
+          <option value="site_cypress">사이트1</option>
+          <option value="site_zelkova">사이트2</option>
+          <option value="site_grass">사이트3</option>
+          <option value="firstetc">기타1</option>
+          <option value="secondetc">기타2</option>
+        </select>
+        <input type="text" name="room_name" style="width:250px;height:100;" placeholder="중복되지 않는 방 번호를 입력해주세요.">
+    </div>
+    </form>
+    <div class="two wide column" style="text-align:right;">
+      <input type="button" id="room_insert" value="등록">
+      <input type="button" id="del" value="삭제">
+    </div>
+  </div>
+
+<script>
+var selectValue
+
+function Select(){
+    var langSelect = document.getElementById("room_type");
+    selectValue = langSelect.options[langSelect.selectedIndex].value;
+}
+
+$('#room_insert').click(function() {
+  if ( parseInt(frm.room_name.value) < 10 ) {
+    frm.room_name.value = selectValue+'_'+"0"+frm.room_name.value;
+  } else {
+      frm.room_name.value = selectValue+'_'+frm.room_name.value;
+  }
+
+  frm.submit();
+});
+
+$("#del").click(function() {
+ //삭제할게 더 이상 없거나, 삭제할 행이 선택퇴어 있지 않을 시 경고창
+ if($('table input:checkbox').length < 1){
+   alert("더 이상 거절할 요청이 없습니다.");
+ }
+  else {
+   //$('input[type=checkbox]:checked').each(function(index){
+    $('tbody input:checkbox:checked').each(function(index){
+     //체크박스를 포함하고 있는 행 제거
+     var tr = $(this).parent().parent();
+     var td = tr.children();
+     var args = td.eq(8).text();
+     var args2 = td.eq(6).text();
+     setTimeout(function(){
+        room_del(args, args2);
+     },1000*index);
+      tr.remove();
+   });
+ }
+});
+
+function room_del(args, args2) {
+    $.ajax({
+        type: "POST",
+        url: "/reser/room_del",
+        data: {args: args, args2: args2}
+  }).done(function( msg ) {
+        alert(msg);
+  });
+}
+
+function reserve_room(name){
+	var room_typea
+	switch (name) {
+		case "nightingale" :
+			room_type="꾀꼬리";
+			break;
+		case "bluebird" :
+			room_type="파랑새";
+			break;
+		case "owl":
+			room_type="부엉이";
+			break;
+		case "cuckoo":
+			room_type="뻐꾸기";
+			break;
+		case "raccoon":
+			room_type="너구리";
+			break;
+		case "scops_owl":
+			room_type="소쩍새";
+			break;
+		case "site_cypress":
+			room_type="사이트1";
+			break;
+		case "site_zelkova":
+			room_type="사이트2";
+			break;
+		case "pension":
+			room_type="펜션";
+			break;
+		case "site_grass":
+			room_type="사이트3";
+			break;
+		case "firstetc":
+			room_type="기타1";
+			break;
+		case "secondetc":
+			room_type="기타2";
+			break;
+		default:
+			room_type="";
+			break;
+	}
+
+	return room_type;
+
+}
+
+function room() {
+  $.ajax({
+        type: "POST",
+        url: "/reser/room",
+        data: {},
+        dataType : "json",
+        success: onSuccess,
+  	    error: onError
+  		  });
+        function onSuccess(response) {
+          jsontable(response.message);
+        }
+        function onError() {
+          alert("오류가 발생하였습니다.");
+        }
+           }
+
+function jsontable(args) {
+
+  var target = $("#reservation");
+  var table = $("<table class=\"ui small striped table\" style=text-align:center;><tr><td></td><td>지역</td><td>방 이름</td><td>비수기 요금</td><td>성수기 요금</td></tr>").appendTo(target);
+
+  var list = [
+    {field:"room_type", width:100},
+    {field:"room_name", width:100},
+    {field:"room_lowcharge", width:100},
+    {field:"room_peakcharge", width:100},
+    {field:"type_args", width:100},
+    {field:"name_args", width:100}
+  ];
+
+  $.each(args, function(index, row) {
+      var tr = $("<tr>").appendTo(table);
+      var td = $("<td><input type=\"checkbox\"></td>").appendTo(tr);
+
+      $.each(list, function( i, fieldInfo ) {
+
+          td = $("<td>").appendTo(tr);
+
+            switch (fieldInfo.field) {
+              case "type_args":
+                $("<td id=\"hide\">"+row[fieldInfo.field]+"</td>").appendTo(tr);
+                break;
+              case "name_args":
+                $("<td id=\"hide\">"+row[fieldInfo.field]+"</td>").appendTo(tr);
+                break;
+              case "room_type":
+                switch (row[fieldInfo.field]) {
+                  case 'bluebird':
+                    td.html("파랑새");
+                    break;
+                  case 'cuckoo':
+                    td.html("뻐꾸기");
+                    break;
+                  case 'nightingale':
+                    td.html("꾀꼬리");
+                    break;
+                  case 'owl':
+                    td.html("부엉이");
+                    break;
+                  case 'pension':
+                    td.html("펜션");
+                    break;
+                  case 'raccoon':
+                    td.html("너구리");
+                    break;
+                  case 'scops_owl':
+                    td.html("소쩍새");
+                    break;
+                  case 'site_cypress':
+                    td.html("사이트1");
+                    break;
+                  case 'site_zelkova':
+                    td.html("사이트2");
+                    break;
+                  case 'site_grass':
+                    td.html("사이트3");
+                    break;
+                  case 'firstetc':
+                    td.html("기타1");
+                    break;
+                  case 'secondetc':
+                    td.html("기타2");
+                    break;
+                  default:
+                    td.html(row[fieldInfo.field]);
+                    break;
+                }
+                break;
+              case "room_name":
+
+                room_name_index=(row[fieldInfo.field]).split("_");
+
+                if ( room_name_index.length == 2 ) {
+                  room_typea=reserve_room(room_name_index[0]);
+                  room_name=room_typea+"_"+room_name_index[1];
+                  td.html(room_name);
+                } else if (room_name_index.length == 3) {
+                  room_typea=reserve_room(room_name_index[0]+"_"+room_name_index[1]);
+                  room_name=room_typea+"_"+room_name_index[2];
+                  td.html(room_name);
+                } else {
+                  td.html(row[fieldInfo.field]);
+                }
+                break;
+              default:
+                td.html(row[fieldInfo.field]);
+                break;
+            }
+      });
+  });
+
+}
+active_check('room');
+</script>
+</body>
+</html>

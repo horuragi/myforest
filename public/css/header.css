@@ -1,0 +1,21 @@
+.top_box1 {
+    float: left;
+    width: 1127px;
+    height: 100%;
+}
+
+.top_box2 {
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    text-align: right;
+}
+
+.main_link {
+    color: black;
+}
+
+.main_link:hover {
+    color: green;
+    font-weight: bold;
+}

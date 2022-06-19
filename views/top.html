@@ -1,0 +1,22 @@
+    <div id="topmenu" class="ui container">
+        <div class="top_box1"  style="color:white">
+            <table style="height: 100%;margin-left: 5px;width: 100%" border=0>
+                <tr><td style="width:50%;vertical-align: middle">
+                <i class="fas fa-volume-up" style="margin-right: 10px"></i> 즐거운 휴식이 있는 곳, 내안의 숲입니다.
+                </td><td style="width:50%;vertical-align: middle;text-align: right">
+                
+                <%if(session.logined=="yes"){%>
+                    <%=session.nickname%> 님 환영합니다.
+                      <a href="#" style="margin-right:15px"  onclick="logout();"><input height="26px" type="image" src="/images/logout.png"></a>
+                      <a href="/" style="margin-right:0px"><input height="26px" type="image" src="/images/gohome.png"></a>
+                      </td>
+          <%}else{%>
+   <a href="#" style="margin-right:10px"  onclick="login();"><input height="26px" type="image" src="/images/naverlogin.png"></a>
+  <a href="/" style="margin-right:15px"><input height="26px" type="image" src="/images/gohome.png"></a>
+          </td>
+  <%}%>
+            </tr>
+            </table>
+            </div>
+        </div>
+

@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>캠핑장 정보설정</title>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="/semantic.min.css">
+  <script src="/semantic.min.js"></script>
+  <script src="/js/admin_page.js"></script>
+
+  <style>
+    body {
+      font-family: "Nanum Gothic", sans-serif;
+    }
+    #hide {
+      display: none;
+    }
+  </style>
+
+</head>
+<body>
+        <% include admin_header.html %>
+<div class="ui container" style="margin-bottom:50px">
+  <h4 class="ui horizontal divider header">
+  <i class="file image icon"></i> 
+  예약시스템 페이지수정
+</h4>
+<div class="ui ignored positive message">예약시스템 구역별 설명을 수정할수있습니다.</div>
+ 수정하실 구역을 선택하세요 :
+    <select class="ui search dropdown" id="room_state" onchange="room_state_query()">
+      <option value="0">파랑새</option>
+      <option value="1">부엉이</option>
+      <option value="2">펜션</option>
+      <option value="3">너구리</option>
+      <option value="4">소쩍새</option>
+      <option value="5">사이트1</option>
+      <option value="6">사이트2</option>
+      <option value="7">뻐꾸기</option>
+      <option value="8">꾀꼬리</option>
+      <option value="9">사이트3</option>
+      <option value="10">기타1</option>
+      <option value="11">기타2</option>
+    </select>
+<% include campinfo_edit.html %>
+<h4 class="ui horizontal divider header">
+ <i class="signup icon"></i>
+  캠핑장 구역별  정보설정
+</h4>
+<div class="ui ignored positive message">정보를 수정하시면 예약시스템과 각 캠핑장 구역 소개페이지에 자동적용됩니다.</div>
+<table class="ui celled table" style="text-align:center">
+  <thead>
+    <tr>
+    <th>선택</th>
+    <th>번호</th>
+    <th>구역</th>
+    <th>시설개수</th>
+    <th>기준인원</th>
+    <th>최대인원</th>
+    <th>성수기요금</th>
+    <th>비수기요금</th>
+    <th>옵션</th>
+  </tr></thead>
+  <tbody>
+    <% data.forEach(function(item,index){ %>
+    <tr>
+      <td><div class="ui input"><input type="checkbox"></div></td>
+      <td><div><%= item.id %></div></td>
+      <td><div><%= item.Field %></div></td>
+      <td><div><%= item.room_cnt %></div></td>
+      <td><div class="ui input" style="width:60px"><input type="text" style="width:60px" value="<%= item.standnum %>"></div></td>
+      <td><div class="ui input" style="width:60px"><input type="text" value="<%= item.maxnum %>" style="width:60px"></div></td>
+      <td><div class="ui input" style="width:120px"><input type="text" value="<%= item.room_peakcharge %>" style="width:120px"></div></td>
+      <td><div class="ui input" style="width:120px"><input type="text" value="<%= item.room_lowcharge %>" style="width:120px"></div></td>
+      <td><div class="ui input" style="width:200px"><input type="text" value="<%= item.coption %>" style="width:200px"></div></td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+<div style="text-align:center;margin-bottom:50px">
+<button id="infobtn" class="ui green button" style="width:200px"><div>수정</div></button>
+</div>
+<h4 class="ui horizontal divider header">
+ <i class="signup icon"></i>
+  캠핑장 기타구역 이름설정
+</h4>
+<table class="ui celled table" style="text-align:center">
+  <thead>
+    <tr>
+    <th>기타1</th>
+    <th>기타2</th>
+  </tr></thead>
+  <tbody>
+   <tr>
+      <td><div class="ui input" style="width:400px"><input id="firstetc_input" type="text" value="" style="width:100%"></div></td>
+      <td><div class="ui input" style="width:400px"><input id="secondetc_input" type="text" value="" style="width:100%"></div></td>
+    </tr>
+  </tbody>
+</table>
+<div style="text-align:center;margin-bottom:50px">
+<button id="etcname_setbtn1" class="ui green button" style="width:200px;margin-right:400px"><div>기타1 수정</div></button>
+<button id="etcname_setbtn2" class="ui green button" style="width:200px"><div>기타2 수정</div></button>
+</div>
+
+<h4 class="ui horizontal divider header">
+ <i class="signup icon"></i>
+  캠핑장 사이트구역 이름설정
+</h4>
+<table class="ui celled table" style="text-align:center">
+  <thead>
+    <tr>
+    <th>사이트1</th>
+    <th>사이트2</th>
+    <th>사이트3</th>
+  </tr></thead>
+  <tbody>
+   <tr>
+      <td><div class="ui input" style="width:300px"><input id="site1_input" type="text" value="" style="width:100%"></div></td>
+      <td><div class="ui input" style="width:300px"><input id="site2_input" type="text" value="" style="width:100%"></div></td>
+      <td><div class="ui input" style="width:300px"><input id="site3_input" type="text" value="" style="width:100%"></div></td>
+    </tr>
+  </tbody>
+</table>
+<div style="text-align:center;margin-bottom:50px">
+<button id="site1_setbtn" class="ui green button" style="width:300px;margin-right:70px"><div>사이트1 수정</div></button>
+<button id="site2_setbtn" class="ui green button" style="width:300px;margin-right:70px"><div>사이트2 수정</div></button>
+<button id="site3_setbtn" class="ui green button" style="width:300px"><div>사이트3 수정</div></button>
+</div>
+
+<h4 class="ui horizontal divider header">
+ <i class="signup icon"></i>
+  사이트3구역 두팀사용 추가요금설정
+</h4>
+<table class="ui celled table" style="text-align:center">
+  <thead>
+    <tr>
+    <th>추가요금</th>
+  </tr></thead>
+  <tbody>
+   <tr>
+      <td><div class="ui input" style="width:400px"><input id="site_grass_addprice" type="text" value="" style="width:100%"></div></td>
+    </tr>
+  </tbody>
+</table>
+<div style="text-align:center;margin-bottom:50px">
+<button id="site_grass_addprice_setbtn" class="ui green button" style="width:200px;"><div>수정</div></button>
+</div>
+
+<h4 class="ui horizontal divider header">
+  <i class="file image icon"></i> 
+  캠핑장 구역별 사진설정
+</h4>
+<div class="ui ignored positive message">사진을 추가,삭제하시면  캠핑장 예약시스템과 캠핑장소개 페이지에 사진이 자동적용됩니다.</div>
+
+
+<div id="bluebird_pic_area" class="ui segment">
+<div id="bluebird_pic_reload">
+<strong>방갈로(파랑새) 사진설정</strong>
+<hr>
+<%
+if(data[0].picture==""){
+%>
+<p>등록된 사진이 없습니다.</p>
+<%
+}else{
+var arr = JSON.parse(data[0].picture); 
+arr.forEach((item,index)=>{
+var i = index+1;
+if(i==1 || i%3==1){
+%>
+<div class="ui three stackable cards" style="margin-bottom:15px">
+<% } %>
+<div class="card" style="width:320px;height:180px">
+<div class="image">
+<img src="/camp_image/<%=item.filename %>" style="width:320px;height:180px">
+</div>
+<div class="content">
+<a class="header" onclick="bluebird_pic_delete('<%= i %>')" style="font-size:10pt;text-align:center;color:red">
+삭제
+</a>
+</div>
+</div>
+<% if(i==arr.length||i%3==0){ %>
+</div>
+<%
+}
+});
+}
+%>
+<form class="ui form" id="bluebird_pic_form" method="post" enctype="multipart/form-data" action="" style="margin-top:20px">
+<a class="item">
+<div class="ui red horizontal label">사진첨부</div>
+<input type="file" id="file1" name="file1">
+</a>
+<button class="ui primary button" type="button" onclick="bluebird_pic_upload(this)" style="margin:15px">사진추가</button>
+</form>
+</div>
+</div>
+
+<div id="owl_pic_area" class="ui segment">
+<div id="owl_pic_reload">
+<strong>방갈로(부엉이) 사진설정</strong>
+<hr>
+<%
+if(data[1].picture==""){
+%>
+<p>등록된 사진이 없습니다.</p>
+<%
+}else{
+var arr = JSON.parse(data[1].picture); 
+arr.forEach((item,index)=>{
+var i = index+1;
+if(i==1 || i%3==1){
+%>
+<div class="ui three stackable cards" style="margin-bottom:15px">
+<% } %>
+<div class="card" style="width:320px;height:180px">
+<div class="image">
+<img src="/camp_image/<%=item.filename %>" style="width:320px;height:180px">
+</div>
+<div class="content">
+<a class="header" onclick="owl_pic_delete('<%= i %>')" style="font-size:10pt;text-align:center;color:red">
+삭제
+</a>
+</div>
+</div>
+<% if(i==arr.length||i%3==0){ %>
+</div>
+<%
+}
+});
+}
+%>
+<form class="ui form" id="owl_pic_form" method="post" enctype="multipart/form-data" action="" style="margin-top:20px">
+<a class="item">
+<div class="ui red horizontal label">사진첨부</div>
+<input type="file" id="file1" name="file1">
+</a>
+<button class="ui primary button" type="button" onclick="owl_pic_upload(this)" style="margin:15px">사진추가</button>
+</form>
+</div>
+</div>
+
+
+<div id="pension_pic_area" class="ui segment">
+<div id="pension_pic_reload">
+<strong>펜션 사진설정</strong>
+<hr>
+<%
+if(data[2].picture==""){
+%>
+<p>등록된 사진이 없습니다.</p>
+<%
+}else{
+var arr = JSON.parse(data[2].picture); 
+arr.forEach((item,index)=>{
+var i = index+1;
+if(i==1 || i%3==1){
+%>
+<div class="ui three stackable cards" style="margin-bottom:15px">
+<% } %>
+<div class="card" style="width:320px;height:180px">
+<div class="image">
+<img src="/camp_image/<%=item.filename %>" style="width:320px;height:180px">
+</div>
+<div class="content">
+<a class="header" onclick="pension_pic_delete('<%= i %>')" style="font-size:10pt;text-align:center;color:red">
+삭제
+</a>
+</div>
+</div>
+<% if(i==arr.length||i%3==0){ %>
+</div>
+<%
+}
+});
+}
+%>
+<form class="ui form" id="pension_pic_form" method="post" enctype="multipart/form-data" action="" style="margin-top:20px">
+<a class="item">
+<div class="ui red horizontal label">사진첨부</div>
+<input type="file" id="file1" name="file1">
+</a>
+<button class="ui primary button" type="button" onclick="pension_pic_upload(this)" style="margin:15px">사진추가</button>
+</form>
+</div>
+</div>
+
+
+<div id="raccoon_pic_area" class="ui segment">
+<div id="raccoon_pic_reload">
+<strong>데크사이트(너구리) 사진설정</strong>
+<hr>
+<%
+if(data[3].picture==""){
+%>
+<p>등록된 사진이 없습니다.</p>
+<%
+}else{
+var arr = JSON.parse(data[3].picture); 
+arr.forEach((item,index)=>{
+var i = index+1;
+if(i==1 || i%3==1){
+%>
+<div class="ui three stackable cards" style="margin-bottom:15px">
+<% } %>
+<div class="card" style="width:320px;height:180px">
+<div class="image">
+<img src="/camp_image/<%=item.filename %>" style="width:320px;height:180px">
+</div>
+<div class="content">
+<a class="header" onclick="raccoon_pic_delete('<%= i %>')" style="font-size:10pt;text-align:center;color:red">
+삭제
+</a>
+</div>
+</div>
+<% if(i==arr.length||i%3==0){ %>
+</div>
+<%
+}
+});
+}
+%>
+<form class="ui form" id="raccoon_pic_form" method="post" enctype="multipart/form-data" action="" style="margin-top:20px">
+<a class="item">
+<div class="ui red horizontal label">사진첨부</div>
+<input type="file" id="file1" name="file1">
+</a>
+<button class="ui primary button" type="button" onclick="raccoon_pic_upload(this)" style="margin:15px">사진추가</button>
+</form>
+</div>
+</div>
+
+
+<div id="scops_owl_pic_area" class="ui segment">
+<div id="scops_owl_pic_reload">
+<strong>방갈로(소쩍새) 사진설정</strong>
+<hr>
+<%
+if(data[4].picture==""){
+%>
+<p>등록된 사진이 없습니다.</p>
+<%
+}else{
+var arr = JSON.parse(data[4].picture); 
+arr.forEach((item,index)=>{
+var i = index+1;
+if(i==1 || i%3==1){
+%>
+<div class="ui three stackable cards" style="margin-bottom:15px">
+<% } %>
+<div class="card" style="width:320px;height:180px">
+<div class="image">
+<img src="/camp_image/<%=item.filename %>" style="width:320px;height:180px">
+</div>
+<div class="content">
+<a class="header" onclick="scops_owl_pic_delete('<%= i %>')" style="font-size:10pt;text-align:center;color:red">
+삭제
+</a>
+</div>
+</div>
+<% if(i==arr.length||i%3==0){ %>
+</div>
+<%
+}
+});
+}
+%>
+<form class="ui form" id="scops_owl_pic_form" method="post" enctype="multipart/form-data" action="" style="margin-top:20px">
+<a class="item">
+<div class="ui red horizontal label">사진첨부</div>
+<input type="file" id="file1" name="file1">
+</a>
+<button class="ui primary button" type="button" onclick="scops_owl_pic_upload(this)" style="margin:15px">사진추가</button>
+</form>
+</div>
+</div>
+
+
+<div id="site_cypress_pic_area" class="ui segment">
+<div id="site_cypress_pic_reload">
+<strong>사이트(편백구역) 사진설정</strong>
+<hr>
+<%
+if(data[5].picture==""){
+%>
+<p>등록된 사진이 없습니다.</p>
+<%
+}else{
+var arr = JSON.parse(data[5].picture); 
+arr.forEach((item,index)=>{
+var i = index+1;
+if(i==1 || i%3==1){
+%>
+<div class="ui three stackable cards" style="margin-bottom:15px">
+<% } %>
+<div class="card" style="width:320px;height:180px">
+<div class="image">
+<img src="/camp_image/<%=item.filename %>" style="width:320px;height:180px">
+</div>
+<div class="content">
+<a class="header" onclick="site_cypress_pic_delete('<%= i %>')" style="font-size:10pt;text-align:center;color:red">
+삭제
+</a>
+</div>
+</div>
+<% if(i==arr.length||i%3==0){ %>
+</div>
+<%
+}
+});
+}
+%>
+<form class="ui form" id="site_cypress_pic_form" method="post" enctype="multipart/form-data" action="" style="margin-top:20px">
+<a class="item">
+<div class="ui red horizontal label">사진첨부</div>
+<input type="file" id="file1" name="file1">
+</a>
+<button class="ui primary button" type="button" onclick="site_cypress_pic_upload(this)" style="margin:15px">사진추가</button>
+</form>
+</div>
+</div>
+
+
+<div id="site_zelkova_pic_area" class="ui segment">
+<div id="site_zelkova_pic_reload">
+<strong>사이트(느티구역) 사진설정</strong>
+<hr>
+<%
+if(data[6].picture==""){
+%>
+<p>등록된 사진이 없습니다.</p>
+<%
+}else{
+var arr = JSON.parse(data[6].picture); 
+arr.forEach((item,index)=>{
+var i = index+1;
+if(i==1 || i%3==1){
+%>
+<div class="ui three stackable cards" style="margin-bottom:15px">
+<% } %>
+<div class="card" style="width:320px;height:180px">
+<div class="image">
+<img src="/camp_image/<%=item.filename %>" style="width:320px;height:180px">
+</div>
+<div class="content">
+<a class="header" onclick="site_zelkova_pic_delete('<%= i %>')" style="font-size:10pt;text-align:center;color:red">
+삭제
+</a>
+</div>
+</div>
+<% if(i==arr.length||i%3==0){ %>
+</div>
+<%
+}
+});
+}
+%>
+<form class="ui form" id="site_zelkova_pic_form" method="post" enctype="multipart/form-data" action="" style="margin-top:20px">
+<a class="item">
+<div class="ui red horizontal label">사진첨부</div>
+<input type="file" id="file1" name="file1">
+</a>
+<button class="ui primary button" type="button" onclick="site_zelkova_pic_upload(this)" style="margin:15px">사진추가</button>
+</form>
+</div>
+</div>
+
+
+<div id="cuckoo_pic_area" class="ui segment">
+<div id="cuckoo_pic_reload">
+<strong>방갈로(뻐꾸기) 사진설정</strong>
+<hr>
+<%
+if(data[7].picture==""){
+%>
+<p>등록된 사진이 없습니다.</p>
+<%
+}else{
+var arr = JSON.parse(data[7].picture); 
+arr.forEach((item,index)=>{
+var i = index+1;
+if(i==1 || i%3==1){
+%>
+<div class="ui three stackable cards" style="margin-bottom:15px">
+<% } %>
+<div class="card" style="width:320px;height:180px">
+<div class="image">
+<img src="/camp_image/<%=item.filename %>" style="width:320px;height:180px">
+</div>
+<div class="content">
+<a class="header" onclick="cuckoo_pic_delete('<%= i %>')" style="font-size:10pt;text-align:center;color:red">
+삭제
+</a>
+</div>
+</div>
+<% if(i==arr.length||i%3==0){ %>
+</div>
+<%
+}
+});
+}
+%>
+<form class="ui form" id="cuckoo_pic_form" method="post" enctype="multipart/form-data" action="" style="margin-top:20px">
+<a class="item">
+<div class="ui red horizontal label">사진첨부</div>
+<input type="file" id="file1" name="file1">
+</a>
+<button class="ui primary button" type="button" onclick="cuckoo_pic_upload(this)" style="margin:15px">사진추가</button>
+</form>
+</div>
+</div>
+
+
+
+<div id="nightingale_pic_area" class="ui segment">
+<div id="nightingale_pic_reload">
+<strong>방갈로(꾀꼬리) 사진설정</strong>
+<hr>
+<%
+if(data[8].picture==""){
+%>
+<p>등록된 사진이 없습니다.</p>
+<%
+}else{
+var arr = JSON.parse(data[8].picture); 
+arr.forEach((item,index)=>{
+var i = index+1;
+if(i==1 || i%3==1){
+%>
+<div class="ui three stackable cards" style="margin-bottom:15px">
+<% } %>
+<div class="card" style="width:320px;height:180px">
+<div class="image">
+<img src="/camp_image/<%=item.filename %>" style="width:320px;height:180px">
+</div>
+<div class="content">
+<a class="header" onclick="nightingale_pic_delete('<%= i %>')" style="font-size:10pt;text-align:center;color:red">
+삭제
+</a>
+</div>
+</div>
+<% if(i==arr.length||i%3==0){ %>
+</div>
+<%
+}
+});
+}
+%>
+<form class="ui form" id="nightingale_pic_form" method="post" enctype="multipart/form-data" action="" style="margin-top:20px">
+<a class="item">
+<div class="ui red horizontal label">사진첨부</div>
+<input type="file" id="file1" name="file1">
+</a>
+<button class="ui primary button" type="button" onclick="nightingale_pic_upload(this)" style="margin:15px">사진추가</button>
+</form>
+</div>
+</div>
+
+
+
+
+<div id="site_grass_pic_area" class="ui segment">
+<div id="site_grass_pic_reload">
+<strong>사이트[편백잔디] 사진설정</strong>
+<hr>
+<%
+if(data[9].picture==""){
+%>
+<p>등록된 사진이 없습니다.</p>
+<%
+}else{
+var arr = JSON.parse(data[9].picture); 
+arr.forEach((item,index)=>{
+var i = index+1;
+if(i==1 || i%3==1){
+%>
+<div class="ui three stackable cards" style="margin-bottom:15px">
+<% } %>
+<div class="card" style="width:320px;height:180px">
+<div class="image">
+<img src="/camp_image/<%=item.filename %>" style="width:320px;height:180px">
+</div>
+<div class="content">
+<a class="header" onclick="site_grass_pic_delete('<%= i %>')" style="font-size:10pt;text-align:center;color:red">
+삭제
+</a>
+</div>
+</div>
+<% if(i==arr.length||i%3==0){ %>
+</div>
+<%
+}
+});
+}
+%>
+<form class="ui form" id="site_grass_pic_form" method="post" enctype="multipart/form-data" action="" style="margin-top:20px">
+<a class="item">
+<div class="ui red horizontal label">사진첨부</div>
+<input type="file" id="file1" name="file1">
+</a>
+<button class="ui primary button" type="button" onclick="site_grass_pic_upload(this)" style="margin:15px">사진추가</button>
+</form>
+</div>
+</div>
+
+
+
+<div id="firstetc_pic_area" class="ui segment">
+<div id="firstetc_pic_reload">
+<strong>기타1 사진설정</strong>
+<hr>
+<%
+if(data[10].picture==""){
+%>
+<p>등록된 사진이 없습니다.</p>
+<%
+}else{
+var arr = JSON.parse(data[10].picture); 
+arr.forEach((item,index)=>{
+var i = index+1;
+if(i==1 || i%3==1){
+%>
+<div class="ui three stackable cards" style="margin-bottom:15px">
+<% } %>
+<div class="card" style="width:320px;height:180px">
+<div class="image">
+<img src="/camp_image/<%=item.filename %>" style="width:320px;height:180px">
+</div>
+<div class="content">
+<a class="header" onclick="firstetc_pic_delete('<%= i %>')" style="font-size:10pt;text-align:center;color:red">
+삭제
+</a>
+</div>
+</div>
+<% if(i==arr.length||i%3==0){ %>
+</div>
+<%
+}
+});
+}
+%>
+<form class="ui form" id="firstetc_pic_form" method="post" enctype="multipart/form-data" action="" style="margin-top:20px">
+<a class="item">
+<div class="ui red horizontal label">사진첨부</div>
+<input type="file" id="file1" name="file1">
+</a>
+<button class="ui primary button" type="button" onclick="firstetc_pic_upload(this)" style="margin:15px">사진추가</button>
+</form>
+</div>
+</div>
+
+
+
+<div id="secondetc_pic_area" class="ui segment">
+<div id="secondetc_pic_reload">
+<strong>기타2 사진설정</strong>
+<hr>
+<%
+if(data[11].picture==""){
+%>
+<p>등록된 사진이 없습니다.</p>
+<%
+}else{
+var arr = JSON.parse(data[11].picture); 
+arr.forEach((item,index)=>{
+var i = index+1;
+if(i==1 || i%3==1){
+%>
+<div class="ui three stackable cards" style="margin-bottom:15px">
+<% } %>
+<div class="card" style="width:320px;height:180px">
+<div class="image">
+<img src="/camp_image/<%=item.filename %>" style="width:320px;height:180px">
+</div>
+<div class="content">
+<a class="header" onclick="secondetc_pic_delete('<%= i %>')" style="font-size:10pt;text-align:center;color:red">
+삭제
+</a>
+</div>
+</div>
+<% if(i==arr.length||i%3==0){ %>
+</div>
+<%
+}
+});
+}
+%>
+<form class="ui form" id="secondetc_pic_form" method="post" enctype="multipart/form-data" action="" style="margin-top:20px">
+<a class="item">
+<div class="ui red horizontal label">사진첨부</div>
+<input type="file" id="file1" name="file1">
+</a>
+<button class="ui primary button" type="button" onclick="secondetc_pic_upload(this)" style="margin:15px">사진추가</button>
+</form>
+</div>
+</div>
+
+<div id="info_map_pic_area" class="ui segment">
+<div id="info_map_pic_reload">
+<strong>캠핑장 안내도 사진설정</strong>
+<hr>
+    <div class="info_map_image">
+        <img src="#" alt='이미지 받아오는 중..' style="width:320px;height:180px" id="campinfosrc">
+    </div>
+<form class="ui form" id="info_map_pic_form" method="post" enctype="multipart/form-data" action="" style="margin-top:20px">
+<a class="item">
+<div class="ui red horizontal label">사진첨부</div>
+<input type="file" id="file1" name="file1">
+</a>
+<button class="ui primary button" type="button" onclick="info_map_pic_upload(this)" style="margin:15px">사진수정</button>
+</form>
+</div>
+</div>
+
+
+
+</div>
+<script>
+$.ajaxSetup({ cache: false });
+function sleep (delay) {
+   var start = new Date().getTime();
+   while (new Date().getTime() < start + delay);
+}
+(function(){
+  var room_state = document.getElementById("room_state");
+  switch ("<%= params.roomtype %>") {
+   	    case "nightingale" :
+    			room_state.selectedIndex="8";
+    			break;
+    		case "bluebird" :
+    			room_state.selectedIndex="0";
+    			break;
+    		case "owl":
+    			room_state.selectedIndex="1";
+    			break;
+    		case "cuckoo":
+    		  room_state.selectedIndex="7";
+    			break;
+    		case "raccoon":
+    			room_state.selectedIndex="3";
+    			break;
+    		case "scops_owl":
+    			room_state.selectedIndex="4";
+    			break;
+    		case "site_cypress":
+    			room_state.selectedIndex="5";
+    			break;
+    		case "site_zelkova":
+    			room_state.selectedIndex="6";
+    			break;
+    		case "pension":
+    			room_state.selectedIndex="2";
+    			break;
+    		case "site_grass":
+    		    room_state.selectedIndex="9";
+    		    break;
+    		case "firstetc":
+    		    room_state.selectedIndex="10";
+    		    break;
+    		case "secondetc":
+    		    room_state.selectedIndex="11";
+    		    break;
+    		default:
+    			room_state.selectedIndex="0";
+    			break;
+  }
+})();
+$("#infobtn").click(function(){
+  console.log("test");
+  if($('tbody input:checkbox:checked').length < 1){
+    alert("수정하실 구역을 체크해주세요.");
+  }else{
+    $('tbody input:checkbox:checked').each(function(index){
+    var tr = $(this).parent().parent().parent();
+    var div = tr.children().children();
+    var args = new Object();
+    args.id = div.eq(1).text();
+    args.field = div.eq(2).text();
+    args.standnum = div.eq(4).children().val();
+    args.maxnum = div.eq(5).children().val();
+    args.peakcharge = div.eq(6).children().val();
+    args.lowcharge = div.eq(7).children().val();
+    args.coption = div.eq(8).children().val();
+    info_update(args);
+    });
+  }
+});
+
+function info_update(args){
+ var loader = document.createElement('div');
+ loader.className = 'ui active inverted mini centered inline loader';
+ var infobtn=document.getElementById('infobtn');
+ infobtn.innerHTML = "";
+ infobtn.appendChild(loader);
+ infobtn.disabled = true;
+ $.ajax({
+    type:"POST",
+    url:"/admin/camping_info",
+    data: {
+     id:args.id,
+     standnum:args.standnum,
+     maxnum:args.maxnum,
+     peakcharge:args.peakcharge,
+     lowcharge:args.lowcharge,
+     coption:args.coption
+    }}).done(function(result){
+      if(result.result=="Success"){
+        alert(args.field+"구역이 성공적으로 수정되었습니다.");
+      }else{
+        alert(args.field+"구역 수정에 실패하였습니다.(관리자문의)");
+      }
+    }).always(function(xhr, status) {
+      infobtn.disabled=false;
+      $("#infobtn").text("수정");
+      $("#infobtn").children().remove();
+     });
+}
+function bluebird_pic_upload(obj){
+    bluebird_pic_flag=true;
+    var loader = document.createElement('div');
+    loader.className = 'ui active inverted mini centered inline loader';
+    obj.innerHTML="";
+    obj.appendChild(loader);
+    obj.disabled=true;
+    var picname = "bluebird";
+    var encode_picname = encodeURIComponent(picname);
+    var file1 = $('#bluebird_pic_form').find('input[name="file1"]')[0].files[0];
+    var formData = new FormData();
+    formData.append('file1',file1);
+    setTimeout(function(){
+    $.ajax({
+       url:'/admin/camping_picture/'+encode_picname,
+       dataType: 'json',
+       processData: false,
+       contentType: false,
+       data: formData,
+       type: 'POST',
+       success: function(result){
+          console.log(result);
+          if(result.result=="success"){
+             $("#bluebird_pic_area").load('/admin/camping_info/<%= params.roomtype %> #bluebird_pic_reload');    
+          }else{
+             alert("사진업로드 실패");
+          }
+          obj.disabled =false;
+          $(obj).text("사진추가");
+          $(obj).children().remove();
+          bluebird_pic_flag=false;
+       }
+    });
+    },2000);
+
+}
+function owl_pic_upload(obj){
+    owl_pic_flag=true;
+    var loader = document.createElement('div');
+    loader.className = 'ui active inverted mini centered inline loader';
+    obj.innerHTML="";
+    obj.appendChild(loader);
+    obj.disabled=true;
+    var picname = "owl";
+    var encode_picname = encodeURIComponent(picname);
+    var file1 = $('#owl_pic_form').find('input[name="file1"]')[0].files[0];
+    var formData = new FormData();
+    formData.append('file1',file1);
+    setTimeout(function(){
+    $.ajax({
+       url:'/admin/camping_picture/'+encode_picname,
+       dataType: 'json',
+       processData: false,
+       contentType: false,
+       data: formData,
+       type: 'POST',
+       success: function(result){
+          console.log(result);
+          if(result.result=="success"){
+             $("#owl_pic_area").load('/admin/camping_info/<%= params.roomtype %> #owl_pic_reload');    
+          }else{
+             alert("사진업로드 실패");
+          }
+          obj.disabled =false;
+          $(obj).text("사진추가");
+          $(obj).children().remove();
+          owl_pic_flag=false;
+       }
+    });
+    },2000);
+
+}
+
+function pension_pic_upload(obj){
+    pension_pic_flag=true;
+    var loader = document.createElement('div');
+    loader.className = 'ui active inverted mini centered inline loader';
+    obj.innerHTML="";
+    obj.appendChild(loader);
+    obj.disabled=true;
+    var picname = "pension";
+    var encode_picname = encodeURIComponent(picname);
+    var file1 = $('#pension_pic_form').find('input[name="file1"]')[0].files[0];
+    var formData = new FormData();
+    formData.append('file1',file1);
+    setTimeout(function(){
+    $.ajax({
+       url:'/admin/camping_picture/'+encode_picname,
+       dataType: 'json',
+       processData: false,
+       contentType: false,
+       data: formData,
+       type: 'POST',
+       success: function(result){
+          console.log(result);
+          if(result.result=="success"){
+             $("#pension_pic_area").load('/admin/camping_info/<%= params.roomtype %> #pension_pic_reload');    
+          }else{
+             alert("사진업로드 실패");
+          }
+          obj.disabled =false;
+          $(obj).text("사진추가");
+          $(obj).children().remove();
+          pension_pic_flag=false;
+       }
+    });
+    },2000);
+
+}
+
+function raccoon_pic_upload(obj){
+    raccoon_pic_flag=true;
+    var loader = document.createElement('div');
+    loader.className = 'ui active inverted mini centered inline loader';
+    obj.innerHTML="";
+    obj.appendChild(loader);
+    obj.disabled=true;
+    var picname = "raccoon";
+    var encode_picname = encodeURIComponent(picname);
+    var file1 = $('#raccoon_pic_form').find('input[name="file1"]')[0].files[0];
+    var formData = new FormData();
+    formData.append('file1',file1);
+    setTimeout(function(){
+    $.ajax({
+       url:'/admin/camping_picture/'+encode_picname,
+       dataType: 'json',
+       processData: false,
+       contentType: false,
+       data: formData,
+       type: 'POST',
+       success: function(result){
+          console.log(result);
+          if(result.result=="success"){
+             $("#raccoon_pic_area").load('/admin/camping_info/<%= params.roomtype %> #raccoon_pic_reload');    
+          }else{
+             alert("사진업로드 실패");
+          }
+          obj.disabled =false;
+          $(obj).text("사진추가");
+          $(obj).children().remove();
+          raccoon_pic_flag=false;
+       }
+    });
+    },2000);
+
+}
+
+function scops_owl_pic_upload(obj){
+    scops_owl_pic_flag=true;
+    var loader = document.createElement('div');
+    loader.className = 'ui active inverted mini centered inline loader';
+    obj.innerHTML="";
+    obj.appendChild(loader);
+    obj.disabled=true;
+    var picname = "scops_owl";
+    var encode_picname = encodeURIComponent(picname);
+    var file1 = $('#scops_owl_pic_form').find('input[name="file1"]')[0].files[0];
+    var formData = new FormData();
+    formData.append('file1',file1);
+    setTimeout(function(){
+    $.ajax({
+       url:'/admin/camping_picture/'+encode_picname,
+       dataType: 'json',
+       processData: false,
+       contentType: false,
+       data: formData,
+       type: 'POST',
+       success: function(result){
+          console.log(result);
+          if(result.result=="success"){
+             $("#scops_owl_pic_area").load('/admin/camping_info/<%= params.roomtype %> #scops_owl_pic_reload');    
+          }else{
+             alert("사진업로드 실패");
+          }
+          obj.disabled =false;
+          $(obj).text("사진추가");
+          $(obj).children().remove();
+          scops_owl_pic_flag=false;
+       }
+    });
+    },2000);
+
+}
+
+function site_cypress_pic_upload(obj){
+    site_cypress_pic_flag=true;
+    var loader = document.createElement('div');
+    loader.className = 'ui active inverted mini centered inline loader';
+    obj.innerHTML="";
+    obj.appendChild(loader);
+    obj.disabled=true;
+    var picname = "site_cypress";
+    var encode_picname = encodeURIComponent(picname);
+    var file1 = $('#site_cypress_pic_form').find('input[name="file1"]')[0].files[0];
+    var formData = new FormData();
+    formData.append('file1',file1);
+    setTimeout(function(){
+    $.ajax({
+       url:'/admin/camping_picture/'+encode_picname,
+       dataType: 'json',
+       processData: false,
+       contentType: false,
+       data: formData,
+       type: 'POST',
+       success: function(result){
+          console.log(result);
+          if(result.result=="success"){
+             $("#site_cypress_pic_area").load('/admin/camping_info/<%= params.roomtype %> #site_cypress_pic_reload');    
+          }else{
+             alert("사진업로드 실패");
+          }
+          obj.disabled =false;
+          $(obj).text("사진추가");
+          $(obj).children().remove();
+          site_cypress_pic_flag=false;
+       }
+    });
+    },2000);
+
+}
+
+function site_zelkova_pic_upload(obj){
+    site_zelkova_pic_flag=true;
+    var loader = document.createElement('div');
+    loader.className = 'ui active inverted mini centered inline loader';
+    obj.innerHTML="";
+    obj.appendChild(loader);
+    obj.disabled=true;
+    var picname = "site_zelkova";
+    var encode_picname = encodeURIComponent(picname);
+    var file1 = $('#site_zelkova_pic_form').find('input[name="file1"]')[0].files[0];
+    var formData = new FormData();
+    formData.append('file1',file1);
+    setTimeout(function(){
+    $.ajax({
+       url:'/admin/camping_picture/'+encode_picname,
+       dataType: 'json',
+       processData: false,
+       contentType: false,
+       data: formData,
+       type: 'POST',
+       success: function(result){
+          console.log(result);
+          if(result.result=="success"){
+             $("#site_zelkova_pic_area").load('/admin/camping_info/<%= params.roomtype %> #site_zelkova_pic_reload');    
+          }else{
+             alert("사진업로드 실패");
+          }
+          obj.disabled =false;
+          $(obj).text("사진추가");
+          $(obj).children().remove();
+          site_zelkova_pic_flag=false;
+       }
+    });
+    },2000);
+
+}
+
+function cuckoo_pic_upload(obj){
+    cuckoo_pic_flag=true;
+    var loader = document.createElement('div');
+    loader.className = 'ui active inverted mini centered inline loader';
+    obj.innerHTML="";
+    obj.appendChild(loader);
+    obj.disabled=true;
+    var picname = "cuckoo";
+    var encode_picname = encodeURIComponent(picname);
+    var file1 = $('#cuckoo_pic_form').find('input[name="file1"]')[0].files[0];
+    var formData = new FormData();
+    formData.append('file1',file1);
+    setTimeout(function(){
+    $.ajax({
+       url:'/admin/camping_picture/'+encode_picname,
+       dataType: 'json',
+       processData: false,
+       contentType: false,
+       data: formData,
+       type: 'POST',
+       success: function(result){
+          console.log(result);
+          if(result.result=="success"){
+             $("#cuckoo_pic_area").load('/admin/camping_info/<%= params.roomtype %> #cuckoo_pic_reload');    
+          }else{
+             alert("사진업로드 실패");
+          }
+          obj.disabled =false;
+          $(obj).text("사진추가");
+          $(obj).children().remove();
+          cuckoo_pic_flag=false;
+       }
+    });
+    },2000);
+
+}
+function nightingale_pic_upload(obj){
+    nightingale_pic_flag=true;
+    var loader = document.createElement('div');
+    loader.className = 'ui active inverted mini centered inline loader';
+    obj.innerHTML="";
+    obj.appendChild(loader);
+    obj.disabled=true;
+    var picname = "nightingale";
+    var encode_picname = encodeURIComponent(picname);
+    var file1 = $('#nightingale_pic_form').find('input[name="file1"]')[0].files[0];
+    var formData = new FormData();
+    formData.append('file1',file1);
+    setTimeout(function(){
+    $.ajax({
+       url:'/admin/camping_picture/'+encode_picname,
+       dataType: 'json',
+       processData: false,
+       contentType: false,
+       data: formData,
+       type: 'POST',
+       success: function(result){
+          console.log(result);
+          if(result.result=="success"){
+             $("#nightingale_pic_area").load('/admin/camping_info/<%= params.roomtype %> #nightingale_pic_reload');    
+          }else{
+             alert("사진업로드 실패");
+          }
+          obj.disabled =false;
+          $(obj).text("사진추가");
+          $(obj).children().remove();
+          nightingale_pic_flag=false;
+       }
+    });
+    },2000);
+
+}
+
+function site_grass_pic_upload(obj){
+    site_grass_pic_flag=true;
+    var loader = document.createElement('div');
+    loader.className = 'ui active inverted mini centered inline loader';
+    obj.innerHTML="";
+    obj.appendChild(loader);
+    obj.disabled=true;
+    var picname = "site_grass";
+    var encode_picname = encodeURIComponent(picname);
+    var file1 = $('#site_grass_pic_form').find('input[name="file1"]')[0].files[0];
+    var formData = new FormData();
+    formData.append('file1',file1);
+    setTimeout(function(){
+    $.ajax({
+       url:'/admin/camping_picture/'+encode_picname,
+       dataType: 'json',
+       processData: false,
+       contentType: false,
+       data: formData,
+       type: 'POST',
+       success: function(result){
+          console.log(result);
+          if(result.result=="success"){
+             $("#site_grass_pic_area").load('/admin/camping_info/<%= params.roomtype %> #site_grass_pic_reload');    
+          }else{
+             alert("사진업로드 실패");
+          }
+          obj.disabled =false;
+          $(obj).text("사진추가");
+          $(obj).children().remove();
+          site_grass_pic_flag=false;
+       }
+    });
+    },2000);
+
+}
+
+function firstetc_pic_upload(obj){
+    firstetc_pic_flag=true;
+    var loader = document.createElement('div');
+    loader.className = 'ui active inverted mini centered inline loader';
+    obj.innerHTML="";
+    obj.appendChild(loader);
+    obj.disabled=true;
+    var picname = "firstetc";
+    var encode_picname = encodeURIComponent(picname);
+    var file1 = $('#firstetc_pic_form').find('input[name="file1"]')[0].files[0];
+    var formData = new FormData();
+    formData.append('file1',file1);
+    setTimeout(function(){
+    $.ajax({
+       url:'/admin/camping_picture/'+encode_picname,
+       dataType: 'json',
+       processData: false,
+       contentType: false,
+       data: formData,
+       type: 'POST',
+       success: function(result){
+          console.log(result);
+          if(result.result=="success"){
+             $("#firstetc_pic_area").load('/admin/camping_info/<%= params.roomtype %> #firstetc_pic_reload');    
+          }else{
+             alert("사진업로드 실패");
+          }
+          obj.disabled =false;
+          $(obj).text("사진추가");
+          $(obj).children().remove();
+          firstetc_pic_flag=false;
+       }
+    });
+    },2000);
+
+}
+
+function secondetc_pic_upload(obj){
+    secondetc_pic_flag=true;
+    var loader = document.createElement('div');
+    loader.className = 'ui active inverted mini centered inline loader';
+    obj.innerHTML="";
+    obj.appendChild(loader);
+    obj.disabled=true;
+    var picname = "secondetc";
+    var encode_picname = encodeURIComponent(picname);
+    var file1 = $('#secondetc_pic_form').find('input[name="file1"]')[0].files[0];
+    var formData = new FormData();
+    formData.append('file1',file1);
+    setTimeout(function(){
+    $.ajax({
+       url:'/admin/camping_picture/'+encode_picname,
+       dataType: 'json',
+       processData: false,
+       contentType: false,
+       data: formData,
+       type: 'POST',
+       success: function(result){
+          console.log(result);
+          if(result.result=="success"){
+             $("#secondetc_pic_area").load('/admin/camping_info/<%= params.roomtype %> #secondetc_pic_reload');    
+          }else{
+             alert("사진업로드 실패");
+          }
+          obj.disabled =false;
+          $(obj).text("사진추가");
+          $(obj).children().remove();
+          secondetc_pic_flag=false;
+       }
+    });
+    },2000);
+
+}
+
+function info_map_pic_upload(obj){
+    info_map_pic_flag=true;
+    var loader = document.createElement('div');
+    loader.className = 'ui active inverted mini centered inline loader';
+    obj.innerHTML="";
+    obj.appendChild(loader);
+    obj.disabled=true;
+    var file1 = $('#info_map_pic_form').find('input[name="file1"]')[0].files[0];
+    var formData = new FormData();
+    formData.append('file1',file1);
+    setTimeout(function(){
+    $.ajax({
+       url:'/admin/camping_image',
+       dataType: 'json',
+       processData: false,
+       contentType: false,
+       data: formData,
+       type: 'POST',
+       success: function(result){
+          console.log(result);
+          if(result.result=="success"){
+             alert("사진수정 성공");
+             loadInfoMap();
+          }else{
+             alert("사진수정 실패");
+          }
+          obj.disabled =false;
+          $(obj).text("사진수정");
+          $(obj).children().remove();
+          info_map_pic_flag=false;
+       }
+    });
+    },2000);
+
+}
+
+function loadInfoMap(){
+  		const image_name = 'info_map';
+  		$.ajax({
+		       url:`/admin/camping_image/${image_name}`,
+		       dataType: 'json',
+		       type: 'GET',
+		       success: function(result){
+		       	console.log(result);
+		          if(result.result && result.result.length > 0){
+		             document.getElementsByClassName('info_map_image')[0].getElementsByTagName('img')[0].src = result.result[0].url;
+		          }else{
+		            document.getElementsByClassName('info_map_image')[0].getElementsByTagName('img')[0].alt = '사진 불러오기 실패';
+		          }
+		       }
+		});
+}
+loadInfoMap();
+
+function bluebird_pic_delete(index){
+console.log(index);
+$.ajax({
+       url:'/admin/camping_picture_del/bluebird/'+index,
+       dataType: 'json',
+       type: 'GET',
+       success: function(result){
+          if(result.result=="Success"){
+             $("#bluebird_pic_area").load('/admin/camping_info/<%= params.roomtype %> #bluebird_pic_reload');
+          }else{
+            alert("사진삭제 실패");
+          }
+       }
+    });
+}
+
+function owl_pic_delete(index){
+console.log(index);
+$.ajax({
+       url:'/admin/camping_picture_del/owl/'+index,
+       dataType: 'json',
+       type: 'GET',
+       success: function(result){
+          if(result.result=="Success"){
+             $("#owl_pic_area").load('/admin/camping_info/<%= params.roomtype %> #owl_pic_reload');
+          }else{
+            alert("사진삭제 실패");
+          }
+       }
+    });
+}
+
+function pension_pic_delete(index){
+console.log(index);
+$.ajax({
+       url:'/admin/camping_picture_del/pension/'+index,
+       dataType: 'json',
+       type: 'GET',
+       success: function(result){
+          if(result.result=="Success"){
+             $("#pension_pic_area").load('/admin/camping_info/<%= params.roomtype %> #pension_pic_reload');
+          }else{
+            alert("사진삭제 실패");
+          }
+       }
+    });
+}
+
+function raccoon_pic_delete(index){
+console.log(index);
+$.ajax({
+       url:'/admin/camping_picture_del/raccoon/'+index,
+       dataType: 'json',
+       type: 'GET',
+       success: function(result){
+          if(result.result=="Success"){
+             $("#raccoon_pic_area").load('/admin/camping_info/<%= params.roomtype %> #raccoon_pic_reload');
+          }else{
+            alert("사진삭제 실패");
+          }
+       }
+    });
+}
+
+function scops_owl_pic_delete(index){
+console.log(index);
+$.ajax({
+       url:'/admin/camping_picture_del/scops_owl/'+index,
+       dataType: 'json',
+       type: 'GET',
+       success: function(result){
+          if(result.result=="Success"){
+             $("#scops_owl_pic_area").load('/admin/camping_info/<%= params.roomtype %> #scops_owl_pic_reload');
+          }else{
+            alert("사진삭제 실패");
+          }
+       }
+    });
+}
+
+function site_cypress_pic_delete(index){
+console.log(index);
+$.ajax({
+       url:'/admin/camping_picture_del/site_cypress/'+index,
+       dataType: 'json',
+       type: 'GET',
+       success: function(result){
+          if(result.result=="Success"){
+             $("#site_cypress_pic_area").load('/admin/camping_info/<%= params.roomtype %> #site_cypress_pic_reload');
+          }else{
+            alert("사진삭제 실패");
+          }
+       }
+    });
+}
+
+function site_zelkova_pic_delete(index){
+console.log(index);
+$.ajax({
+       url:'/admin/camping_picture_del/site_zelkova/'+index,
+       dataType: 'json',
+       type: 'GET',
+       success: function(result){
+          if(result.result=="Success"){
+             $("#site_zelkova_pic_area").load('/admin/camping_info/<%= params.roomtype %> #site_zelkova_pic_reload');
+          }else{
+            alert("사진삭제 실패");
+          }
+       }
+    });
+}
+
+function cuckoo_pic_delete(index){
+console.log(index);
+$.ajax({
+       url:'/admin/camping_picture_del/cuckoo/'+index,
+       dataType: 'json',
+       type: 'GET',
+       success: function(result){
+          if(result.result=="Success"){
+             $("#cuckoo_pic_area").load('/admin/camping_info/<%= params.roomtype %> #cuckoo_pic_reload');
+          }else{
+            alert("사진삭제 실패");
+          }
+       }
+    });
+}
+
+function nightingale_pic_delete(index){
+console.log(index);
+$.ajax({
+       url:'/admin/camping_picture_del/nightingale/'+index,
+       dataType: 'json',
+       type: 'GET',
+       success: function(result){
+          if(result.result=="Success"){
+             $("#nightingale_pic_area").load('/admin/camping_info/<%= params.roomtype %> #nightingale_pic_reload');
+          }else{
+            alert("사진삭제 실패");
+          }
+       }
+    });
+}
+
+function site_grass_pic_delete(index){
+console.log(index);
+$.ajax({
+       url:'/admin/camping_picture_del/site_grass/'+index,
+       dataType: 'json',
+       type: 'GET',
+       success: function(result){
+          if(result.result=="Success"){
+             $("#site_grass_pic_area").load('/admin/camping_info/<%= params.roomtype %> #site_grass_pic_reload');
+          }else{
+            alert("사진삭제 실패");
+          }
+       }
+    });
+}
+
+function firstetc_pic_delete(index){
+console.log(index);
+$.ajax({
+       url:'/admin/camping_picture_del/firstetc/'+index,
+       dataType: 'json',
+       type: 'GET',
+       success: function(result){
+          if(result.result=="Success"){
+             $("#firstetc_pic_area").load('/admin/camping_info/<%= params.roomtype %> #firstetc_pic_reload');
+          }else{
+            alert("사진삭제 실패");
+          }
+       }
+    });
+}
+
+function secondetc_pic_delete(index){
+console.log(index);
+$.ajax({
+       url:'/admin/camping_picture_del/secondetc/'+index,
+       dataType: 'json',
+       type: 'GET',
+       success: function(result){
+          if(result.result=="Success"){
+             $("#secondetc_pic_area").load('/admin/camping_info/<%= params.roomtype %> #secondetc_pic_reload');
+          }else{
+            alert("사진삭제 실패");
+          }
+       }
+    });
+}
+
+function room_state_query(){
+    var room_state = document.getElementById("room_state");
+      var selectValue = room_state.options[room_state.selectedIndex].value;
+      console.log(selectValue);
+     switch (selectValue) {
+         case "0":
+            location.href="/admin/camping_info/bluebird";
+         break;
+         case "1":
+            location.href="/admin/camping_info/owl";
+         break;
+         case "2":
+            location.href="/admin/camping_info/pension";
+         break;
+         case "3":
+            location.href="/admin/camping_info/raccoon";
+         break;
+         case "4":
+            location.href="/admin/camping_info/scops_owl";
+         break;
+         case "5":
+            location.href="/admin/camping_info/site_cypress";
+         break;
+         case "6":
+            location.href="/admin/camping_info/site_zelkova";
+         break;
+         case "7":
+            location.href="/admin/camping_info/cuckoo";
+         break;
+         case "8":
+            location.href="/admin/camping_info/nightingale";
+         break;
+         case "9":
+             location.href="/admin/camping_info/site_grass";
+         break;
+         case "10":
+             location.href="/admin/camping_info/firstetc";
+         break;
+         case "11":
+             location.href="/admin/camping_info/secondetc";
+         break;
+       default:
+         location.href="/admin/camping_info/bluebird";
+         break;
+     }
+}
+
+active_check("camping");
+
+function getaddprice(){
+    $.ajax({
+        type: "POST"
+        ,url: "/reserve/add_price"
+        ,data: {room_type:"site_grass"}
+        ,success:function(response){
+            document.getElementById('site_grass_addprice').value=response.result[0].lowcharge;
+        }
+        ,error:function(data){
+            alert("error");
+            history.back();
+        }
+    });
+}
+
+function getetcname(){
+    $.ajax({
+            type: "POST"
+            ,url: "/reserve/rev_roomname"
+            ,data: {room_type:"firstetc"}
+            ,success:function(response){
+                document.getElementById('firstetc_input').value=response.result[0].name;
+            }
+            ,error:function(data){
+                alert("기타1 이름을 가져오지 못했습니다.");
+            }
+    });
+    
+    $.ajax({
+            type: "POST"
+            ,url: "/reserve/rev_roomname"
+            ,data: {room_type:"secondetc"}
+            ,success:function(response){
+                document.getElementById('secondetc_input').value=response.result[0].name;
+            }
+            ,error:function(data){
+                alert("기타2 이름을 가져오지 못했습니다.");
+            }
+    });
+}
+
+function getsitename(){
+    $.ajax({
+            type: "POST"
+            ,url: "/reserve/rev_roomname"
+            ,data: {room_type:"site_cypress"}
+            ,success:function(response){
+                document.getElementById('site1_input').value=response.result[0].name;
+            }
+            ,error:function(data){
+                alert("사이트1 이름을 가져오지 못했습니다.");
+            }
+    });
+    
+    $.ajax({
+            type: "POST"
+            ,url: "/reserve/rev_roomname"
+            ,data: {room_type:"site_zelkova"}
+            ,success:function(response){
+                document.getElementById('site2_input').value=response.result[0].name;
+            }
+            ,error:function(data){
+                alert("사이트2 이름을 가져오지 못했습니다.");
+            }
+    });
+    
+    $.ajax({
+            type: "POST"
+            ,url: "/reserve/rev_roomname"
+            ,data: {room_type:"site_grass"}
+            ,success:function(response){
+                document.getElementById('site3_input').value=response.result[0].name;
+            }
+            ,error:function(data){
+                alert("사이트3 이름을 가져오지 못했습니다.");
+            }
+    });
+}
+
+$('document').ready(function(){
+   getetcname(); 
+   getsitename();
+   getaddprice();
+   $("#etcname_setbtn1").click(function(){
+       var firstetc_input = document.getElementById('firstetc_input').value;
+       if(firstetc_input==""){
+           alert("기타1 이름을 입력해주세요.");
+       }else{
+           $.ajax({
+            type: "POST"
+            ,url: "/reserve/set_roomname"
+            ,data: {room_type:"firstetc",name:firstetc_input}
+            ,success:function(response){
+                if(response.result=="Success"){
+                    alert("기타1 이름설정 성공");
+                }else{
+                    alert("기타1 이름설정 실패");   
+                }
+            }
+            ,error:function(data){
+                alert("기타2 이름을 가져오지 못했습니다.");
+            }
+            });
+       }
+   });
+   $("#etcname_setbtn2").click(function(){
+       var secondetc_input = document.getElementById('secondetc_input').value;
+       if(secondetc_input==""){
+           alert("기타2 이름을 입력해주세요.");
+       }else{
+           $.ajax({
+            type: "POST"
+            ,url: "/reserve/set_roomname"
+            ,data: {room_type:"secondetc",name:secondetc_input}
+            ,success:function(response){
+                if(response.result=="Success"){
+                    alert("기타2 이름설정 성공");
+                }else{
+                    alert("기타2 이름설정 실패");   
+                }
+            }
+            ,error:function(data){
+                console.log(data);
+                alert("기타2 이름을 가져오지 못했습니다.");
+            }
+            });
+       }
+   });
+   //사이트 구역이름설정 버튼 리스너
+   $("#site1_setbtn").click(function(){
+       let input = document.getElementById('site1_input').value;
+       if(input==""){
+           alert("사이트1 이름을 입력해주세요.");
+       }else{
+           $.ajax({
+            type: "POST"
+            ,url: "/reserve/set_roomname"
+            ,data: {room_type:"site_cypress",name:input}
+            ,success:function(response){
+                if(response.result=="Success"){
+                    alert("사이트1 이름설정 성공");
+                }else{
+                    alert("사이트1 이름설정 실패");   
+                }
+            }
+            ,error:function(data){
+                console.log(data);
+                alert("사이트1 이름을 가져오지 못했습니다.");
+            }
+            });
+       }
+   });
+   
+   $("#site2_setbtn").click(function(){
+       let input = document.getElementById('site2_input').value;
+       if(input==""){
+           alert("사이트2 이름을 입력해주세요.");
+       }else{
+           $.ajax({
+            type: "POST"
+            ,url: "/reserve/set_roomname"
+            ,data: {room_type:"site_zelkova",name:input}
+            ,success:function(response){
+                if(response.result=="Success"){
+                    alert("사이트2 이름설정 성공");
+                }else{
+                    alert("사이트2 이름설정 실패");   
+                }
+            }
+            ,error:function(data){
+                console.log(data);
+                alert("사이트2 이름을 가져오지 못했습니다.");
+            }
+            });
+       }
+   });
+   
+   $("#site3_setbtn").click(function(){
+       let input = document.getElementById('site3_input').value;
+       if(input==""){
+           alert("사이트3 이름을 입력해주세요.");
+       }else{
+           $.ajax({
+            type: "POST"
+            ,url: "/reserve/set_roomname"
+            ,data: {room_type:"site_grass",name:input}
+            ,success:function(response){
+                if(response.result=="Success"){
+                    alert("사이트3 이름설정 성공");
+                }else{
+                    alert("사이트3 이름설정 실패");   
+                }
+            }
+            ,error:function(data){
+                console.log(data);
+                alert("사이트3 이름을 가져오지 못했습니다.");
+            }
+            });
+       }
+   });
+   
+   
+   //편백잔디 추가요금 버튼 리스너
+   $("#site_grass_addprice_setbtn").click(function(){
+       var sitegrass_input = document.getElementById('site_grass_addprice').value;
+       if(sitegrass_input==""){
+           alert("편백잔디 두팀추가요금을 설정 해주세요.");
+       }else{
+           $.ajax({
+            type: "POST"
+            ,url: "/reserve/set_price"
+            ,data: {setprice:sitegrass_input}
+            ,success:function(response){
+                if(response.result=="Success"){
+                    alert("가격설정 성공");
+                }else{
+                    alert("가격설정 실패");   
+                }
+            }
+            ,error:function(data){
+                console.log(data);
+                alert("편백잔디 가격설정 실패.");
+            }
+            });
+       }
+   });
+});
+</script>
+</body>
+</html>

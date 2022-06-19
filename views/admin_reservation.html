@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>관리자 예약 승인</title>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="/semantic.min.css">
+  <script src="/semantic.min.js"></script>
+  <script src="/js/admin_page.js"></script>
+
+  <style>
+    .clickable {
+      cursor: pointer;
+    }
+
+    .hover {
+      text-decoration: underline;
+    }
+
+    body {
+      font-family: "Nanum Gothic", sans-serif;
+    }
+
+    #hide {
+      display: none;
+    }
+  </style>
+
+</head>
+
+<body onload=reservation_admin_query()>
+  <% include admin_header.html %>
+  <div class="ui fluid container" style="padding:2rem;">
+
+    <div class="two wide column" style="text-align:right;">
+      <input type="button" id="auth" value="예약 승인">
+      <input type="button" id="cancel" value="예약 취소">
+      <input type="button" id="refund" value="환불 신청">
+      <input type="button" id="refund_auth" value="환불 완료">
+    </div>
+  
+    예약 상태 필터 :
+    <select class="ui search dropdown" id="rev_state">
+      <option value="0">선택해주세요.</option>
+      <option value="1">예약 신청</option>
+      <option value="2">예약 승인</option>
+      <option value="3">환불 신청</option>
+      <option value="5">환불 완료</option>
+    </select>
+    
+    <input id="rev_name" style="height:40px; line-height:40px; width:220px" type="text" placeholder="이름을 입력후 엔터를 치세요." onkeyup="rev_name_enter(event)" />
+    <input type="button" value="검색" onclick="reservation_state_query()" />
+
+    <br>
+    <br>
+
+    <div id="reservation" class="ui fluid container">
+    </div>
+
+  </div>
+
+  <script>
+    $("#auth").click(function() {
+      //삭제할게 더 이상 없거나, 삭제할 행이 선택퇴어 있지 않을 시 경고창
+      if ($('table input:checkbox').length < 1) {
+        alert("더 이상 거절할 요청이 없습니다.");
+      } else {
+        //$('input[type=checkbox]:checked').each(function(index){
+        $('tbody input:checkbox:checked').each(function(index) {
+          //체크박스를 포함하고 있는 행 제거
+          var tr = $(this).parent().parent();
+          var td = tr.children();
+          var args = td.eq(1).text();
+          reservation_auth(args);
+        });
+      }
+    });
+
+    $("#refund_auth").click(function() {
+      //삭제할게 더 이상 없거나, 삭제할 행이 선택퇴어 있지 않을 시 경고창
+      if ($('table input:checkbox').length < 1) {
+        alert("더 이상 거절할 요청이 없습니다.");
+      } else {
+        //$('input[type=checkbox]:checked').each(function(index){
+        $('tbody input:checkbox:checked').each(function(index) {
+          //체크박스를 포함하고 있는 행 제거
+          var tr = $(this).parent().parent();
+          var td = tr.children();
+          var args = td.eq(1).text();
+          reservation_refund_auth(args);
+        });
+      }
+    });
+ 
+    $("#cancel").click(function() {
+      //삭제할게 더 이상 없거나, 삭제할 행이 선택퇴어 있지 않을 시 경고창
+      if ($('table input:checkbox').length < 1) {
+        alert("더 이상 거절할 요청이 없습니다.");
+      } else {
+        //$('input[type=checkbox]:checked').each(function(index){
+        $('tbody input:checkbox:checked').each(function(index) {
+          //체크박스를 포함하고 있는 행 제거
+          var tr = $(this).parent().parent();
+          var td = tr.children();
+          var args = td.eq(1).text();
+          reservation_cancel(args);
+        });
+      }
+    });
+    $("#refund").click(function() {
+      //삭제할게 더 이상 없거나, 삭제할 행이 선택퇴어 있지 않을 시 경고창
+      if ($('table input:checkbox').length < 1) {
+        alert("더 이상 거절할 요청이 없습니다.");
+      } else {
+        //$('input[type=checkbox]:checked').each(function(index){
+        $('tbody input:checkbox:checked').each(function(index) {
+          //체크박스를 포함하고 있는 행 제거
+          var tr = $(this).parent().parent();
+          var td = tr.children();
+          var args = td.eq(1).text();
+          reservation_refund(args);
+        });
+      }
+    });
+
+    function reservation_auth(args) {
+      $.ajax({
+        type: "POST",
+        url: "/reser/reservation_auth",
+        data: {
+          args: args
+        }
+      }).done(function(msg) {
+        alert(msg);
+        $('#reservation').html('');
+        reservation_admin_query();
+      });
+    }
+
+    function reservation_refund_auth(args) {
+      $.ajax({
+        type: "POST",
+        url: "/reser/reservation_refund_auth",
+        data: {
+          args: args
+        }
+      }).done(function(msg) {
+        alert(msg);
+        $('#reservation').html('');
+        reservation_admin_query();
+      });
+    }
+    
+    function reservation_cancel(args){
+      $.ajax({
+        type: "POST",
+        url: "/reser/reservation_cancel",
+        data: {
+          args: args
+        }
+      }).done(function(msg) {
+        if(msg.indexOf("완료")!==-1){
+          alert("예약취소 완료");
+        }else{
+          alert("예약취소 실패") 
+        }
+        $('#reservation').html('');
+        reservation_admin_query();
+      });
+    }
+    
+    function reservation_refund(args){
+      $.ajax({
+        type: "POST",
+        url: "/reser/reservation_refund",
+        data: {
+          args: args
+        }
+      }).done(function(msg) {
+        if(msg.indexOf("완료")!==-1){
+          alert("환불신청 완료");
+        }else{
+          alert("환불신청 실패") 
+        }
+        $('#reservation').html('');
+        reservation_admin_query();
+      });
+    }
+    
+    function rev_name_enter(e){
+      if(e.keyCode == 13){
+        reservation_state_query();
+        e.target.value = '';
+      }
+    }
+
+    function reservation_admin_query() {
+      $.ajax({
+        type: "POST",
+        url: "/reser/reservation_admin_query",
+        data: {},
+        success: onSuccess,
+        error: onError
+      });
+
+      function onSuccess(response) {
+        jsontable(response.message);
+      }
+
+      function onError() {
+        alert("오류가 발생하였습니다.");
+      }
+    }
+
+    function reservation_state_query(){
+      const rev_state = document.getElementById("rev_state") || 0;
+      const rev_name = document.getElementById("rev_name").value;
+      var selectValue = rev_state.options[rev_state.selectedIndex].value || '';
+
+      if (selectValue == 5) {
+        reservation_admin_refund_query({ selectValue, rev_name });
+      } else {
+        reservation_admin_state_query({ selectValue, rev_name });
+      }
+    }
+
+    function reservation_admin_state_query({ selectValue, rev_name }) {
+
+      $('#reservation').html('데이터를 받아오는 중입니다..');
+
+      $.ajax({
+        type: "POST",
+        url: "/reser/reservation_admin_state_query",
+        data: {
+          args: selectValue,
+          rev_name
+        },
+        success: onSuccess,
+        error: onError
+      });
+
+      function onSuccess(response) {
+         $('#reservation').html('');
+        jsontable(response.message);
+      }
+
+      function onError() {
+        alert("오류가 발생하였습니다.");
+      }
+    }
+
+    function reservation_admin_refund_query({ selectValue, rev_name }) {
+
+      $('#reservation').html('데이터를 받아오는 중입니다..');
+
+      $.ajax({
+        type: "POST",
+        url: "/reser/reservation_admin_refund_query",
+        data: {
+          args: selectValue,
+          rev_name
+        },
+        success: onSuccess,
+        error: onError
+      });
+
+      function onSuccess(response) {
+        $('#reservation').html('');
+        jsontable(response.message);
+      }
+
+      function onError() {
+        alert("오류가 발생하였습니다.");
+      }
+    }
+
+
+    function reserve_room(name){
+    	var room_typea
+    	switch (name) {
+    		case "nightingale" :
+    			room_type="꾀꼬리";
+    			break;
+    		case "bluebird" :
+    			room_type="파랑새";
+    			break;
+    		case "owl":
+    			room_type="부엉이";
+    			break;
+    		case "cuckoo":
+    			room_type="뻐꾸기";
+    			break;
+    		case "raccoon":
+    			room_type="너구리";
+    			break;
+    		case "scops_owl":
+    			room_type="소쩍새";
+    			break;
+    		case "site_cypress":
+    			room_type="사이트1";
+    			break;
+    		case "site_zelkova":
+    			room_type="사이트2";
+    			break;
+    		case "pension":
+    			room_type="펜션";
+    			break;
+    		case "site_grass":
+    	    room_type="사이트3";
+    	    break;
+        case "firstetc":
+    	    room_type="기타1";
+    	    break;
+        case "secondetc":
+    	    room_type="기타2";
+    	    break;
+    		default:
+    			room_type="";
+    			break;
+    	}
+
+    	return room_type;
+
+    }
+    
+    function etcname_render(td,name,number){
+	if(name=="firstetc"||name=="secondetc"){
+		$.ajax({
+            type: "POST"
+            ,url: "/reserve/rev_roomname"
+            ,data: {room_type:name}
+            ,success:function(response){
+                td.html(response.result[0].name+"_"+number);
+            }
+            ,error:function(data){
+                alert("error");
+            }
+    	});
+	}else if(name=="site_cypress"||name=="site_zelkova"||name=="site_grass"){
+	  $.ajax({
+            type: "POST"
+            ,url: "/reserve/rev_roomname"
+            ,data: {room_type:name}
+            ,success:function(response){
+                td.html(response.result[0].name+"_"+number);
+            }
+            ,error:function(data){
+                alert("error");
+            }
+    	});
+	}
+}
+function query_addprice(row,td){
+	var s_day = row["s_day"];
+	var l_day = row["l_day"]; 
+	 var fd = new Date((s_day).replace(/-/g,"/"));
+     var ld = new Date((l_day).replace(/-/g,"/"));
+     var sd = (ld.getTime() - fd.getTime()) / (1000*60*60*24);
+     fd = (s_day);
+     ld = (l_day);
+     
+     $.ajax({
+        type: "POST"
+        ,url: "/reserve/query_room"
+        ,data: {f_day:fd,l_day:ld,day:sd}
+        ,success:function(response){
+            if(response.result["site_grass_price"]!==row["rev_charge"]){
+            	
+            	$.ajax({
+                  type: "POST"
+                  ,url: "/reserve/rev_roomname"
+                  ,data: {room_type:"site_grass"}
+                  ,success:function(response){
+                    if(td.html().indexOf("(두팀)")==-1){
+		            		if(td.html().indexOf("site_grass")==-1){
+		            			console.log(td.html());
+		            			td.html(td.html().replace(response.result[0].name,response.result[0].name+"(두팀)_"));
+		            		}
+		                	else {
+		                		console.log(td.html());
+		                		td.html(td.html().replace("site_grass_",response.result[0].name+"(두팀)_"));
+		                	}
+		            	}
+                  }
+                  ,error:function(data){
+                      alert("error");
+                  }
+          	});
+            }
+        }
+        ,error:function(data){
+        	
+        }
+    });
+}
+
+    function jsontable(args) {
+
+      var target = $("#reservation");
+      var table = $(
+        "<table class=\"ui small striped table\" style=text-align:center;><tr><thead><th id=\"hide\"></th><th></th><th>이름</th><th>phone</th><th>종류</th><th>예약 상태</th><th>금액</th><th class=\"sorting clickable\">입실<img src=\"/asc.gif\"></th><th class=\"sorting clickable\">퇴실<img src=\"/asc.gif\"></th></tr></thead>"
+        ).appendTo(target);
+
+      var list = [{
+          field: "rev_id",
+          width: 100
+        },
+        {
+          field: "rev_name",
+          width: 100
+        },
+        {
+          field: "rev_phone",
+          width: 100
+        },
+        {
+          field: "rev_id_split",
+          width: 100
+        },
+        {
+          field: "rev_state",
+          width: 100
+        },
+        {
+          field: "rev_charge",
+          width: 100
+        },
+        {
+          field: "s_day",
+          width: 100
+        },
+        {
+          field: "l_day",
+          width: 100
+        }
+      ];
+
+      $.each(args, function(index, row) {
+        var tr = $("<tr>").appendTo(table);
+        var td = $("<td><input type=\"checkbox\"></td>").appendTo(tr);
+
+        $.each(list, function(i, fieldInfo) {
+          if ((fieldInfo.field) == "rev_id") {
+            $("<td id=\"hide\">" + row[fieldInfo.field] + "</td>").appendTo(tr);
+          } else {
+            td = $("<td>").appendTo(tr);
+          }
+          switch (fieldInfo.field) {
+            case "rev_state":
+              switch (row[fieldInfo.field]) {
+                case 1:
+                  td.html("예약 신청");
+                  break;
+                case 2:
+                  td.html("예약 승인");
+                  break;
+                case 3:
+                  td.html("환불 신청");
+                  break;
+                case 5:
+                  td.html("환불 완료");
+                  break;
+                default:
+                  td.html("예약 신청");
+                  break;
+              }
+              break;
+            case "rev_id_split":
+              room_name_index=(row[fieldInfo.field]).split("_");
+
+              if ( room_name_index.length == 2 ) {
+                room_typea=reserve_room(room_name_index[0]);
+                room_name=room_typea+"_"+room_name_index[1];
+                td.html(room_name);
+                etcname_render(td,room_name_index[0],room_name_index[1]);
+              } else if (room_name_index.length == 3) {
+                room_typea=reserve_room(room_name_index[0]+"_"+room_name_index[1]);
+                room_name=room_typea+"_"+room_name_index[2];
+                td.html(room_name);
+                etcname_render(td,room_name_index[0]+"_"+room_name_index[1],room_name_index[2]);
+              } else {
+                td.html(row[fieldInfo.field]);
+              }
+              if(row["rev_id_split"].indexOf("site_grass")!==-1){
+							query_addprice(row,td);
+						  }
+              break;
+            case "rev_id":
+              break;
+            default:
+              td.html(row[fieldInfo.field]);
+              break;
+          }
+        });
+
+        $(document).ready(function() {
+          var reSortColors = function($table) {
+            $('tbody tr:odd', $table)
+              .removeClass('even').addClass('odd');
+            $('tbody tr:even', $table)
+              .removeClass('odd').addClass('even');
+          };
+
+          $('table.ui').each(function() {
+            var $table = $(this);
+            reSortColors($table);
+
+            $('th', $table).each(function(column) {
+              var $header = $(this);
+              if ($header.is('.sorting')) {
+                $header.addClass('clickable').hover(function() {
+                  $header.addClass('hover');
+                }, function() {
+                  $header.removeClass('hover');
+                }).click(function() {
+                  var rows = $table.find('tbody > tr').get();
+                  rows.sort(function(a, b) {
+                    var keyA = $(a).children('td').eq(column).text().toUpperCase();
+                    var keyB = $(b).children('td').eq(column).text().toUpperCase();
+                    if (keyA < keyB) return -1;
+                    if (keyA > keyB) return 1;
+                    return 0;
+                  });
+                  $.each(rows, function(index, row) {
+                    $table.children('tbody').append(row);
+                  });
+
+                  reSortColors($table);
+                });
+              }
+            });
+          });
+        });
+
+      });
+
+    }
+active_check("book");
+  </script>
+</body>
+
+</html>

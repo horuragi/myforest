@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>방문자 통계</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<link rel="stylesheet" type="text/css" href="/semantic.min.css">
+  <script src="/semantic.min.js"></script>
+  <script src="/js/admin_page.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <style>
+    body {
+      font-family: "Nanum Gothic", sans-serif;
+    }
+    #hide {
+      display: none;
+    }
+  </style>
+
+</head>
+<body >
+	<% include admin_header.html %>
+<div class="ui" style="margin:15px">
+	<h2 class="ui header">
+		<i class="far fa-calendar-alt"></i>
+  <div class="content">
+	  날짜선택
+  </div>
+</h2>
+<input type="text" name="date" id="date1" size="16" />
+<button class="ui mini primary button" onclick="$('#date1').datepicker('show');" >날짜변경</button>
+<h3 class="ui dividing header">
+	방문자 수
+</h3>
+<h4 style="margin:0px">
+<%= today %> 방문자수 : <%= pasing.totalPageCount %> 명
+</h4>
+<h3 class="ui dividing header" style="margin-top:50px">
+       방문자 기록
+</h3>
+<table class="ui small striped table" style="text-align: center">
+<thead>
+<tr>
+<th width="8%">번호</th>
+<th width="20%">ip주소</th>
+<th width="47%">접속경로</th>
+<th width="25%">등록일</th>
+</tr>
+</thead>
+<tbody>
+
+<% data.forEach(function (item,index){ %>
+<tr>
+<td>
+<%= item.id %>
+</td>
+<td>
+<%= item.ip_address %>
+</td>
+<td>
+<%= item.referer %>
+</td>
+<td>
+        <%= item.regdate %>
+</td>
+</tr>
+<% })%>
+</tbody>
+</table>
+</div>
+<div class="ui container" style="text-align: center">
+<ul class="pager">
+
+
+
+<%
+
+var curSet = pasing.curSet
+var endPage = pasing.endPage
+var startPage = pasing.startPage
+var totalSet = pasing.totalSet
+var totalPage = pasing.totalPage
+var page_list_size = pasing.page_list_size
+var page_size = pasing.page_size
+var curPage = pasing.curPage
+var totalPageCount = pasing.totalPageCount
+%>
+
+
+<%
+if(curSet > 1){
+%>
+<a href='/admin/admin_visit/passing/<%= ( startPage - 1) %>/<%= today %>' style="margin-left:10px;color:black">이전페이지</a>
+
+<%
+}
+%>
+
+
+<%
+for(var i = startPage; i <= endPage; i++){
+if(i > totalPage){break;}
+
+if(i == curPage){
+%>
+
+<a href='/admin/admin_visit/passing/<%= i %>/<%= today %>' style="margin-left:10px;color:green;font-size: 2em">
+<%= i %>
+</a>
+
+<%
+}else{
+%>
+
+
+<a href='/admin/admin_visit/passing/<%= i %>/<%= today %>' style="margin-left:10px;color:black">
+<%= i %>
+</a>
+
+
+<%
+}
+%>
+
+<%
+}
+%>
+
+<%
+if(curSet < totalSet){
+%>
+
+<a href='/admin/admin_visit/passing/<%= ( endPage + 1) %>/<%= today %>' style="margin-left:10px;color:black">다음페이지</a>
+
+<%
+}
+%>
+
+</ul>
+</div>
+	<script>
+		$.datepicker.setDefaults({
+        dateFormat: 'yy-mm-dd',
+        prevText: '이전 달',
+        nextText: '다음 달',
+        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+        showMonthAfterYear: true,
+        yearSuffix: '년'
+    });
+		$(function(){ 
+			$("#date1").datepicker({
+				onSelect:function(dateText){
+					console.log(dateText);
+					location.href="/admin/admin_visit/passing/1/"+dateText;
+				}
+			});
+			$("#date1").datepicker('setDate','<%= today %>');
+		});
+// <%= totalPageCount %>
+		active_check('visit');
+	</script>
+</body>
+</html>

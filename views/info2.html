@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>내안의숲 오토캠핑장</title>
+<meta name="description" content="내안의숲(계백) 오토캠핑장 홈페이지입니다. #내안의숲 #부여캠핑장 #캠핑장 #오토캠핑장 #데크사이트 #방갈로 #펜션예약">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="내안의숲(계백) 오토캠핑장">
+<meta property="og:description" content="부여에 위치한 내안의숲 오토캠핑장 홈페이지입니다">
+<meta property="og:image" content="https://www.xn--220bt54ayhcmwc.com/images/myforestlogo.png">
+<meta property="og:url" content="https://www.xn--220bt54ayhcmwc.com">
+			<link rel="stylesheet" type="text/css" href="/semantic.min.css">
+			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+			<script src="/semantic.min.js"></script>
+			<link rel="stylesheet" type="text/css" href="/zoomslider.css" />
+			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+			<script>
+					$(document)
+						.ready(function() {
+				
+							// fix main menu to page on passing
+					 
+							// show dropdown on hover
+							$('.ui.dropdown').dropdown({
+								on: 'hover',
+								action:'nothing'
+							});
+						})
+					;
+					</script>
+			<style>
+			#menu{
+				margin-right: 50px;
+				color: black;
+				height: 60px;
+				font-size: 18px;
+				font-weight: bold;
+				margin-bottom: 0px;
+			}
+			#top{
+				width: 100%;
+				background-color: rgb(107, 107, 107);
+				height: 35px;
+			}
+			#topmenu{
+				margin-top:0px;
+				height: 35px;
+			}
+			#main{
+				margin-top:0;
+				width: 100%;
+				height: 100%;
+			}
+			#main_menu{
+				height: 50px;
+				background-color: white;
+			}
+
+			#border{
+				height: 10px;
+				background: rgb(71, 175, 71);
+				margin-bottom: 5px;
+			}
+
+			#border2{
+				height: 1px;
+				background: rgb(107, 107, 107);
+			}
+
+			#demo-1 {
+			overflow: hidden; /* to bound the empty top space created by inner element's top margin */
+			position: relative; /* can either be relative, absolute or fixed. If position is not set (i.e. static), it would be set to "relative" by script */
+			width: 100%;
+			height: 500px;
+			background-color: #f0f0f0;
+		}
+		#submenu{
+			font-size: 15px;
+		}
+		.demo-inner-content {
+			position: relative; /* if position is not set, the script will set it to 'relative'. */
+			z-index: 2; /* if z-index is not set, the script will set it to '2'. */
+			margin: 70px auto;
+			padding: 40px;
+			max-height: 500px;
+			color: #fff;
+			text-align: center;
+			font-size: 1.5em;
+		}
+
+		.demo-inner-content h1 {
+			font-size: 2.5em;
+			margin: 0;
+		}
+		#container{
+			width: 100%;
+			height: 140px;
+		}
+		#container2{
+			min-height: 400px auto;
+		}
+		#footer{
+			font-style: normal;
+			height: 120px;
+		}
+#content_left{
+	width:25%;	
+}
+
+#content_right{
+	width:75%;
+}
+
+#load {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	display: block;
+	opacity: 1.0;
+	background: white;
+	z-index: 99;
+	text-align: center;
+}
+
+#img {
+	position: absolute;
+	top: 45%;
+	left: 48%;
+	z-index: 100;
+}
+#load > p {
+	position: relative;
+	z-index: 100;
+}
+
+.top_box1{
+	float: left;
+	width: 50%;
+	height: 100%;
+}
+.top_box2{
+	display: inline-block;
+	width: 50%;
+	height: 100%;
+	text-align: right;
+}
+			</style>
+<script>
+	function loading_show(){
+	$('#load').show();
+	}
+	function loading_hide(){
+	//$('#load').hide();
+	$('#load')
+.transition({animation:'fade',duration:'600ms'})
+;
+	}
+	function page_move(renderpage){
+				location.href=renderpage;
+			}
+
+			function mouse_on(obj){
+				obj.style.background = "#cecece";
+				obj.style.fontWeight= "bold";
+				var tag = obj.getElementsByTagName('i');
+				tag[0].style.display = "inline";
+			}
+
+			function mouse_off(obj){
+				obj.style.background = "white";
+				obj.style.fontWeight= "lighter";
+				var tag = obj.getElementsByTagName('i');
+				tag[0].style.display = "none";
+			}
+	</script>
+  </head>
+	<body>
+			<div id="load">
+					<div id="img"><img src="images/loading1.gif" alt="loading..."><br><strong>Loading...</strong></div>	
+				</div>
+		<div id="main">
+				<% include header.html %>
+			<div id="border" ></div>
+			<div id="border2" ></div>
+			<div id=container style="background:url('/images/introtop.jpg');background-size:cover;background-repeat: no-repeat;">
+		</div>
+		<div id="container2" class="ui container">
+					<div class="ui stackable two column grid">
+							<div id="content_left" class="column">
+									<table border=1 cellspacing="0" cellpadding="20px" style="width:100%;border-collapse:collapse; border:1px;border-color: rgb(148, 148, 148)">
+										<tr><td style="height:100px;text-align: center;color:white;background:green;font-size:18px;"><strong>캠핑장 소개</strong></td></tr>
+										<tr><td style= "cursor:pointer" onmouseover="mouse_on(this)" onmouseout="mouse_off(this)" onclick="location.href='/info1'">
+												<i class="fas fa-check" style="margin-right: 10px;display:none;"></i>
+                                            내안의 숲 소개</td></tr>
+                                            <tr><td style="background: #cecece;"><i class="fas fa-check" style="margin-right: 10px;display:inline"></i><strong>주변관광지</strong></td></tr>
+										<tr><td style= "cursor:pointer" onmouseover="mouse_on(this)" onmouseout="mouse_off(this)" onclick="location.href='/info3'">
+												<i class="fas fa-check" style="margin-right: 10px;display:none;"></i>
+											찾아오시는길</td></tr>
+										</table>
+							</div>
+							<div id="content_right" class="column">
+									<table border=0 cellspacing="0" cellpadding="15px" style="margin-top:20px;width:100%;border-collapse:collapse; border:1px;border-color: rgb(148, 148, 148)">
+                                            <tr><td style="width: 50%"><strong><h2>주변관광지</h2></strong><p style="margin-top:10px">내안의 숲 주변관광지를 소개합니다.</p>
+                                                <hr align="left" style="width: 15%;border:solid 2px green"></td>
+                                                <td  style="width: 50%;text-align: right;vertical-align: text-top"><i class="fas fa-home" style="color: green"></i>&nbsp;&nbsp;HOME&nbsp;&nbsp;<i class="fas fa-angle-right"></i>
+                                                    &nbsp;&nbsp;캠핑장 소개&nbsp;&nbsp;<i class="fas fa-angle-right"></i>&nbsp;&nbsp;주변관광지&nbsp;&nbsp;
+                                                </td></tr>
+                                            </table>
+                                            <div style="margin:15px">
+                                            <h3 class="ui dividing header">
+                                                    물놀이/레저
+                                            </h3>
+                                            <div class="ui link three stackable cards">
+                                                    <div class="card">
+                                                      <div class="image">
+                                                        <img src="/images/info2/play1.jpg">
+                                                      </div>
+                                                      <div class="content">
+                                                        <div class="header">대천해수욕장</div>
+                                                        <div class="meta">
+                                                          <a style="font-size: 13px">충청남도 보령시 대천해수욕장</a>
+                                                        </div>
+                                                        <div class="description"><font size="2px">대천해수욕장은 젊음과 낭만, 안락함과 자연미가 함께 어우러진 곳입니다.
+                                                               </font>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="card">
+                                                      <div class="image">
+                                                        <img src="/images/info2/play2.jpg">
+                                                      </div>
+                                                      <div class="content">
+                                                        <div class="header">무창포해수욕장</div>
+                                                        <div class="meta">
+                                                                <a style="font-size: 13px">충남 보령시 웅천읍 무창포해수욕장</a>
+                                                        </div>
+                                                        <div class="description"><font size="2px">
+                                                                무창포는 여름휴향지라는 해수욕장으로서의 한계를 뛰어넘어 사계절 내내 가족단위 휴양객들의 발길이 끊기지 않고 있다.
+                                                            </font>
+                                                            </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="card">
+                                                      <div class="image">
+                                                        <img src="/images/info2/play3.jpg">
+                                                      </div>
+                                                      <div class="content">
+                                                        <div class="header">성주계곡</div>
+                                                        <div class="meta">
+                                                          <a style="font-size: 13px">충청남도 보령군 성주면 성주리</a>
+                                                        </div>
+                                                        <div class="description">
+                                                                <font size="2px">
+                                                                        충남 보령시 성주면에 위치한 성주산은 오서산과 함께 보령을 상징하는 명산이며, 옛부터 성인 혹은 선인들이 많이 살았다하여 성주산으로 이름이 붙여졌다.
+                                                                </font>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                            </div>
+                                            <div class="ui link three stackable cards">
+                                                    <div class="card">
+                                                      <div class="image">
+                                                        <img src="/images/info2/play4.jpg">
+                                                      </div>
+                                                      <div class="content">
+                                                        <div class="header">서천 스카이 파3 골프장</div>
+                                                        <div class="meta">
+                                                          <a style="font-size: 13px">충청남도 보령시 대천해수욕장</a>
+                                                        </div>
+                                                        <div class="description"><font size="2px">대천해수욕장은 젊음과 낭만, 안락함과 자연미가 함께 어우러진 곳입니다.
+                                                               </font>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="card">
+                                                      <div class="image">
+                                                        <img src="/images/info2/play5.jpg">
+                                                      </div>
+                                                      <div class="content">
+                                                        <div class="header">옥산저수지</div>
+                                                        <div class="meta">
+                                                                <a style="font-size: 13px">충남 부여군 옥산면 옥산저수지</a>
+                                                        </div>
+                                                        <div class="description"><font size="2px">
+                                                                붕어,잉어,가물치,메기,동자개 등등 많은 수종의 물고기와 30Cm가 넘는 월척이 자주낚이는 좋은 낚시터로 많은 낚시인들의 사랑을 받고 있는 곳이다.
+                                                            </font>
+                                                            </div>
+                                                      </div>
+                                                    </div>
+                                                    
+                                            </div>
+                                        <!-- 관광 section-->
+                                            <h3 class="ui dividing header">
+                                                    관광
+                                            </h3>
+                                            <div class="ui link three stackable cards">
+                                                    <div class="card">
+                                                      <div class="image">
+                                                        <img src="/images/info2/tour1.jpg">
+                                                      </div>
+                                                      <div class="content">
+                                                        <div class="header">서동요테마파크</div>
+                                                        <div class="meta">
+                                                          <a style="font-size: 13px">충청남도 부여군 충화면 가화리</a>
+                                                        </div>
+                                                        <div class="description"><font size="2px">백제 무왕의 이야기 '서동요'를 바탕으로 제작된 드라마의 촬영장으로, 
+                                                            드라마 종영 후에 테마파크로 변모한 곳이다. </font>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="card">
+                                                      <div class="image">
+                                                        <img src="/images/info2/tour2.jpg">
+                                                      </div>
+                                                      <div class="content">
+                                                        <div class="header">한산모시관</div>
+                                                        <div class="meta">
+                                                                <a style="font-size: 13px">충청남도 서천군 한산면 지현리 60-1</a>
+                                                        </div>
+                                                        <div class="description"><font size="2px">
+                                                                여름철을 시원하게 보낼 수 있도록 도와주는 최고의 옷감 모시, 그중에서도 최고로 치는 한산 모시의 고장이 바로 서천 한산면이다.
+                                                            </font>
+                                                            </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="card">
+                                                      <div class="image">
+                                                        <img src="/images/info2/tour3.jpg">
+                                                      </div>
+                                                      <div class="content">
+                                                        <div class="header">산성리갈대밭</div>
+                                                        <div class="meta">
+                                                          <a style="font-size: 13px">충청남도 서천군 한산면 신성리</a>
+                                                        </div>
+                                                        <div class="description">
+                                                                <font size="2px">
+                                                                영화 「공동경비구역 JSA」에서 비무장지대의 배경이 되었던 곳이 바로 금강변 신성리 갈대밭이다. 
+                                                                </font>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="ui link three stackable cards">
+                                                        <div class="card">
+                                                          <div class="image">
+                                                            <img src="/images/info2/tour4.jpg">
+                                                          </div>
+                                                          <div class="content">
+                                                            <div class="header">서천특화시장</div>
+                                                            <div class="meta">
+                                                              <a style="font-size: 13px">충청남도 서천군 서천읍 686-1</a>
+                                                            </div>
+                                                            <div class="description">
+                                                                    2005년 개설된 상가건물형의 중형시장으로 장날은 매월 2일, 7일이며, 주 취급품목은 수산물.
+                                                                    계절마다 서천의 수산물을 싱싱하고 값싸게 구입 할 수 있는 곳으로 캠장에서 가까이에 위치하고 있다.
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="card">
+                                                          <div class="image">
+                                                            <img src="/images/info2/tour5.jpg">
+                                                          </div>
+                                                          <div class="content">
+                                                            <div class="header">장암 억새풀 산책로</div>
+                                                            <div class="meta">
+                                                              <a style="font-size: 13px">충청남도 부여군 장암면 석동~합곡(리)</a>
+                                                            </div>
+                                                            <div class="description">
+                                                                    부여군은 장암면 석동리~합곡리 구간의 금천변에 위치한 억새군락지 8902㎡(약 2700여평)으로, 산책로,주차장,평의자,표지판,이정표등이
+                                                                    들어설 예정이다.
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <!-- 관광 section end-->
+                                            <h3 class="ui dividing header">
+                                                    역사 문화
+                                            </h3>
+                                            <div class="ui link three stackable cards">
+                                                    <div class="card">
+                                                      <div class="image">
+                                                        <img src="/images/info2/history1.jpg">
+                                                      </div>
+                                                      <div class="content">
+                                                        <div class="header">백제문화단지</div>
+                                                        <div class="meta">
+                                                          <a style="font-size: 13px">충청남도 부여군 규암면 합정리 575</a>
+                                                        </div>
+                                                        <div class="description">
+                                                                삼국문화의 한축으로서 우리민족문화의 근간을 이루고 있을뿐 아니라 고대 동방문화의 중심으로써 
+                                                                찬란한 문화의 꽃을 피운 백제역사문화의 우수성을 볼 수 있다.
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="card">
+                                                      <div class="image">
+                                                        <img src="/images/info2/history2.jpg">
+                                                      </div>
+                                                      <div class="content">
+                                                        <div class="header">
+                                                                궁남지</div>
+                                                        <div class="meta">
+                                                          <a style="font-size: 13px">충청남도 부여군 부여읍 동남리 16-1</a>
+                                                        </div>
+                                                        <div class="description">
+                                                                경주의 안압지가 통일신라 궁궐건축의 당당함을 보여준다면 궁남지의 차분한 아름다움은 백제의 단아한 옛 멋을 느끼게 한다. 
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="card">
+                                                            <div class="image">
+                                                              <img src="/images/info2/history3.jpg">
+                                                            </div>
+                                                            <div class="content">
+                                                              <div class="header">
+                                                                      국립 부여 박물관</div>
+                                                              <div class="meta">
+                                                                <a style="font-size: 13px">충청남도 부여군 부여읍 금성로 5</a>
+                                                              </div>
+                                                              <div class="description">
+                                                                    국립 부여 박물관은 충청의 젖줄인 금강 지류를 바탕으로 선사시대 이래로 수많은 문화 유적과 유물들이 남아 있는 부여에 설립된 박물관이다.
+                                                              </div>
+                                                            </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                  <div style="height:100px"></div>
+							</div>
+						</div>
+			<!--내안의숲소개 캠핑장안내도 요금안내 예약하기 예약확인
+				공지사항ㅡ문의사항 찾아오시는길-->
+			</div>
+		<!--footer-->
+		<% include footer.html %>
+	</div>
+
+	</body>
+	<script type="text/javascript" src="/jquery.zoomslider.min.js"></script>
+	<script>
+			setTimeout(function(){
+						loading_hide();
+					},400);
+					</script>
+</html>

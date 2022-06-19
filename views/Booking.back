@@ -1,0 +1,495 @@
+<!DOCTYPE html> 
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ite=edge">
+ 
+    <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" type="text/css" href="/semantic.min.css">
+    <script src="/semantic.min.js"></script>
+    
+
+    <link rel="stylesheet" href="/js/swiper/swiper.css">
+    <link rel="stylesheet" href="/js/swiper/swiper.min.css">
+
+    <script src="/js/swiper/swiper.js"></script>
+    <script src="/js/swiper/swiper.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/banner.css" />
+    <link rel="stylesheet" type="text/css" href="/css/simpleBanner.css" />
+    <link rel="stylesheet" type="text/css" href="/zoomslider.css" />
+    <link rel="stylesheet" type="text/css" href="/css/falling.css" />
+    <link href="/css/datepicker.css" rel="stylesheet" type="text/css">
+    <link href="/css/booking.css" rel="stylesheet" type="text/css">
+    <script src="/js/booking.js"></script>
+    <script src="/js/datepicker/datepicker.min.js"></script>
+    <script src="/js/booking_index.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+
+<body>
+<div id="wrap">
+<div id="top">
+	<% include top.html %>
+</div>
+	<!--
+	    <header>
+        <div class="ui text menu">
+            <div class="ui container">
+                <a class="item">
+                    Home Example Log
+                </a>
+
+                <div class="right menu">
+                    <a class="item">
+                        My_Booking
+                    </a>
+                    <a class="item">
+                        login/logout
+                    </a>
+                </div>
+            </div>
+        </div>
+	    </header> -->
+    <div id="wrap_select">
+        <div class="ui container">
+            <div class="rev_left_select">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <li class="swiper-slide"><img src="/images/swiper/1.jpg"></li>
+                        <li class="swiper-slide"><img src="/images/swiper/2.jpg"></li>
+                        <li class="swiper-slide"><img src="/images/swiper/3.jpg"></li>
+                        <li class="swiper-slide"><img src="/images/swiper/4.jpg"></li>
+                        <li class="swiper-slide"><img src="/images/swiper/5.jpg"></li>
+                        <li class="swiper-slide"><img src="/images/swiper/6.jpg"></li>
+                    </div>
+                        
+
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+                    
+                <div class="rev_select_info">
+                    <h2>내안의 숲 & 오토 캠핑장</h2>
+                    <p><i class="map outline blue icon"></i>충남 부여군 옥산면 내대리 산 28-1 </p>
+                    <p><i class="phone blue icon"></i>010-5691-5058</p>
+                </div>
+            </div>
+            
+            <div class="rev_right_select">
+                <div id="custom_calendar"></div>
+                
+                <div class="calendar_select">
+                    <span> 입실일 : <span id="first_select_day"></span></span>
+                    <span> 퇴실일 : <span id="last_select_day"></span>
+                </div>
+                
+                <div class="alert_day">
+                    <span id="alert_days"></span>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+    <form name="room_frm" method="post">
+        <input type="hidden" name="days">
+        <input type="hidden" name="sec_day">
+        <input type="hidden" name="f_day">
+        <input type="hidden" name="l_day">
+        <input type="hidden" name="room_price">
+    </form>
+    
+    <br>
+    <div class="wrap_room">
+        <div class="ui container">
+            <div class="camp_info">
+                <div class="search_rooms" id="search_rooms"> 
+                </div>
+
+                <div class="icon" id="icon">
+                    <div class="icon_labeld">
+                        <img src="icon/pool.png"> 
+                        <p class="icon_text">수영장</p>
+                    </div>
+
+                    <div class="icon_labeld">
+                        <img src="icon/hiking.png"> 
+                        <p class="icon_text">등산</p>
+                    </div>
+
+                    <div class="icon_labeld">
+                        <img src="icon/store.png"> 
+                        <p class="icon_text">매점</p>
+                    </div>
+
+                    <div class="icon_labeld">
+                        <img src="icon/toilet.png"> 
+                        <p class="icon_text">화장실</p>
+                    </div>
+
+                    <div class="icon_labeld">
+                        <img src="icon/wood.png"> 
+                        <p class="icon_text">장작 판매</p>
+                    </div>
+        
+                    <div class="icon_labeld">
+                        <img src="icon/shower.png"> 
+                        <p class="icon_text">샤워 시설</p>
+                    </div>
+            
+                    <div class="icon_labeld">
+                        <img src="icon/water_sink.png"> 
+                        <p class="icon_text">개수대</p>
+                    </div>
+            
+                    <div class="icon_labeld">
+                        <img src="icon/electricity.png"> 
+                        <p class="icon_text">전기</p>
+                    </div>
+            
+                    <div class="icon_labeld">
+                        <img src="icon/winter_camp.png"> 
+                        <p class="icon_text">동계 캠핑</p>
+                    </div>
+            
+                    <div class="icon_labeld">
+                        <img src="icon/hot_water.png"> 
+                        <p class="icon_text">온수 제공</p>
+                    </div>  
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <br>
+</div>
+
+<script>
+var swiper = new Swiper('.swiper-container', {
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+});
+
+const MinRange = new Date();
+    var MaxRange = new Date();
+    var tmpday;
+    MaxRange.setDate(MinRange.getDate() + 30); 
+
+
+$('#custom_calendar').datepicker({
+    language: {
+        days: ['일', '월', '화', '수', '목', '금', '토'],
+        daysShort: ['일', '월', '화', '수', '목', '금', '토'],
+        daysMin: ['일', '월', '화', '수', '목', '금', '토'],
+        months: ['1월','2월','3월','4월','5월','6월', '7월','8월','9월','10월','11월','12월'],
+        monthsShort: ['1월','2월','3월','4월','5월','6월', '7월','8월','9월','10월','11월','12월'],
+        today: 'Today',
+        clear: 'Clear',
+        dateFormat: 'yyyy-mm-dd',
+        timeFormat: 'hh:ii aa',
+        firstDay: 0
+    },
+    navTitles: {
+        days: 'yyyy<p>년</p> &nbsp; MM'
+    },
+    minDate: MinRange,
+    maxDate: MaxRange,
+    disableNavWhenOutOfRange: true,
+    keyboardNav: false,
+    multipleDates: false,
+    range: true,
+    view: "days",  
+    maxView: "days",
+    multipleDatesSeparator: "&",
+
+
+  
+
+    onSelect: function (secdate, dateobject, inst) {
+         if (secdate != "") 
+         { 
+             const datesseparator= /&/; 
+             var testresult = datesseparator.test(secdate); 
+
+            if (testresult == true) 
+            { 
+                var tmpstr = secdate.split("&")
+                var fd = new Date(tmpstr[0]);
+                var ld = new Date(tmpstr[1]);
+                var firstdate = tmpstr[0].split("-")
+                var lastdate = tmpstr[1].split("-")
+            
+                var tmpnum = (ld.getTime() - fd.getTime()) / (1000*60*60*24);
+                
+                if (parseInt(tmpday[2]) > parseInt(firstdate[2])) {
+                    date = new Date(firstdate);
+                    inst.clear();
+                    inst.selectDate(date);  
+                } else if (tmpnum > 4) {
+                    alert("최대 4박까지 가능합니다.");
+                    inst.clear();  
+                    $('#first_select_day').text("");
+                } else {
+                    $('#last_select_day').text(tmpstr[1]);
+                    $('#alert_days').text(tmpnum+"박 "+(tmpnum+1)+"일");
+                    room_frm.days.value=tmpnum+"박 "+(tmpnum+1)+"일";
+                    room_frm.sec_day.value=tmpnum;
+                    
+                    room_query(tmpstr[0],tmpstr[1],tmpnum);
+                }
+            } else {
+                tmpday = secdate.split("-")
+                $('#first_select_day').text($('#custom_calendar').val()+" ~ ");
+                $('#last_select_day').text("");
+                $('#alert_days').text("");
+            }
+        } else {
+            $('#first_select_day').text("");
+        } 
+    } 
+})
+
+function room_query(fday,lday,sec_day){
+    $.ajax({   
+        type: "POST"  
+        ,url: "/reserve/query_room"
+        ,data: {f_day:fday,l_day:lday,day:sec_day}
+        ,success:function(response){
+            room(response);
+        }
+        ,error:function(data){
+            alert("error");
+            history.back();
+        }
+    });
+}
+
+function room(res){
+    res = JSON.stringify(res);
+    res=res.replace("{\"result\":","");
+    res=res.replace("}","");
+    res = JSON.parse(res)
+    
+    $(".search_rooms").empty();
+    var target = $(".search_rooms");
+
+    if (res.nightingale > 0 ){
+        var room=$("<div id=\"link\"><div class=\"room\"><div class=\"room_img\"><img src=\"/images/bungalow/nightingale/1.png\"></div><div class=\"room_details\"><p class=\"room_title\" >[방갈로] 꾀꼬리</p><br><span>전기온돌/냉장고/선풍기/에어컨/야외 테라스</span><br><br><span>예약 가능 좌석  <span >"+res.nightingale+"</span><p class=\"room_price\">"+res.nightingale_price+"</p></div></div></div>").appendTo(target);  
+    }
+
+    if (res.bluebird > 0 ) {
+        room=$("<div id=\"link2\"><div class=\"room\"><div class=\"room_img\"><img src=\"/images/bungalow/bluebird/1.jpg\"></div><div class=\"room_details\"><p class=\"room_title\" >[방갈로] 파랑새</p><br><span>전기온돌/냉장고/선풍기/에어컨/야외 테라스</span><br><br><span>예약 가능 좌석  <span>"+res.bluebird+"</span>  <p class=\"room_price\">"+res.bluebird_price+"</p></div></div></div>").appendTo(target);  
+    }
+
+    if (res.owl > 0 ){
+        room=$("<div id=\"link3\"><div class=\"room\"><div class=\"room_img\"><img src=\"/images/bungalow/owl/1.jpg\"></div><div class=\"room_details\"><p class=\"room_title\" >[방갈로] 부엉이</p><br><span>전기온돌/냉장고/야외 테라스/야외 파라솔</span><br><br><span>예약 가능 좌석  <span>"+res.owl+"</span> <p class=\"room_price\">"+res.owl_price+"</p></div></div></div>").appendTo(target);  
+    }
+    
+    if (res.cuckoo > 0 ) {
+        room=$("<div id=\"link4\"><div class=\"room\"><div class=\"room_img\"><img src=\"/images/bungalow/cuckoo/1.jpg\"></div><div class=\"room_details\"><p class=\"room_title\" >[방갈로] 뻐꾸기</p><br><span>냉장고/에어컨/선풍기/야외 테라스/야외 파라솔</span><br><br><span>예약 가능 좌석  <span >"+res.cuckoo+"</span> <p class=\"room_price\">"+res.cuckoo_price+"</p></div></div></div>").appendTo(target);  
+    }
+
+    if (res.scops_owl > 0 ){
+        room=$("<div id=\"link5\"><div class=\"room\"><div class=\"room_img\"><img src=\"/images/bungalow/scops_owl/1.jpg\"></div><div class=\"room_details\"><p class=\"room_title\" >[방갈로] 소쩍새</p><br><span>냉장고/에어컨/선풍기/개수대/화장실/내부 세면 및 샤워시설/야외 테라스</span><br><br><span>예약 가능 좌석  <span>"+res.scops_owl+"</span> <p class=\"room_price\">"+res.scops_owl_price+"</p></div></div></div>").appendTo(target);  
+    }
+
+    if (res.raccoon > 0 ) {
+        room=$("<div id=\"link6\"><div class=\"room\"><div class=\"room_img\"><img src=\"/images/decksite/3.jpg\"></div><div class=\"room_details\"><p class=\"room_title\" >데크 사이트</p><br><span>전기사용가능</span><br><br><span>예약 가능 좌석  <span>"+res.raccoon+"</span> <p class=\"room_price\">"+res.raccoon_price+"</p></div></div></div>").appendTo(target);          
+    }
+
+    if (res.site_cypress > 0 ){
+        room=$("<div id=\"link7\"><div class=\"room\"><div class=\"room_img\"><img src=\"/images/site/cypress/3.jpg\"></div><div class=\"room_details\"><p class=\"room_title\" >[사이트] 편백 구역</p><br><span>전기사용가능</span><br><br><span>예약 가능 좌석  <span>"+res.site_cypress+"</span> <p class=\"room_price\">"+res.site_cypress_price+"</p></div></div></div>").appendTo(target);   
+    }
+
+    if (res.site_zelkova > 0 ){
+        room=$("<div id=\"link8\"><div class=\"room\"><div class=\"room_img\"><img src=\"/images/site/zelkova/3.jpg\"></div><div class=\"room_details\"><p class=\"room_title\" >[사이트] 느티나무 구역</p><br><span>전기사용가능</span><br><br><span>예약 가능 좌석  <span>"+res.site_zelkova+"</span> <p class=\"room_price\">"+res.site_zelkova_price+"</p></div></div></div>").appendTo(target);   
+    }
+
+    if (res.pension > 0 ){
+        room=$("<div id=\"link9\"><div class=\"room\" ><div class=\"room_img\"><img src=\"/images/pension/2.jpg\"></div><div class=\"room_details\"><p class=\"room_title\" >펜션</p><br><span>화장실, 개수대, 인터넷 TV, 와이파이, 샤워시설</span><br><br><span>예약 가능 좌석  <span>"+res.pension+"</span> <p class=\"room_price\">"+res.pension_price+"</p></div></div></div>").appendTo(target);          
+    }
+
+    var e = document.getElementById('search_rooms'); 
+        e.style.border = '1px solid silver';
+        e.style.borderBottom = '0px';
+
+        e = document.getElementById('icon'); 
+        e.style.borderTop = '0px';
+  
+    style(res);
+}
+
+function sendPost(url,price){
+    room_frm.action=url;  
+    day=$('#custom_calendar').val();
+    day=day.split("&")
+    room_frm.f_day.value=day[0];
+    room_frm.l_day.value=day[1];
+    room_frm.room_price.value=price;
+    
+    room_frm.submit();
+}
+
+function style(res) {
+    
+    $('#link').mouseover(function(){
+        var e = document.getElementById('link'); 
+        e.style.background = 'silver';
+        e.style.cursor = 'pointer';
+    })
+
+    $('#link').mouseout(function(){
+        var e = document.getElementById('link'); 
+        e.style.background = 'white';
+    })
+
+    $('#link').click(function(){
+
+        sendPost("/nightingale",res.nightingale_price)
+    })
+
+    $('#link2').mouseover(function(){
+        var e = document.getElementById('link2'); 
+        e.style.background = 'silver';
+        e.style.cursor = 'pointer';
+
+    })
+
+    $('#link2').mouseout(function(){
+        var e = document.getElementById('link2'); 
+        e.style.background = 'white';
+    })
+
+    $('#link2').click(function(){
+        sendPost("/bluebird",res.bluebird_price)
+    })
+
+
+    
+    $('#link3').mouseover(function(){
+        var e = document.getElementById('link3'); 
+        e.style.background = 'silver';
+        e.style.cursor = 'pointer';
+
+    })
+
+    $('#link3').mouseout(function(){
+        var e = document.getElementById('link3'); 
+        e.style.background = 'white';
+    })
+
+    $('#link3').click(function(){
+        sendPost("/owl",res.owl_price)
+    })
+
+    $('#link4').mouseover(function(){
+        var e = document.getElementById('link4'); 
+        e.style.background = 'silver';
+        e.style.cursor = 'pointer';
+
+    })
+
+    $('#link4').mouseout(function(){
+        var e = document.getElementById('link4'); 
+        e.style.background = 'white';
+    })
+
+    $('#link4').click(function(){
+        sendPost("/cuckoo",res.cuckoo_price)
+    })
+
+    $('#link5').mouseover(function(){
+        var e = document.getElementById('link5'); 
+        e.style.background = 'silver';
+        e.style.cursor = 'pointer';
+
+    })
+
+    $('#link5').mouseout(function(){
+        var e = document.getElementById('link5'); 
+        e.style.background = 'white';
+    })
+    
+    $('#link5').click(function(){
+        sendPost("/scops_owl",res.scops_owl_price)
+    })
+
+    $('#link6').mouseover(function(){
+        var e = document.getElementById('link6'); 
+        e.style.background = 'silver';
+        e.style.cursor = 'pointer';
+
+    })
+
+    $('#link6').mouseout(function(){
+        var e = document.getElementById('link6'); 
+        e.style.background = 'white';
+    })
+
+    $('#link6').click(function(){
+        sendPost("/raccoon",res.raccoon_price)
+    })
+
+    $('#link7').mouseover(function(){
+        var e = document.getElementById('link7'); 
+        e.style.background = 'silver';
+        e.style.cursor = 'pointer';
+
+    })
+
+    $('#link7').mouseout(function(){
+        var e = document.getElementById('link7'); 
+        e.style.background = 'white';
+    })
+
+    $('#link7').click(function(){
+        sendPost("/site_cypress",res.site_cypress_price)
+    })
+
+    $('#link8').mouseover(function(){
+        var e = document.getElementById('link8'); 
+        e.style.background = 'silver';
+        e.style.cursor = 'pointer';
+
+    })
+
+    $('#link8').mouseout(function(){
+        var e = document.getElementById('link8'); 
+        e.style.background = 'white';
+    })
+
+    $('#link8').click(function(){
+        sendPost("/site_zelkova",res.site_zelkova_price)
+    })
+
+    
+
+    $('#link9').mouseover(function(){
+        var e = document.getElementById('link9'); 
+        e.style.background = 'silver';
+        e.style.cursor = 'pointer';
+
+    })
+
+    $('#link9').mouseout(function(){
+        var e = document.getElementById('link9'); 
+        e.style.background = 'white';
+    })
+
+    $('#link9').click(function(){
+        sendPost("/pension",res.pension_price)
+    })
+}
+
+
+</script>
+</body>
+
+</head>
+</html>

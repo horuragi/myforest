@@ -1,0 +1,66 @@
+
+<div class="ui container">
+        <br>
+<div class="form-group">
+<input type="hidden" class="form-control" id="id" name= "id" value = "<%= data.id%>" disabled>
+</div>
+<div class="ui raised segment" style="padding:10px">
+        <div class="ui top attached label"><font color=black style="margin-right: 10px">제목 : <%= data.subject%></font><font color=black style="margin-right: 10px">작성자 : <%= data.user_name%> </font>
+            <font color=black style="margin-right: 10px">조회수 : <%= data.hits%></font><font color=black style="margin-right: 10px">등록일 : <%= data.reg_date%></font></div>
+        <div style="min-height: 400px">
+        <%- data.contents%>
+        </div>
+</div>
+            <div class="ui container" style="text-align: center">
+                    <button type="button" onclick="location.href='/<%= boardtype %>'" class="ui positive button">목록</button>
+                    <% if(session.userid == data.user_id || session.isadmin){ %>
+                    <button type="button" onclick="location.href='/<%= boardtype %>/edit/<%= data.id %>'" class="ui positive button">수정</button>
+                    <button type="reset" onclick="location.href='/<%= boardtype %>/delete/<%= data.id %>'" class="ui button">삭제</button>
+                    <% } %>
+                    <!--<a href="/<%= boardtype %>/edit/<%= data.id %>">수정</a> <a href="/<%= boardtype %>/delete/<%= data.id %>">삭제</a> -->
+                    </div>
+<!-- <button type="submit" class="btn btn-success">수정하기</button> -->
+</div>
+<div class="ui container" style="margin-top:50px">
+                <h3 class="ui block header">
+                                댓글
+                              </h3>
+                  <% data2.forEach(function (item,index){ %>
+                <div class="ui raised segment" style="padding:10px">
+                                <div class="ui top attached label">
+                                        <font color=black style="margin-right: 10px">작성자 : <%= item.user_name%> </font>
+                                    <font color=black style="margin-right: 10px">등록일 : <%= item.reg_date%></font></div>
+                                <div style="min-height: 50px">
+                                <%- item.comment%>
+                                </div>
+                                <div style="width:100%;text-align: right">
+                                                <% if(session.userid == item.user_id || session.isadmin){ %>
+                                <button class="ui negative button" type="reset" onclick="location.href='/<%= boardtype %>/comment/delete/<%= item.id %>/<%= item.board_id%>'" class="ui button">삭제</button>
+                                <% } %>
+                        </div>
+                </div>
+                <% })%>
+                <% if(session.logined=="yes") { %>
+        <form action="/<%= boardtype %>/comment/insert" method="POST">
+                <input type="hidden" name="board_id" id="board_id" value="<%=data.id %>"> 
+                <div class="ui raised segment" style="padding:10px">
+                                <div class="ui top attached label">댓글쓰기</div>
+                <textarea name="comment" id="comment" style="width:100%;min-height:100px"></textarea>
+                <div style="width:100%;text-align: right"><button type="submit" class="ui positive button">
+                                작성
+                              </button>
+                        </div>
+                </div>
+        </form>
+        <% } %>
+                        
+                        
+</div>
+	<script>
+		$.get( "/board_visit/<%= data.id %>/<%= boardtype %>", function(result) {
+			console.log(result);
+}, 'json' /* xml, text, script, html */)
+.fail(function(result) {
+   console.log(result); 
+})
+	</script>

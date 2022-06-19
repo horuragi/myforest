@@ -1,0 +1,88 @@
+#menu {
+    margin-right: 50px;
+    color: black;
+    height: 60px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+#top {
+    width: 100%;
+    background-color: rgb(107, 107, 107);
+    height: 35px;
+    text-align: center;
+}
+
+#topmenu {
+    background-color: rgb(107, 107, 107);
+    margin-top: 0px;
+    height: 35px;
+}
+
+#main {
+    margin-top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#main_menu {
+    height: 50px;
+    background-color: white;
+}
+
+#border {
+    height: 10px;
+    background: rgb(71, 175, 71);
+    margin-bottom: 5px;
+}
+
+#border2 {
+    height: 1px;
+    background: rgb(107, 107, 107);
+}
+
+#demo-1 {
+    overflow: hidden;
+    /* to bound the empty top space created by inner element's top margin */
+    position: relative;
+    /* can either be relative, absolute or fixed. If position is not set (i.e. static), it would be set to "relative" by script */
+    width: 100%;
+    height: 500px;
+    background-color: #f0f0f0;
+}
+
+#submenu {
+    font-size: 15px;
+}
+
+.demo-inner-content {
+    position: relative;
+    /* if position is not set, the script will set it to 'relative'. */
+    z-index: 2;
+    /* if z-index is not set, the script will set it to '2'. */
+    margin: 70px auto;
+    padding: 40px;
+    max-height: 500px;
+    color: #fff;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.demo-inner-content h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+#container {
+    height: 500px;
+}
+
+#container2 {
+    min-height: 400px auto;
+}
+
+#footer {
+    font-style: normal;
+    height: 120px;
+}
