@@ -13,7 +13,7 @@
 - .env.naver_login
 - .env.sms
 
-2. 아래 데이터베이스 백업파일을 호루라기 slack에서 다운받아 `{project_root}/db/inidb.d/`에 저장한다.
+2. 아래 데이터베이스 백업파일을 호루라기 slack에서 다운받아 `{project_root}/db/initdb.d/`에 저장한다.
 - myforest.sql
 
 3. 개발환경구성 스크립트를 실행한다.
