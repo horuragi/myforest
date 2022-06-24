@@ -333,13 +333,6 @@ router.get("/booking", function (req, res, next) {
   camping_info.get(req, res, handler, errhandler);
 });
 
-// 주차장 예약 페이지
-router.get("/booking_parking", function (req, res, next) {
-  var adarr = home_admin.get_adlist();
-  renderPage = "booking_parking";
-  res.render(renderPage, { session: req.session, adarr: adarr });
-});
-
 // 방갈로 꾀꼬리
 router.post("/nightingale", function (req, res, next) {
   renderPage = "booking_nightingale";
