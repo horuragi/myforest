@@ -1,28 +1,34 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var bodyParser = require("body-parser");
-var session = require("./lib/session");
+import createError from "http-errors";
+import express from "express";
+import path from "path";
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+import cookieParser from "cookie-parser";
+import logger from "morgan";
+import bodyParser from "body-parser";
+import session from "./lib/session.js";
 
-/* 커뮤니티 */
-var noticeRouter = require("./routes/notice");
-var reviewRouter = require("./routes/review");
-var qnaRouter = require("./routes/qna");
-var adminRouter = require("./routes/admin");
-var reserRouter = require("./routes/reservation.js");
-var bookingRouter = require("./routes/reserve.js");
-var mobileRouter = require("./routes/mobile.js");
-var parkingRouter = require("./routes/parking.js");
+/* 메인, 사용자 */
+import indexRouter from "./routes/index.js";
+import usersRouter from "./routes/users.js";
 
-var app = express();
+/* 모바일, 커뮤니티, 예약 */
+import noticeRouter from "./routes/notice.js";
+import reviewRouter from "./routes/review.js";
+import qnaRouter from "./routes/qna.js";
+import adminRouter from "./routes/admin.js";
+import reserRouter from "./routes/reservation.js";
+import bookingRouter from "./routes/reserve.js";
+import mobileRouter from "./routes/mobile.js";
+import parkingRouter from "./routes/parking.mjs";
+import ejs from "ejs";
+
+const app = express();
 
 // view engine setup
-app.engine("html", require("ejs").renderFile);
+app.engine("html", ejs.renderFile);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "html");
 
@@ -62,4 +68,4 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-module.exports = app;
+export default app;
