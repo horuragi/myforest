@@ -12,7 +12,37 @@ body {
   margin: 0;
   padding: 0;
 }
+.leftArrayContianer {
+  display: flex;
+}
 
+.parkingAreaImgContainer {
+  height: 350px;
+  width: 50%;
+  border: 1px solid silver;
+}
+
+.parkingAreaImg {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  margin: auto;
+}
+
+.parkingAreaSelectContainer {
+  height: 350px;
+  width: 50%;
+  border: 1px solid silver;
+  padding: 1rem;
+  overflow: scroll;
+}
+
+.pakingAreaSelectBox {
+  border: 1px solid silver;
+  padding: 1rem 3rem;
+  display: flex;
+  justify-content: space-between;
+}
 #top {
   width: 100%;
   background-color: rgb(107, 107, 107);
