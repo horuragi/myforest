@@ -1,14 +1,54 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
+
 <head>
     <link rel="stylesheet" type="text/css" href="/semantic.min.css">
     <link rel="stylesheet" href="/css/parking.css">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 
 <body>
-        
-<div id="top"><% include top.html %></div>
-<div class="ui container">
-<div><h1>안녕 나는 파킹 ^__________^</h1></div></div>
+
+    <div id="top">
+        <% include top.html %>
+    </div>
+    <div class="ui container">
+        <div class="leftArrayContianer">
+            <div class="parkingAreaImgContainer">
+                <img class="parkingAreaImg" src="https://t1.daumcdn.net/cfile/blog/2070C7334D74A3A721?original" />
+            </div>
+            <div class="parkingAreaSelectContainer">
+                <h3>주차 구역 선택</h3>
+                <div>
+                    <script>
+                        window.addEventListener('load', (Area) => {
+                            makeSubject()
+                        });
+
+
+                        function makeSubject() {
+                            var parkingAreaList = [
+                                ['주차구역 A', '20,000원'],
+                                ['주차구역 B', '30,000원'],
+                                ['주차구역 C', '40,000원'],
+                                ['주차구역 D', '50,000원'],
+                                ['주차구역 E', '60,000원'],
+                                ['주차구역 F', '70,000원'],
+                                ['주차구역 G', '80,000원'],
+                                ['주차구역 H', '90,000원'],
+                            ];
+                            var wrap = document.getElementsByClassName('parkingAreaSelectContainer')[0];
+
+                            parkingAreaList.forEach(Area => {
+                                wrap.innerHTML += `<div class="pakingAreaSelectBox"><div>${Area[0]}</div><div>${Area[1]}</div></div>`;
+                            });
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+        <h1>안녕 나는 파킹 ^__________^</h1>
+    </div>
+    </div>
 </body>
 </head>
+
 </html>
