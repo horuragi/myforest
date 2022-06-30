@@ -12,7 +12,7 @@ body {
   margin: 0;
   padding: 0;
 }
-.leftArrayContianer {
+.horizontalArrayContainer {
   display: flex;
 }
 
@@ -53,10 +53,94 @@ body {
   margin-top: 0px;
   height: 35px;
 }
-#wrap {
-  width: 100%; /* width  */
-  height: 100%;
-  position: relative;
-  /* overflow: hidden; */
-  overflow: auto;
+
+.horizontalCalenderContainer {
+  margin-top: 3rem;
+  padding: 1rem;
+  border: 1px solid silver;
+  align-items: center;
+}
+
+.selectedYear {
+  margin: 0rem 0.5rem;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.selectedMonth {
+  margin: 0rem 0.5rem;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.dateSat {
+  color: blue;
+}
+
+.dateSun {
+  color: crimson;
+}
+
+.date:hover,
+.dateSat:hover,
+.dateSun:hover {
+  background-color: rgb(150, 150, 150);
+}
+
+.dates {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  font-size: larger;
+}
+
+.datesContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  padding: 0rem 5rem;
+}
+
+.calenderHeader {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.selectedInfoContainer {
+  display: flex;
+  margin-top: 3rem;
+  padding: 1rem;
+  border: 1px solid silver;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.selectedAreaImgContainer {
+  height: 20rem;
+  width: 20rem;
+  border: 1px solid silver;
+}
+
+.selectedAreaImg {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  margin: auto;
+}
+
+.selectedInfoTextContainer {
+  margin-left: 2rem;
+}
+
+.selectedInfoTitleText {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  margin: 1rem;
+}
+
+.selectedInfoText {
+  font-size: 1.5rem;
+  margin: 1rem;
 }

@@ -4,6 +4,8 @@
     <link rel="stylesheet" type="text/css" href="/semantic.min.css">
     <link rel="stylesheet" href="/css/parking.css">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+    <script defer type="text/javascript" src="/js/datepicker/datepicker_horizontal.js"></script>
+</head>
 
 <body>
 
@@ -11,44 +13,84 @@
         <% include top.html %>
     </div>
     <div class="ui container">
-        <div class="leftArrayContianer">
+        <div class="horizontalArrayContainer">
             <div class="parkingAreaImgContainer">
                 <img class="parkingAreaImg" src="https://t1.daumcdn.net/cfile/blog/2070C7334D74A3A721?original" />
             </div>
             <div class="parkingAreaSelectContainer">
                 <h3>주차 구역 선택</h3>
                 <div>
-                    <script>
-                        window.addEventListener('load', (Area) => {
-                            makeSubject()
-                        });
 
-
-                        function makeSubject() {
-                            var parkingAreaList = [
-                                ['주차구역 A', '20,000원'],
-                                ['주차구역 B', '30,000원'],
-                                ['주차구역 C', '40,000원'],
-                                ['주차구역 D', '50,000원'],
-                                ['주차구역 E', '60,000원'],
-                                ['주차구역 F', '70,000원'],
-                                ['주차구역 G', '80,000원'],
-                                ['주차구역 H', '90,000원'],
-                            ];
-                            var wrap = document.getElementsByClassName('parkingAreaSelectContainer')[0];
-
-                            parkingAreaList.forEach(Area => {
-                                wrap.innerHTML += `<div class="pakingAreaSelectBox"><div>${Area[0]}</div><div>${Area[1]}</div></div>`;
-                            });
-                        }
-                    </script>
                 </div>
             </div>
         </div>
-        <h1>안녕 나는 파킹 ^__________^</h1>
+
+        <div class="horizontalCalenderContainer">
+            <div class="calenderHeader">
+                <button class="prevBtn" onclick="prevMonth()">&lt; </button>
+                <div class="horizontalArrayContainer">
+                    <div class="selectedYear"></div>
+                    <div class="selectedMonth"></div>
+                </div>
+                <button class="nextBtn" onclick="nextMonth()">&gt;</button>
+            </div>
+            <div class="datesContainer">
+                <div class="dates"></div>
+            </div>
+        </div>
+
+        <div class="selectedInfoContainer">
+            <div class="selectedAreaImgContainer">
+                <img class="selectedAreaImg"
+                    src="https://img.animalplanet.co.kr/news/2020/11/07/700/g76pp21c5bh62k75d97d.jpg" />
+            </div>
+            <div class="selectedInfoTextContainer">
+                <div class="horizontalArrayContainer">
+                    <span class="selectedInfoTitleText">선택 구역</span>
+                    <span class="selectedInfoText">주차구역 A</span>
+                </div>
+                <div class="horizontalArrayContainer">
+                    <span class="selectedInfoTitleText">선택 날짜</span>
+                    <span class="selectedInfoText">22.06.30</span>
+                    <span class="selectedInfoText">~</span>
+                    <span class="selectedInfoText">22.07.05</span>
+                </div>
+                <div class="horizontalArrayContainer">
+                    <span class="selectedInfoTitleText">합계 금액</span>
+                    <span class="selectedInfoText">100,000원</span>
+                </div>
+
+            </div>
+            <button>예약하기</button>
+        </div>
     </div>
     </div>
+
 </body>
-</head>
+<script defer>
+    window.addEventListener('DOMContentLoaded', (Area) => {
+        makeSubject()
+    });
+
+
+    function makeSubject() {
+        var parkingAreaList = [
+            ['주차구역 A', '20,000원'],
+            ['주차구역 B', '30,000원'],
+            ['주차구역 C', '40,000원'],
+            ['주차구역 D', '50,000원'],
+            ['주차구역 E', '60,000원'],
+            ['주차구역 F', '70,000원'],
+            ['주차구역 G', '80,000원'],
+            ['주차구역 H', '90,000원'],
+        ];
+        var wrap = document.getElementsByClassName('parkingAreaSelectContainer')[0];
+
+        parkingAreaList.forEach(Area => {
+            wrap.innerHTML += `<div class="pakingAreaSelectBox"><div>${Area[0]}</div><div>${Area[1]}</div></div>`;
+        });
+    }
+
+</script>
 
 </html>
