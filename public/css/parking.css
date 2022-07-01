@@ -42,7 +42,24 @@ body {
   padding: 1rem 3rem;
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 }
+
+.areaClicked {
+  background-color: lightcyan;
+  font-weight: bolder;
+}
+
+.dateClicked {
+  background-color: lightcyan;
+  font-weight: bolder;
+}
+
+.ParkingFeeText,
+.areaNameText {
+  pointer-events: none;
+}
+
 #top {
   width: 100%;
   background-color: rgb(107, 107, 107);
@@ -81,10 +98,15 @@ body {
   color: crimson;
 }
 
+.exdate {
+  color: darkgrey;
+}
+
 .date:hover,
 .dateSat:hover,
 .dateSun:hover {
   background-color: rgb(150, 150, 150);
+  cursor: pointer;
 }
 
 .dates {
@@ -143,4 +165,9 @@ body {
 .selectedInfoText {
   font-size: 1.5rem;
   margin: 1rem;
+}
+
+#selectedStartDate,
+#selectedEndDate {
+  min-width: 7.5rem;
 }

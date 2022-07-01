@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="/semantic.min.css">
     <link rel="stylesheet" href="/css/parking.css">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
-    <script defer type="text/javascript" src="/js/datepicker/datepicker_horizontal.js"></script>
+
 </head>
 
 <body>
@@ -27,12 +27,12 @@
 
         <div class="horizontalCalenderContainer">
             <div class="calenderHeader">
-                <button class="prevBtn" onclick="prevMonth()">&lt; </button>
+                <button id="prevBtn" onclick="prevMonth()">&lt; </button>
                 <div class="horizontalArrayContainer">
                     <div class="selectedYear"></div>
                     <div class="selectedMonth"></div>
                 </div>
-                <button class="nextBtn" onclick="nextMonth()">&gt;</button>
+                <button id="nextBtn" onclick="nextMonth()">&gt;</button>
             </div>
             <div class="datesContainer">
                 <div class="dates"></div>
@@ -47,17 +47,19 @@
             <div class="selectedInfoTextContainer">
                 <div class="horizontalArrayContainer">
                     <span class="selectedInfoTitleText">선택 구역</span>
-                    <span class="selectedInfoText">주차구역 A</span>
+                    <span class="selectedInfoText" id="selectedArea">-</span>
                 </div>
                 <div class="horizontalArrayContainer">
                     <span class="selectedInfoTitleText">선택 날짜</span>
-                    <span class="selectedInfoText">22.06.30</span>
+                    <span class="selectedInfoText" id="selectedStartDate">
+                        -
+                    </span>
                     <span class="selectedInfoText">~</span>
-                    <span class="selectedInfoText">22.07.05</span>
+                    <span class="selectedInfoText" id="selectedEndDate">-</span>
                 </div>
                 <div class="horizontalArrayContainer">
                     <span class="selectedInfoTitleText">합계 금액</span>
-                    <span class="selectedInfoText">100,000원</span>
+                    <span class="selectedInfoText" id="sumOfParkingFee">-</span>
                 </div>
 
             </div>
@@ -71,6 +73,15 @@
     window.addEventListener('DOMContentLoaded', (Area) => {
         makeSubject()
     });
+
+    let selectedDates = [];
+    let selectedParkingFee = 0;
+    let selectedNumbersOfDates = 0;
+    const selectedStartDate = document.getElementById("selectedStartDate");
+    const selectedEndDate = document.getElementById("selectedEndDate");
+    const dateHtmls = document.querySelectorAll(".dates > div");
+    const pakingAreaSelectBox = document.getElementsByClassName("pakingAreaSelectBox")
+
 
 
     function makeSubject() {
@@ -86,11 +97,71 @@
         ];
         var wrap = document.getElementsByClassName('parkingAreaSelectContainer')[0];
 
-        parkingAreaList.forEach(Area => {
-            wrap.innerHTML += `<div class="pakingAreaSelectBox"><div>${Area[0]}</div><div>${Area[1]}</div></div>`;
-        });
+        const areaElements = parkingAreaList.map((Area, id) =>
+            `<div class="pakingAreaSelectBox" id="${id}"><div class="areaNameText">${Area[0]}</div><div class="ParkingFeeText">${Area[1]}</div></div>`).join('');
+        wrap.innerHTML += areaElements;
+
+
+        for (let i = 0; i < pakingAreaSelectBox.length; i++) {
+            pakingAreaSelectBox[i].addEventListener('click', e => areaClicked(e))
+        }
     }
 
+    function areaClicked(e) {
+        for (let i = 0; i < pakingAreaSelectBox.length; i++) {
+            pakingAreaSelectBox[i].classList.remove("areaClicked");
+        }
+        e.target.classList.add("areaClicked");
+        writeSelectedInfo(e);
+        writeSumOfParkingFee();
+    }
+
+    function writeSelectedInfo(e) {
+        const selectedArea = document.getElementById("selectedArea")
+        selectedArea.innerText = e.target.innerText.split('\n')[0]
+        selectedParkingFee = Number(e.target.innerText.split('\n')[1].replace(',', '').replace('원', ''))
+    }
+
+
+
+    function validateAlert() {
+        alert("예약 종료일이 예약 시작일을 앞설 수 없습니다.");
+        selectedStartDate.innerText = "-";
+        selectedEndDate.innerText = "-";
+    }
+
+    function writeSelectedDates() {
+        if (selectedDates[0]) {
+            selectedStartDate.innerText = selectedDates[0];
+        } else {
+            selectedStartDate.innerText = "-";
+        }
+
+        if (selectedDates[1]) {
+            selectedEndDate.innerText = selectedDates[1];
+        } else {
+            selectedEndDate.innerText = "-";
+        }
+    }
+
+    function calculateDates(startDate, endDate) {
+        const msec = Date.parse(endDate) - Date.parse(startDate)
+        selectedNumbersOfDates = msec / 1000 / 60 / 60 / 24
+    }
+
+    function writeSumOfParkingFee() {
+
+        calculateDates(selectedDates[0], selectedDates[1])
+        const sumOfParkingFee = document.getElementById("sumOfParkingFee")
+        const result = selectedNumbersOfDates * selectedParkingFee
+        const convertedResult = result.toLocaleString()
+        sumOfParkingFee.innerText = convertedResult + "원"
+
+
+    }
+
+
 </script>
+<script defer type="text/javascript" src="/js/datepicker/datepicker_horizontal.js"></script>
 
 </html>
