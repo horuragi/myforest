@@ -6,4 +6,9 @@ router.get("/", function (req, res) {
   res.render(renderPage, { session: req.session });
 });
 
+router.get("/reservation", function (req, res) {
+  const renderPage = "parking_reservation";
+  res.render(renderPage, { session: req.session });
+});
+
 export default router;

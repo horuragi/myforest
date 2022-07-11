@@ -118,7 +118,7 @@ body {
 }
 
 .dates > div {
-  padding:3px;
+  padding: 3px;
   flex-grow: 1;
   flex-basis: 0;
   text-align: center;

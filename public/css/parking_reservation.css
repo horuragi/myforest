@@ -1,0 +1,209 @@
+html,
+body {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 16px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+#top {
+  width: 100%;
+  background-color: rgb(107, 107, 107);
+  height: 35px;
+}
+
+#topmenu {
+  margin-top: 0px;
+  height: 35px;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.selectedReservationInfoContainer {
+  width: 50%;
+  border: 1px solid silver;
+  padding: 1rem;
+  height: fit-content;
+}
+
+.selectedReservationInfoInnerContainer {
+  height: 80%;
+  border: 1px solid silver;
+}
+
+.horizontalArrayContainer {
+  display: flex;
+}
+
+.selectedAreaImgContainer {
+  height: 250px;
+  width: 250px;
+  border: 1px solid silver;
+}
+
+.selectedAreaImg {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  margin: auto;
+}
+
+.selectedInfoTextContainer {
+  height: 250px;
+  padding: 10px 40px;
+}
+
+.selectedInfoTextInnerContainer {
+  display: flex;
+  margin: 20px 0px;
+}
+
+.selectedInfoTitleText {
+  font-size: 1.2rem;
+  font-weight: bolder;
+  margin-right: 10px;
+}
+
+.selectedInfoText {
+  font-size: 1.2rem;
+}
+.numberOfDatesTextContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.numberOfDatesText {
+  font-size: 1.4rem;
+  font-weight: bolder;
+  color: blue;
+}
+
+.selectedAreaDescriptionContainer {
+  border-top: 1px solid silver;
+  padding: 1.2rem;
+  height: fit-content;
+}
+
+.reservationPersonInfoContainer {
+  height: fit-content;
+  width: 50%;
+  border: 1px solid silver;
+  padding: 1rem;
+}
+
+.reservationPersonInfoInnerContainer {
+  padding: 0px 20px;
+  flex-direction: column;
+}
+
+.reservationPersonInfoTextContainer {
+  display: flex;
+  align-items: center;
+}
+
+.reservationPersonInfoText {
+  font-size: 1.2rem;
+  margin-right: 20px;
+}
+
+.reservationPersonInfoInnerContainer > div {
+  margin-top: 20px;
+}
+
+.ui.input {
+  width: 70%;
+}
+
+.hr1 {
+  margin-top: 30px;
+}
+
+.paymentMethodTextContainer {
+  padding: 10px 20px;
+}
+
+.ui.checkbox {
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid silver;
+}
+
+.ui.checkbox p {
+  display: inline;
+  border-bottom: 1px solid silver;
+  color: gray;
+}
+
+.terms,
+.terms tr {
+  border: 1px solid silver;
+}
+
+.terms_detail {
+  text-align: right;
+  display: inline;
+}
+
+.modal_body {
+  padding: 20px 20px;
+}
+
+.terms table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 10px;
+  border: 1px solid silver;
+}
+
+.terms table td,
+.terms_agree {
+  padding: 10px 20px;
+}
+
+.terms_info {
+  padding: 0px 30px;
+}
+
+.td_left {
+  color: gray;
+}
+
+.td_right {
+  border-left: 1px solid silver;
+}
+.ui.checkbox {
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid silver;
+}
+
+.ui.checkbox p {
+  display: inline;
+  border-bottom: 1px solid silver;
+  color: gray;
+}
+
+#cancel_terms {
+  border-bottom: 0px solid silver;
+}
+
+#cancel_terms p {
+  color: black;
+  border-bottom: 0px;
+}
+
+.cancel_info {
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
