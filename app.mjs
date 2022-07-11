@@ -1,7 +1,7 @@
 import createError from "http-errors";
 import express from "express";
 import path from "path";
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -51,6 +51,7 @@ app.use("/reser", reserRouter);
 app.use("/reserve", bookingRouter);
 app.use("/mobile", mobileRouter);
 app.use("/parking", parkingRouter);
+app.use("/parking_reservation", parkingRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

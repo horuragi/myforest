@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/semantic.min.css">
+    <link rel="stylesheet" href="/css/parking_reservation.css">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="top">
+        <% include top.html %>
+    </div>
+    <div class="ui container">
+        <div class="mainContainer">
+            <div class="selectedReservationInfoContainer">
+                <h3>예약 정보</h3>
+                <div class="selectedReservationInfoInnerContainer">
+                    <div class="horizontalArrayContainer">
+                        <div class="selectedAreaImgContainer">
+                            <img class="selectedAreaImg"
+                                src="https://img.animalplanet.co.kr/news/2020/11/07/700/g76pp21c5bh62k75d97d.jpg" />
+                        </div>
+                        <div class="selectedInfoTextContainer">
+                            <div class="selectedInfoTextInnerContainer">
+                                <span class="selectedInfoTitleText">선택 구역</span>
+                                <span class="selectedInfoText">주차구역 A</span>
+                            </div>
+                            <div class="selectedInfoTextInnerContainer">
+                                <span class="selectedInfoTitleText">시작일</span>
+                                <span class="selectedInfoText">2022년 7월 10일</span>
+                            </div>
+                            <div class="selectedInfoTextInnerContainer">
+                                <span class="selectedInfoTitleText">종료일</span>
+                                <span class="selectedInfoText">2022년 9월 10일</span>
+                            </div>
+                            <div class="selectedInfoTextInnerContainer">
+                                <span class="selectedInfoTitleText">이용금액</span>
+                                <span class="selectedInfoText">240,000원</span>
+                            </div>
+                            <div class="numberOfDatesTextContainer">
+                                <span class="numberOfDatesText">30박 31일</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="selectedAreaDescriptionContainer"><span class="selectedAreaDescriptionText">
+                            머리가 둥글고 얼굴은 짧고 넓으며, 눈이 둥글고 커서 양안시(양쪽 눈의 망막에 맺힌 대상물을 각각이 아닌 하나로 보게 하고, 입체적으로 보게 하는 눈의 기능)의
+                            능력이
+                            뛰어나다. 귓바퀴는 작은 삼각형 모양으로 끝에 긴 털이 있으며 몸에는 다양한 무늬가 있다. 몸길이는 보통 30~60cm이며 몸무게는 2~3kg부터 7.5~8.5kg에
+                            이르기까지 다양하다. 꼬리는 종류에 따라 길이가 다르며 보통은 22~38cm 정도이다. 발가락은 앞다리에 5개, 뒷다리에 4개가 있으며 발톱을 살 속에 감출 수
+                            있다.
+                        </span></div>
+                </div>
+            </div>
+            <div class="reservationPersonInfoContainer">
+                <h3>예약자 정보</h3>
+                <div class="reservationPersonInfoInnerContainer">
+                    <div>
+                        <span class="reservationPersonInfoText">예약자</span>
+                        <div class="ui input">
+                            <input type="text" placeholder="예약자 성함" />
+                        </div>
+                    </div>
+                    <div>
+                        <span class="reservationPersonInfoText">연락처</span>
+                        <div class="ui input">
+                            <input type="text" placeholder="휴대폰 번호" />
+                        </div>
+                    </div>
+                    <div>
+                        <span class="reservationPersonInfoText">차량번호</span>
+                        <div class="ui input">
+                            <input type="text" placeholder="예약차량 번호" />
+                        </div>
+                    </div>
+                </div>
+                <hr class="hr1">
+                <h3>결제방식</h3>
+                <div class="paymentMethodTextContainer">
+                    <span class="reservationPersonInfoText">농협은행 / 463131-52-138136 / 장택순( 010 5691 5058 )</span>
+                </div>
+                <hr class="hr1">
+                <h3>이용약관</h3>
+                <div class="terms_agree">
+                    <div class="ui checkbox">
+                        <input type="checkbox" id="checkboxcontroll">
+                        <label>
+                            <h3>약관 전체 동의</h3>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="terms_info">
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="booking_terms" id="terms_1">
+                        <label>개인정보 수집 동의 <p id="collection">(상세 보기)</p> </label>
+                    </div>
+
+
+
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="booking_terms" id="terms_2">
+                        <label>개인정보 제공 동의 <p id="provision">(상세 보기)</p></label>
+                    </div>
+
+                    <div class="ui checkbox" id="cancel_terms">
+                        <input type="checkbox" name="booking_terms" id="terms_3">
+                        <label>취소/환불 규정 동의</label>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    </div>
+    </div>
+</body>
+
+</html>
