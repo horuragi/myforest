@@ -1,0 +1,25 @@
+class Controller {
+  /**
+   * @constructor
+   * @param {Model} model 모델
+   * selectedReservationInfoModel 설정
+   */
+  constructor(model) {
+    this.selectedReservationInfoModel = model.selectedReservationInfoModel;
+  }
+
+  /**
+   * @public 초기화 시 필요한 데이터 얻기
+   * @param {function} callback 콜백함수
+   */
+  getInitData(callback) {
+    callback({
+      areaName: this.selectedReservationInfoModel.selectedInfo.areaName,
+      startDate: this.selectedReservationInfoModel.selectedInfo.startDate,
+      endDate: this.selectedReservationInfoModel.selectedInfo.endDate,
+      parkingFee: this.selectedReservationInfoModel.selectedInfo.parkingFee,
+    });
+  }
+}
+
+const controller = new Controller(model);
