@@ -58,19 +58,20 @@
                     <div>
                         <span class="reservationPersonInfoText">예약자</span>
                         <div class="ui input">
-                            <input type="text" placeholder="예약자 성함" />
+                            <input type="text" id="reservationPersonName" value="" placeholder="예약자 성함" />
                         </div>
                     </div>
                     <div>
                         <span class="reservationPersonInfoText">연락처</span>
                         <div class="ui input">
-                            <input type="text" placeholder="휴대폰 번호" />
+                            <input type="text" id="reservationPersonPhoneNum" value="" onKeyup="inputPhoneNumber(this)"
+                                placeholder="휴대폰 번호" />
                         </div>
                     </div>
                     <div>
                         <span class="reservationPersonInfoText">차량번호</span>
                         <div class="ui input">
-                            <input type="text" placeholder="예약차량 번호" />
+                            <input type="text" id="reservationPersonCampingCarNum" value="" placeholder="예약차량 번호" />
                         </div>
                     </div>
                 </div>
@@ -108,6 +109,8 @@
                         <label>취소/환불 규정 동의</label>
                     </div>
                 </div>
+                <hr class="hr1">
+                <button class="goToReservationButton" onclick="goToReservationButtonClick()">예약하기</button>
             </div>
 
 
@@ -120,7 +123,6 @@
 <script defer type="text/javascript" src="/js/parking_reservation/model.js"></script>
 <script defer type="text/javascript" src="/js/parking_reservation/controller.js"></script>
 <script defer type="text/javascript" src="/js/parking_reservation/view.js"></script>
-
 
 
 </html>

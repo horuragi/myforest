@@ -1,24 +1,19 @@
 /**
- * View에서 자주 사용되는 엘리먼트 참조 변수 선언
- */
-const selectedStartDateHTML = document.getElementById("selectedStartDate");
-const selectedEndDateHTML = document.getElementById("selectedEndDate");
-
-/**
  * View 초기화
  */
 function init() {
   //Controller로 부터 초기데이터를 받아와 예약 정보 및 예약자 정보 초기화
-  controller.getInitData(({ areaName, startDate, endDate, parkingFee }) => {
-    renderSelectedReservationInfo({
-      areaName,
-      startDate,
-      endDate,
-      parkingFee,
-    });
-  });
-
-  renderDayLength();
+  controller.getInitData(
+    ({ areaName, startDate, endDate, parkingFee, dayLength }) => {
+      renderSelectedReservationInfo({
+        areaName,
+        startDate,
+        endDate,
+        parkingFee,
+        dayLength,
+      });
+    }
+  );
 }
 
 /**
@@ -30,53 +25,65 @@ function renderSelectedReservationInfo({
   startDate,
   endDate,
   parkingFee,
+  dayLength,
 }) {
+  const selectedStartDateHTML = document.getElementById("selectedStartDate");
+  const selectedEndDateHTML = document.getElementById("selectedEndDate");
   const selectedAreaHTML = document.getElementById("selectedArea");
   const parkingFeeHTML = document.getElementById("parkingFee");
+  const selectedDayLengthHTML = document.getElementById("dayLength");
 
   selectedAreaHTML.innerHTML = areaName;
   selectedStartDateHTML.innerHTML = startDate;
   selectedEndDateHTML.innerHTML = endDate;
   parkingFeeHTML.innerHTML = parkingFee;
+  selectedDayLengthHTML.innerHTML = `${dayLength}박 ${dayLength + 1}일`;
 }
 
-/**
- * 선택한 날짜의 박/일 수를 랜더링 하는 함수
- */
-function renderDayLength() {
-  const selectedDayLengthHTML = document.getElementById("dayLength");
-
-  selectedDayLengthHTML.innerHTML = `${getDayLength()}박 ${
-    getDayLength() + 1
-  }일`;
+function goToReservationButtonClick() {
+  controller.getFormData(
+    ({
+      reservationPersonName,
+      reservationPersonPhoneNum,
+      reservationFormCampingCarNum,
+    }) => {
+      validTest({
+        reservationPersonName,
+        reservationPersonPhoneNum,
+        reservationFormCampingCarNum,
+      });
+    }
+  );
 }
 
-/**
- * 선택한 날짜의 일수(n박)를 계산하는 함수
- * @returns {number}
- */
-function getDayLength() {
-  const selectedStartDateText = selectedStartDateHTML.innerText;
-  const selectedEndDateText = selectedEndDateHTML.innerText;
+function inputPhoneNumber(obj) {
+  var number = obj.value.replace(/[^0-9]/g, "");
+  var phone = "";
 
-  const formattedStartDate = new Date(
-    selectedStartDateText.substring(0, 4) +
-      "-" +
-      selectedStartDateText.substring(6, 8) +
-      "-" +
-      selectedStartDateText.substring(10, 12)
-  );
+  if (number.length < 4) {
+    return number;
+  } else if (number.length <= 7) {
+    phone += number.substr(0, 3);
+    phone += "-";
+    phone += number.substr(3);
+  } else {
+    phone += number.substr(0, 3);
+    phone += "-";
+    phone += number.substr(3, 4);
+    phone += "-";
+    phone += number.substr(7);
+  }
+  obj.value = phone;
+}
 
-  const formattedEndDate = new Date(
-    selectedEndDateText.substring(0, 4) +
-      "-" +
-      selectedEndDateText.substring(6, 8) +
-      "-" +
-      selectedEndDateText.substring(10, 12)
-  );
-
-  const diff = formattedEndDate.getTime() - formattedStartDate.getTime();
-  return Math.ceil(diff / (1000 * 3600 * 24));
+function validTest({
+  reservationPersonName,
+  reservationPersonPhoneNum,
+  reservationFormCampingCarNum,
+}) {
+  console.log(reservationPersonName);
+  console.log(reservationPersonPhoneNum);
+  console.log(reservationFormCampingCarNum);
 }
 
 init();
