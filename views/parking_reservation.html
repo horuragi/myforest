@@ -24,22 +24,22 @@
                         <div class="selectedInfoTextContainer">
                             <div class="selectedInfoTextInnerContainer">
                                 <span class="selectedInfoTitleText">선택 구역</span>
-                                <span class="selectedInfoText">주차구역 A</span>
+                                <span class="selectedInfoText" id="selectedArea">-</span>
                             </div>
                             <div class="selectedInfoTextInnerContainer">
                                 <span class="selectedInfoTitleText">시작일</span>
-                                <span class="selectedInfoText">2022년 7월 10일</span>
+                                <span class="selectedInfoText" id="selectedStartDate">-</span>
                             </div>
                             <div class="selectedInfoTextInnerContainer">
                                 <span class="selectedInfoTitleText">종료일</span>
-                                <span class="selectedInfoText">2022년 9월 10일</span>
+                                <span class="selectedInfoText" id="selectedEndDate">-</span>
                             </div>
                             <div class="selectedInfoTextInnerContainer">
                                 <span class="selectedInfoTitleText">이용금액</span>
-                                <span class="selectedInfoText">240,000원</span>
+                                <span class="selectedInfoText" id="parkingFee">-</span>
                             </div>
                             <div class="numberOfDatesTextContainer">
-                                <span class="numberOfDatesText">30박 31일</span>
+                                <span class="numberOfDatesText" id="dayLength">-</span>
                             </div>
                         </div>
                     </div>
@@ -117,5 +117,10 @@
     </div>
     </div>
 </body>
+<script defer type="text/javascript" src="/js/parking_reservation/model.js"></script>
+<script defer type="text/javascript" src="/js/parking_reservation/controller.js"></script>
+<script defer type="text/javascript" src="/js/parking_reservation/view.js"></script>
+
+
 
 </html>
