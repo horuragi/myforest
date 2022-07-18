@@ -23,13 +23,17 @@ class Controller {
     });
   }
 
+  /**
+   * @public form 에 입력된 데이터 얻기
+   * @param {function} callback 콜백함수
+   */
   getFormData(callback) {
     callback({
       reservationPersonName:
         this.reservationPersonInfoModel.reservationFormName,
       reservationPersonPhoneNum:
         this.reservationPersonInfoModel.reservationFormPhoneNum,
-      reservationFormCampingCarNum:
+      reservationPersonCampingCarNum:
         this.reservationPersonInfoModel.reservationFormCampingCarNum,
     });
   }

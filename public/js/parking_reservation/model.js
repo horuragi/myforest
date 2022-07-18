@@ -49,18 +49,28 @@ class SelectedReservationInfoModel {
   }
 }
 /**
- * 예약자 정보 관리
+ * 예약자 정보 form 관리
  */
 
 class ReservationPersonInfoModel {
+  /**
+   * 예약자 정보 form의 예약자명 얻기
+   * @returns {string} 예약자명
+   */
   get reservationFormName() {
     return document.getElementById("reservationPersonName").value;
   }
-
+  /**
+   * 예약자 정보 form의 예약자 연락처 얻기
+   * @returns {string} 예약자연락처
+   */
   get reservationFormPhoneNum() {
     return document.getElementById("reservationPersonPhoneNum").value;
   }
-
+  /**
+   * 예약자 정보 form의 예약자 차량번호 얻기
+   * @returns {string} 예약자 차량번호
+   */
   get reservationFormCampingCarNum() {
     return document.getElementById("reservationPersonCampingCarNum").value;
   }

@@ -40,21 +40,30 @@ function renderSelectedReservationInfo({
   selectedDayLengthHTML.innerHTML = `${dayLength}박 ${dayLength + 1}일`;
 }
 
+/**
+ * '예약하기' 버튼 클릭시 form 제출과 유효성 검사를 하는 함수
+ * @param {{reservationPersonName: string, reservationPersonPhoneNum: string, reservationPersonCampingCarNum: string}}
+ */
 function goToReservationButtonClick() {
   controller.getFormData(
     ({
       reservationPersonName,
       reservationPersonPhoneNum,
-      reservationFormCampingCarNum,
+      reservationPersonCampingCarNum,
     }) => {
       validTest({
         reservationPersonName,
         reservationPersonPhoneNum,
-        reservationFormCampingCarNum,
+        reservationPersonCampingCarNum,
       });
     }
   );
 }
+
+/**
+ * 연락처 입력 시 핸드폰번호 형태로 자동 fomatting 해주는 함수
+ * @param {string} obj
+ */
 
 function inputPhoneNumber(obj) {
   var number = obj.value.replace(/[^0-9]/g, "");
@@ -76,14 +85,18 @@ function inputPhoneNumber(obj) {
   obj.value = phone;
 }
 
+/**
+ * 제출된 예약자 form의 유효성 검사를 하는 함수
+ * @param {{reservationPersonName: string, reservationPersonPhoneNum: string, reservationPersonCampingCarNum: string}}
+ */
 function validTest({
   reservationPersonName,
   reservationPersonPhoneNum,
-  reservationFormCampingCarNum,
+  reservationPersonCampingCarNum,
 }) {
   console.log(reservationPersonName);
   console.log(reservationPersonPhoneNum);
-  console.log(reservationFormCampingCarNum);
+  console.log(reservationPersonCampingCarNum);
 }
 
 init();
