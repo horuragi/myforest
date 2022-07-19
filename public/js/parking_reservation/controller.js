@@ -6,6 +6,7 @@ class Controller {
    */
   constructor(model) {
     this.selectedReservationInfoModel = model.selectedReservationInfoModel;
+    this.reservationPersonInfoModel = model.reservationPersonInfoModel;
   }
 
   /**
@@ -18,6 +19,22 @@ class Controller {
       startDate: this.selectedReservationInfoModel.selectedInfo.startDate,
       endDate: this.selectedReservationInfoModel.selectedInfo.endDate,
       parkingFee: this.selectedReservationInfoModel.selectedInfo.parkingFee,
+      dayLength: this.selectedReservationInfoModel.selectedInfo.dayLength,
+    });
+  }
+
+  /**
+   * @public form 에 입력된 데이터 얻기
+   * @param {function} callback 콜백함수
+   */
+  getFormData(callback) {
+    callback({
+      reservationPersonName:
+        this.reservationPersonInfoModel.reservationFormName,
+      reservationPersonPhoneNum:
+        this.reservationPersonInfoModel.reservationFormPhoneNum,
+      reservationPersonCampingCarNum:
+        this.reservationPersonInfoModel.reservationFormCampingCarNum,
     });
   }
 }
