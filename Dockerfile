@@ -4,11 +4,11 @@ FROM node:12.18.0
 WORKDIR /app
 
 # npm install
-COPY package*.json .
-COPY package-lock.json .
+COPY package*.json ./
+COPY package-lock.json ./
 RUN npm install
 
-COPY . .
+COPY . ./
 
 # Docker Demon Port Mapping
 EXPOSE 80
