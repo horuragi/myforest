@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 env:
   AWS_REGION: ap-northeast-2
   ECR_REGISTRY: 943061967341.dkr.ecr.ap-northeast-2.amazonaws.com
