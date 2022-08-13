@@ -1,1 +1,1 @@
-docker-compose -f ./myforest-prod.yml up -d
+docker run -d -p 80:80 --network myforest_network --restart=always myforest:latest
