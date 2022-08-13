@@ -9,3 +9,8 @@ services:
       - ./db/conf.d:/etc/mysql/conf.d
       - ./db/data:/var/lib/mysql
     env_file: .env.db
+    networks:
+      - network
+
+networks:
+  network:
