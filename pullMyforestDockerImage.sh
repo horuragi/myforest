@@ -15,7 +15,7 @@ docker pull ${DOCKER_IMAGE_ADDRESS}
 docker rm -f $(docker ps -qa -f "name=backend")
 
 #docker run
-docker run -d --name backend -p 3000:80 --restart=always -v ~/myforest/public/icon:/app/public/icon -v ~/myforest/public/images:/app/public/images -v ~/myforest/public/img:/app/public/img -v ~/myforest/public/camp_image:/app/public/camp_image -v ~/myforest/upload/image:/app/upload/image ${DOCKER_IMAGE_ADDRESS}
+docker run -d --name backend -p 3000:80 --restart=always -e TZ=Asia/Seoul -v ~/myforest/public/icon:/app/public/icon -v ~/myforest/public/images:/app/public/images -v ~/myforest/public/img:/app/public/img -v ~/myforest/public/camp_image:/app/public/camp_image -v ~/myforest/upload/image:/app/upload/image ${DOCKER_IMAGE_ADDRESS}
 
 #move .env
 docker cp .env.admin backend:/app/.env.admin
