@@ -24,7 +24,7 @@ const logger = winston.createLogger({
     new winstonDaily({
       level: "info",
       datePattern: "YYYY-MM-DD",
-      dirname: logDir,
+      dirname: logDir + "/info",
       filename: `%DATE%.log`, // file 이름 날짜로 저장
       maxFiles: 30, // 30일치 로그 파일 저장
       zippedArchive: true,
@@ -57,7 +57,7 @@ logger.stream = {
   },
 };
 
-// Production 환경이 아닌 경우(dev 등) 배포 환경에서는 최대한 자원을 안잡아 먹는 로그를 출력해야함
+// Production 외 환경에서는 컬러로그 적용 Prod 시는 최대한 자원을 안잡아 먹도록 설정
 if (process.env.NODE_ENV !== "production") {
   logger.add(
     new winston.transports.Console({

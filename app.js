@@ -6,7 +6,7 @@ var logger = require("./winston");
 var morgan = require("morgan");
 var bodyParser = require("body-parser");
 var session = require("./lib/session");
-require("dotenv").config({ path: path.join(__dirname, ".server.env") });
+require("dotenv").config({ path: path.join(__dirname, "server.env") });
 
 var combined =
   ':remote-addr - :remote-user ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
