@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ./components/head.html %>
+    <link rel="stylesheet" href="../css/info.css" />
+    <script src="../js/info.js"></script>
+    <% if (title == "시설 소개") { %>
+    <script src="../js/facility.js"></script>
+    <% } %>
+  </head>
+  <body>
+    <div id="load">
+      <div id="img">
+        <img src="/images/loading1.gif" alt="loading..." /><br /><strong>Loading...</strong>
+      </div>
+    </div>
+    <div id="main">
+      <!-- header -->
+      <% include header.html %>
+      <!-- // header -->
+      <div id="border"></div>
+      <div id="border2"></div>
+      <div
+        id="container"
+        style="
+          background: url('/images/introtop.jpg');
+          background-size: cover;
+          background-repeat: no-repeat;
+        "
+      ></div>
+      <div id="container2" class="ui container">
+        <div class="ui stackable two column grid">
+          <!-- navbar -->
+          <%- include ./components/navbar.html %>
+          <!-- // navbar -->
+          <div id="content_right" class="column">
+            <!-- navbar -->
+            <%- include ./components/title.html %>
+            <!-- // navbar -->
+
+            <!-- contents -->
+            <script>
+              const file = "<%= locals.file %>";
+            </script>
+            <%- include(file); %>
+            <!-- // contents -->
+          </div>
+        </div>
+      </div>
+      <!-- footer -->
+      <% include footer.html %>
+      <!-- // footer -->
+    </div>
+  </body>
+  <script type="text/javascript" src="/jquery.zoomslider.min.js"></script>
+  <script>
+    setTimeout(function () {
+      loading_hide();
+    }, 400);
+  </script>
+</html>
