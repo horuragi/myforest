@@ -1,0 +1,108 @@
+<div>
+  <div id="map" style="width: 100%; height: 500px"></div>
+  <div style="margin-top: 10px; text-align: right">
+    <button
+      class="ui animated positive button"
+      onclick="window.open('about:blank').location.href='http://map.daum.net/link/to/내안의숲오토캠핑장,36.184678,126.746136'"
+    >
+      <div class="visible content">
+        <i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;길찾기 바로가기
+      </div>
+      <div class="hidden content"><i class="fas fa-arrow-right"></i>&nbsp;&nbsp;이동</div>
+    </button>
+  </div>
+</div>
+
+<div style="margin-top: 30px">
+  <h3 class="ui dividing header">휴대폰 네비게이션 적용시 유의사항</h3>
+  <div class="ui raised segment">
+    <i class="fas fa-exclamation-triangle" style="color: red"></i>&nbsp;&nbsp;충청남도 부여군 옥산면
+    내대리 106번지 또는 산 30번지로 적용시 티맵, 올레네비, 유플러스 네비가 길을 못찾는 불상사가 왕왕
+    일어나고 있습니다. <br /><br />군도 이하의 농로길은 휴대전화 네비게이션 특성상 표시만 하고
+    안내를 안하는 경우이기에<br />
+    <div class="ui red horizontal label" style="font-size: 15px">
+      휴대전화 네비게이션으로 검색시
+    </div>
+    <br />
+    <div class="ui green horizontal label" style="font-size: 15px">
+      새주소 : 충청남도 부여군 옥산면 차동로 30번길 10
+    </div>
+    <br />
+    <div class="ui green horizontal label" style="font-size: 15px">
+      지번주소 : 충청남도 부여군 옥산면 내대리 142
+    </div>
+    <br />위 주소로 지정해서 오시면 됩니다. 원래 주소까지는 농로로 되어 네비게이션에 표시가
+    안됩니다. <br /><br /><i class="fas fa-plus-circle" style="color: green"></i>&nbsp;&nbsp;캠핑장
+    주소가 아님을 유념해주시기바라며 캠핑장은 차동로30벌길 맨끝에 위치합니다. 위 주소부터는
+    캠핑장안내 표지판이 갈림길마다 붙어있으니 참고해 오시면 되겠습니다. 감사합니다.
+  </div>
+</div>
+<div style="height: 100px"></div>
+
+<script
+  type="text/javascript"
+  src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bcfaba025dd47a0cae64cc9b3cd987bb"
+></script>
+<script>
+  var container = document.getElementById("map");
+  var options = {
+    center: new daum.maps.LatLng(36.184961, 126.746456),
+    level: 5,
+  };
+
+  var map = new daum.maps.Map(container, options);
+  map.setMapTypeId(daum.maps.MapTypeId.HYBRID);
+  //var markerPosition  = new daum.maps.LatLng(36.184678, 126.746136);
+  //var markerPosition2  = new daum.maps.LatLng(36.192441, 126.733804);
+
+  var positions = [
+    new daum.maps.LatLng(36.192441, 126.733804),
+    new daum.maps.LatLng(36.191538, 126.73529),
+    new daum.maps.LatLng(36.190118, 126.73735),
+    new daum.maps.LatLng(36.188646, 126.742371),
+    new daum.maps.LatLng(36.18849, 126.743337),
+    new daum.maps.LatLng(36.189408, 126.74486),
+    new daum.maps.LatLng(36.189685, 126.747114),
+    new daum.maps.LatLng(36.190638, 126.749195),
+    new daum.maps.LatLng(36.188455, 126.750053),
+    new daum.maps.LatLng(36.187327, 126.749862),
+    new daum.maps.LatLng(36.186297, 126.750653),
+    new daum.maps.LatLng(36.185968, 126.750449),
+    new daum.maps.LatLng(36.185247, 126.746902),
+  ];
+  for (var i = 0; i < positions.length; i++) {
+    var marker = new daum.maps.Marker({
+      map: map,
+      position: positions[i],
+      opacity: 0.0000001,
+    });
+  }
+
+  var linep;
+  var line = new daum.maps.Polyline();
+
+  for (var i = 0; i < positions.length; i++) {
+    if (i != 0) {
+      linep = [positions[i - 1], positions[i]];
+    }
+    line.setPath(linep);
+    var drawline = new daum.maps.Polyline({
+      map: map,
+      path: linep,
+      strokeWeight: 3,
+      strokeColor: "#db4040",
+      strokeOpacity: 1,
+      strokeStyle: "solid",
+    });
+  }
+  var imagesrc = "/images/marker.png";
+  var imsize = new daum.maps.Size(80, 80);
+  var markerImage = new daum.maps.MarkerImage(imagesrc, imsize);
+
+  var destmarker = new daum.maps.Marker({
+    map: map,
+    position: new daum.maps.LatLng(36.184678, 126.746136),
+    opacity: 1,
+    image: markerImage,
+  });
+</script>

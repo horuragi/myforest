@@ -1,64 +1,76 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
-var session = require('./lib/session');
+/* 외부 모듈 */
+var createError = require("http-errors");
+var path = require("path");
+var cookieParser = require("cookie-parser");
+var logger = require("morgan");
+var bodyParser = require("body-parser");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+/* 내부 모듈 */
+var session = require("./lib/session");
 
-/* 커뮤니티 */
-var noticeRouter = require('./routes/notice');
-var reviewRouter = require('./routes/review');
-var qnaRouter = require('./routes/qna');
-var adminRouter = require('./routes/admin');
-var reserRouter = require('./routes/reservation.js')
-var bookingRouter = require('./routes/reserve.js')
-var mobileRouter = require('./routes/mobile.js')
-
+/* express 생성 */
+var express = require("express");
 var app = express();
 
-// view engine setup
-app.engine('html', require('ejs').renderFile);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'html');
+/* 템플릿 엔진 설정 */
+app.engine("html", require("ejs").renderFile);
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "html");
 
-app.use(logger('dev'));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: false}));
-app.use(bodyParser.json({limit: '50mb'}));
+/* 공통 미들웨어 */
+app.use(logger("dev"));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
+app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'upload')));
-app.use(express.static(path.join(__dirname, 'adminupload')));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "upload")));
+app.use(express.static(path.join(__dirname, "adminupload")));
 app.use(session);
 
+/* 라우트 모듈 */
+// 메인 라우터
+var indexRouter = require("./routes/index");
+// 메뉴 라우터
+var campingRouter = require("./routes/nav/camping"); // 캠핑장 소개
+var facilityRouter = require("./routes/nav/facility"); // 시설 소개
+// var reservationRouter = require("./routes/nav/reservation");  실시간 예약
+var commnunityRouter = require("./routes/nav/community"); // 커뮤니티
+// 나머지 라우터
+var usersRouter = require("./routes/users");
+var adminRouter = require("./routes/admin");
+var reserRouter = require("./routes/reservation.js");
+var bookingRouter = require("./routes/reserve.js");
+var mobileRouter = require("./routes/mobile.js");
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/notice', noticeRouter);
-app.use('/review', reviewRouter);
-app.use('/qna',qnaRouter);
-app.use('/admin',adminRouter);
-app.use('/reser', reserRouter);
-app.use('/reserve', bookingRouter);
-app.use('/mobile',mobileRouter);
+/* 라우터 설정 */
+// 메인 페이지
+app.use("/", indexRouter);
+// 메뉴 페이지
+app.use("/campinginfo", campingRouter); // 캠핑장 소개
+app.use("/facilityinfo", facilityRouter); // 시설 소개
+app.use("/community", commnunityRouter); // 커뮤니티
+// app.use("/reservation", reservationRouter); // 실시간 예약
+// 나머지 페이지
+app.use("/users", usersRouter);
+app.use("/admin", adminRouter);
+app.use("/reser", reserRouter);
+app.use("/reserve", bookingRouter);
+app.use("/mobile", mobileRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
+/* 404 처리 미들웨어 */
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// error handler
-app.use(function(err, req, res, next) {
+/* 오류 처리 미들웨어 */
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render("error");
 });
 
 module.exports = app;

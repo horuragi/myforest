@@ -1,0 +1,36 @@
+<div id="content_left" class="column">
+  <table
+    border="1"
+    cellspacing="0"
+    cellpadding="20px"
+    style="width: 100%; border-collapse: collapse; border: 1px; border-color: rgb(148, 148, 148)"
+  >
+    <tr>
+      <td
+        style="height: 100px; text-align: center; color: white; background: green; font-size: 18px"
+      >
+        <strong><%= title %></strong>
+      </td>
+    </tr>
+    <% for (let i = 0; i < menus.length; i++) { %>
+    <tr>
+      <% if (menus[i].name == menu) { %>
+      <td style="background: #cecece">
+        <i class="fas fa-check" style="margin-right: 10px; display: inline"></i
+        ><strong><%= menus[i].name %></strong>
+      </td>
+      <% } else { %>
+      <td
+        style="cursor: pointer"
+        onmouseover="mouse_on(this)"
+        onmouseout="mouse_off(this)"
+        onclick="location.href='<%= menus[i].href %>'"
+      >
+        <i class="fas fa-check" style="margin-right: 10px; display: none"></i>
+        <%= menus[i].name %>
+      </td>
+      <% } %>
+    </tr>
+    <% } %>
+  </table>
+</div>

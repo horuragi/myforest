@@ -1,0 +1,144 @@
+<h3 class="ui dividing header">캠핑장 안내도</h3>
+<div class="ui link cards">
+  <div class="card" style="width: 100%">
+    <div class="image">
+      <img src="#" alt="이미지 받아오는 중.." width="100%" id="campinfosrc" />
+    </div>
+  </div>
+</div>
+<div style="margin-top: 30px">
+  <h3 class="ui dividing header">시설 안내</h3>
+  <table class="ui celled structured table" style="text-align: center">
+    <thead>
+      <tr>
+        <th>구분</th>
+        <th>이름</th>
+        <th>개수</th>
+        <th>기준인원</th>
+        <th>성수기요금</th>
+        <th>비수기요금</th>
+        <th style="width: 25%">옵션</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="5">방갈로</td>
+        <td>꾀꼬리</td>
+        <td><%= data[8].room_cnt %></td>
+        <td><%= data[8].standnum %></td>
+        <td><%= data[8].room_peakcharge %></td>
+        <td><%= data[8].room_lowcharge %></td>
+        <td><%= data[8].coption %></td>
+      </tr>
+      <tr>
+        <td>파랑새</td>
+        <td><%= data[0].room_cnt %></td>
+        <td><%= data[0].standnum %></td>
+        <td><%= data[0].room_peakcharge %></td>
+        <td><%= data[0].room_lowcharge %></td>
+        <td><%= data[0].coption %></td>
+      </tr>
+      <tr>
+        <td>부엉이</td>
+        <td><%= data[1].room_cnt %></td>
+        <td><%= data[1].standnum %></td>
+        <td><%= data[1].room_peakcharge %></td>
+        <td><%= data[1].room_lowcharge %></td>
+        <td><%= data[1].coption %></td>
+      </tr>
+      <tr>
+        <td>뻐꾸기</td>
+        <td><%= data[7].room_cnt %></td>
+        <td><%= data[7].standnum %></td>
+        <td><%= data[7].room_peakcharge %></td>
+        <td><%= data[7].room_lowcharge %></td>
+        <td><%= data[7].coption %></td>
+      </tr>
+      <tr>
+        <td>소쩍새</td>
+        <td><%= data[4].room_cnt %></td>
+        <td><%= data[4].standnum %></td>
+        <td><%= data[4].room_peakcharge %></td>
+        <td><%= data[4].room_lowcharge %></td>
+        <td><%= data[4].coption %></td>
+      </tr>
+      <tr>
+        <td rowspan="2">일반텐트</td>
+        <td>느티나무구역</td>
+        <td><%= data[6].room_cnt %></td>
+        <td><%= data[6].standnum %></td>
+        <td><%= data[6].room_peakcharge %></td>
+        <td><%= data[6].room_lowcharge %></td>
+        <td><%= data[6].coption %></td>
+      </tr>
+      <tr>
+        <td>편백나무구역</td>
+        <td><%= data[5].room_cnt %></td>
+        <td><%= data[5].standnum %></td>
+        <td><%= data[5].room_peakcharge %></td>
+        <td><%= data[5].room_lowcharge %></td>
+        <td><%= data[5].coption %></td>
+      </tr>
+      <tr>
+        <td>데크</td>
+        <td>너구리</td>
+        <td><%= data[3].room_cnt %></td>
+        <td><%= data[3].standnum %></td>
+        <td><%= data[3].room_peakcharge %></td>
+        <td><%= data[3].room_lowcharge %></td>
+        <td><%= data[3].coption %></td>
+      </tr>
+      <tr>
+        <td>펜션</td>
+        <td>펜션</td>
+        <td><%= data[2].room_cnt %></td>
+        <td><%= data[2].standnum %></td>
+        <td><%= data[2].room_peakcharge %></td>
+        <td><%= data[2].room_lowcharge %></td>
+        <td><%= data[2].coption %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div style="height: 100px"></div>
+
+<script>
+  function loadInfoMap() {
+    const image_name = "info_map";
+    $.ajax({
+      url: `/admin/camping_image/${image_name}`,
+      dataType: "json",
+      type: "GET",
+      success: function (result) {
+        console.log(result);
+        if (result.result && result.result.length > 0) {
+          document.getElementsByClassName("image")[0].getElementsByTagName("img")[0].src =
+            result.result[0].url;
+        } else {
+          document.getElementsByClassName("image")[0].getElementsByTagName("img")[0].alt =
+            "사진 불러오기 실패";
+        }
+      },
+    });
+  }
+
+  function deleteModal() {
+    $(".ui.basic.modal").each(function () {
+      $(this).remove();
+    });
+  }
+  $(".image").click(function () {
+    // Delete any modals hanging around
+    deleteModal();
+    var image = $(this).children("img").attr("src");
+    $("body").append(
+      '<div class="ui basic modal"><div class="content"><img src="' +
+        image +
+        '" width="1100" /></div><div class="actions"><div class="ui red basic cancel inverted button">닫기</div></div></div>'
+    );
+    $(".ui.basic.modal").modal("show");
+  });
+  setTimeout(function () {
+    loadInfoMap();
+  }, 400);
+</script>
