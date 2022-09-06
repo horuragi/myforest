@@ -3,7 +3,7 @@ const winstonDaily = require("winston-daily-rotate-file");
 
 const { combine, timestamp, printf, colorize } = winston.format;
 
-const logDir = "logs"; // logs 디렉토리 하위에 로그 파일 저장
+const logDir = "logs";
 
 const logFormat = printf((info) => {
   return `${info.timestamp} ${info.level}: ${info.message}`;
@@ -20,29 +20,28 @@ const logger = winston.createLogger({
     logFormat
   ),
   transports: [
-    // info 레벨 로그를 저장할 파일 설정
     new winstonDaily({
       level: "info",
       datePattern: "YYYY-MM-DD",
       dirname: logDir + "/info",
-      filename: `%DATE%.log`, // file 이름 날짜로 저장
-      maxFiles: 30, // 30일치 로그 파일 저장
+      filename: `%DATE%.log`,
+      maxFiles: 30,
       zippedArchive: true,
     }),
-    // warn 레벨 로그를 저장할 파일 설정
+
     new winstonDaily({
       level: "warn",
       datePattern: "YYYY-MM-DD",
       dirname: logDir + "/warn",
-      filename: `%DATE%.warn.log`, // file 이름 날짜로 저장
-      maxFiles: 30, // 30일치 로그 파일 저장
+      filename: `%DATE%.warn.log`,
+      maxFiles: 30,
       zippedArchive: true,
     }),
-    // error 레벨 로그를 저장할 파일 설정
+
     new winstonDaily({
       level: "error",
       datePattern: "YYYY-MM-DD",
-      dirname: logDir + "/error", // error.log 파일은 /logs/error 하위에 저장
+      dirname: logDir + "/error",
       filename: `%DATE%.error.log`,
       maxFiles: 30,
       zippedArchive: true,
@@ -51,20 +50,15 @@ const logger = winston.createLogger({
 });
 
 logger.stream = {
-  // morgan wiston 설정
   write: (message) => {
     logger.info(message);
   },
 };
 
-// Production 외 환경에서는 컬러로그 적용 Prod 시는 최대한 자원을 안잡아 먹도록 설정
 if (process.env.NODE_ENV !== "production") {
   logger.add(
     new winston.transports.Console({
-      format: combine(
-        colorize({ all: true }), // console 에 출력할 로그 컬러 설정 적용함
-        logFormat // log format 적용
-      ),
+      format: combine(colorize({ all: true }), logFormat),
     })
   );
 }
