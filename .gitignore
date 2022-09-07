@@ -7,4 +7,9 @@
 node_modules/
 db/data/
 db/initdb.d/
+public/camp_image/
+public/icon/
+public/images/
+public/images
+*.Identifier
 logs/
