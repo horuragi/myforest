@@ -1,15 +1,20 @@
 /* 외부 모듈 */
 var createError = require("http-errors");
+var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+var logger = require("./winston");
+var morgan = require("morgan");
 var bodyParser = require("body-parser");
-
-/* 내부 모듈 */
 var session = require("./lib/session");
+require("dotenv").config({ path: path.join(__dirname, "server.env") });
+
+var combined =
+  ':remote-addr - :remote-user ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
+var morganFormat = process.env.NODE_ENV !== "production" ? "dev" : combined;
+console.log(morganFormat);
 
 /* express 생성 */
-var express = require("express");
 var app = express();
 
 /* 템플릿 엔진 설정 */
@@ -18,7 +23,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "html");
 
 /* 공통 미들웨어 */
-app.use(logger("dev"));
+// app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());
@@ -26,6 +31,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "upload")));
 app.use(express.static(path.join(__dirname, "adminupload")));
 app.use(session);
+app.use(morgan(morganFormat, { stream: logger.stream }));
 
 /* 라우트 모듈 */
 // 메인 라우터
