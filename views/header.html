@@ -3,81 +3,78 @@
 <link rel="stylesheet" type="text/css" href="/css/header.css" />
 <div class="ui modal head">
 
-    <div class="header" style="background: seagreen;color:snow">
-        전체 메뉴
-    </div>
-    <div class="content">
-        <div class="description">
-            <table class="ui striped table" style="text-align: center">
-                <thead>
-                    <tr>
-                        <th>캠핑장소개</th>
-                        <th>시설 소개</th>
-                        <th>실시간 예약</th>
-                        <th>커뮤니티</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><a href="/campinginfo">내안의 숲 소개</a></td>
-                        <td><a href="/facilityinfo">캠핑장 안내도</a></td>
-                        <td><a href="/booking_price">요금안내</a></td>
-                        <td><a href="/community/notice">공지사항</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="/campinginfo/near">주변관광지</a></td>
-                        <td><a href="/facilityinfo/bungalow">방갈로 소개</a></td>
-                        <td>예약하기</td>
-                        <td><a href="/community/photo">포토갤러리</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="/campinginfo/map">찾아오시는길</a></td>
-                        <td><a href="/facilityinfo/decksite">데크사이트 소개</a></td>
-                        <td>예약확인</td>
-                        <td><a href="/community/review">내안의 숲 후기</a></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><a href="/facilityinfo/pension">펜션 소개</a></td>
-                        <td></td>
-                        <td><a href="/community/qna">문의게시판</a></td>
-                    </tr>
+  <div class="header" style="background: seagreen;color:snow">
+    전체 메뉴
+  </div>
+  <div class="content">
+    <div class="description">
+      <table class="ui striped table" style="text-align: center">
+        <thead>
+          <tr>
+            <th>캠핑장소개</th>
+            <th>시설 소개</th>
+            <th>실시간 예약</th>
+            <th>커뮤니티</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="/campinginfo">내안의 숲 소개</a></td>
+            <td><a href="/facilityinfo">캠핑장 안내도</a></td>
+            <td><a href="/booking_price">요금안내</a></td>
+            <td><a href="/community/notice">공지사항</a></td>
+          </tr>
+          <tr>
+            <td><a href="/campinginfo/near">주변관광지</a></td>
+            <td><a href="/facilityinfo/bungalow">방갈로 소개</a></td>
+            <td>예약하기</td>
+            <td><a href="/community/photo">포토갤러리</a></td>
+          </tr>
+          <tr>
+            <td><a href="/campinginfo/map">찾아오시는길</a></td>
+            <td><a href="/facilityinfo/decksite">데크사이트 소개</a></td>
+            <td>예약확인</td>
+            <td><a href="/community/review">내안의 숲 후기</a></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><a href="/facilityinfo/pension">펜션 소개</a></td>
+            <td></td>
+            <td><a href="/community/qna">문의게시판</a></td>
+          </tr>
 
-                </tbody>
-            </table>
-        </div>
+        </tbody>
+      </table>
     </div>
-    <div class="actions">
-        <div class="ui black deny button">
-            닫기
-        </div>
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      닫기
     </div>
+  </div>
 </div>
 
 <div id="top">
-    <div id="topmenu" class="ui container">
-        <div class="top_box1" style="color:white">
-            <table style="height: 100%;margin-left: 5px;width: 100%" border=0>
-                <tr>
-                    <td style="width:50%;vertical-align: middle;text-align:left">
-                        <i class="fas fa-volume-up" style="margin-right: 10px"></i> 암호화통신(SSL)에 의해 보호 중
+  <div id="topmenu" class="ui container">
+    <div class="top_box1" style="color:white">
+      <table style="height: 100%;margin-left: 5px;width: 100%" border=0>
+        <tr>
+          <td style="width:50%;vertical-align: middle;text-align:left">
+            <i class="fas fa-volume-up" style="margin-right: 10px"></i> 암호화통신(SSL)에 의해 보호 중
 
-                    </td>
-                    <td style="width:50%;vertical-align: middle;text-align: right">
-                        <%if(session.logined=="yes"){%>
-                            <%=session.nickname%> 님 환영합니다.
-                    </td>
-                    <td style="vertical-align: middle">
-                        <a href="#" style="margin-right:15px" onclick="logout();"><input height="26px" type="image"
-                                src="/images/logout.png"></a>
-                    </td>
-                    <%}else{%>
-                        <a href="#" style="margin-right:10px" onclick="login();"><input height="26px" type="image"
-                                src="/images/naverlogin.png"></a>
-                        <a href="#" style="margin-right:15px" onclick="sitemap_show()"><input height="26px" type="image"
-                                src="/images/sitemap.png"></a>
-                        </td>
-                        <%}%>
+          </td>
+          <td style="width:50%;vertical-align: middle;text-align: right">
+            <%if(session.logined=="yes"){%>
+            <%=session.nickname%> 님 환영합니다.
+          </td>
+          <td style="vertical-align: middle">
+            <a href="#" style="margin-right:15px" onclick="logout();"><input height="26px" type="image" src="/images/logout.png"></a>
+          </td>
+          <%}else{%>
+          <a href="#" style="margin-right:10px" onclick="login();"><input height="26px" type="image" src="/images/naverlogin.png"></a>
+          <a href="#" style="margin-right:15px" onclick="sitemap_show()"><input height="26px" type="image" src="/images/sitemap.png"></a>
+          </td>
+          <%}%>
                 </tr>
             </table>
         </div>
@@ -154,34 +151,34 @@
     <div id="testbanner" class="simple_banner_wrap banner02" data-type="vslide" data-interval="3000">
         <ul>
             <% adarr.forEach(function (item,index){ %>
-                <li style="background-color:#69f;"><a href="<%= item.adurl %>" target="_blank"><img
-                            src="/adverimages/<%= item.filename %>" width="100%" height="100%"></a></li>
-                <% })%>
-        </ul>
-        <div style="color:white;position: relative;text-align: right;">
+          <li style="background-color:#69f;"><a href="<%= item.adurl %>" target="_blank"><img src="/adverimages/<%= item.filename %>" width="100%" height="100%"></a></li>
+          <% })%>
+          </ul>
+          <div style="color:white;position: relative;text-align: right;">
             <a href="#" onclick="close_1day()" style="color: white;background: black">오늘하루닫기</a>
             <a href="#" onclick="close_banner()" style="color: white;background: black">닫기</a>
-        </div>
+          </div>
     </div>
     <script>
-        function sitemap_show() {
-            $('.ui.modal.head')
-                .modal('show')
-                ;
-        }
-        function login() {
-            location.href = '/users/login';
-        }
-        function logout() {
-            location.href = "/logout";
-        }
+      function sitemap_show() {
+        $('.ui.modal.head')
+          .modal('show');
+      }
 
-        var filter = "win16|win32|win64|mac|macintel";
-        if (navigator.platform) {
-            if (filter.indexOf(navigator.platform.toLowerCase()) < 0) {
-                //mobile 
-                location.href = "/mobile"
-            }
+      function login() {
+        location.href = '/users/login';
+      }
+
+      function logout() {
+        location.href = "/users/logout";
+      }
+
+      var filter = "win16|win32|win64|mac|macintel";
+      if (navigator.platform) {
+        if (filter.indexOf(navigator.platform.toLowerCase()) < 0) {
+          //mobile 
+          location.href = "/mobile"
         }
+      }
     </script>
-</header>
+    </header>
