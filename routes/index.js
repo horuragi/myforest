@@ -46,13 +46,6 @@ router.get("/main", function (req, res, next) {
   naverlogin.login(req, res, renderPage, adarr);
 });
 
-// 로그아웃
-router.get("/logout", function (req, res, next) {
-  req.session.destroy(function (err) {
-    res.redirect("/");
-  });
-});
-
 // 내 안의 숲 회원가입 동의서 페이지
 router.get("/register", function (req, res, next) {
   renderPage = "register";

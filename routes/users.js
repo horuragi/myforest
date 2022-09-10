@@ -11,7 +11,7 @@ router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
 
-// 무슨 페이지인지 잘 모르겠음
+// 로그인
 router.get("/login", function (req, res, next) {
   function getRandom() {
     return Math.floor(Math.random() * 99999) + 1;
@@ -29,6 +29,13 @@ router.get("/login", function (req, res, next) {
     state +
     "&svctype=0";
   res.redirect(api_url);
+});
+
+// 로그아웃
+router.get("/logout", function (req, res, next) {
+  req.session.destroy(function (err) {
+    res.redirect("/");
+  });
 });
 
 module.exports = router;
