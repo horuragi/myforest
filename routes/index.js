@@ -30,20 +30,13 @@ var router = express.Router();
 /* 라우터 설정 */
 // 메인 페이지
 router.get("/", function (req, res, next) {
-  var adarr = home_admin.get_adlist();
-  // renderPage = "index";
-  renderPage = "index";
-  //res.render(renderPage);
+  const adarr = home_admin.get_adlist(); // 광고 목록
+  const renderPage = "index";
+
   naverlogin.login(req, res, renderPage, adarr);
 });
-
-// 메인 페이지
 router.get("/main", function (req, res, next) {
-  var adarr = home_admin.get_adlist();
-  // renderPage = "index";
-  renderPage = "index";
-  //res.render(renderPage);
-  naverlogin.login(req, res, renderPage, adarr);
+  res.redirect("/");
 });
 
 // 내 안의 숲 회원가입 동의서 페이지
@@ -121,8 +114,8 @@ router.get("/last_reservation", function (req, res, next) {
 
 // 무슨 페이지인지 잘 모르겠음
 router.get("/particle_list/:btype", function (req, res, next) {
-  console.log("particle_list/parm");
   var board_type = req.params.btype;
+  console.log(board_type);
   jsboard.particle_list(req, res, board_type);
 });
 
