@@ -3,9 +3,9 @@ function getRandom() {
 }
 
 function login() {
-  location.href = "/users/login";
+  location.href = '/users/login';
 }
 
 function logout() {
-  location.href = "/users/logout";
+  location.href = '/users/logout';
 }

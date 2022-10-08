@@ -1,54 +1,54 @@
 /* 외부 모듈 */
-const fs = require("fs");
-const ejs = require("ejs");
+const fs = require('fs');
+const ejs = require('ejs');
 
 /* 내부 모듈 */
-const jsboard = require("../../../lib/jsboard");
-const mysql = require("../../../lib/mysql");
-const home_admin = require("../../../lib/home_admin");
+const jsboard = require('../../../lib/jsboard');
+const mysql = require('../../../lib/mysql');
+const home_admin = require('../../../lib/home_admin');
 
 /* express 생성하기 */
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 /* 라우터 설정 */
 //게시글 리시트
-router.get("/pasing/:cur", function (req, res) {
-  jsboard.list(req, res, "review");
+router.get('/pasing/:cur', function (req, res) {
+  jsboard.list(req, res, 'review');
 });
 
 //review redirect
-router.get("/", function (req, res) {
+router.get('/', function (req, res) {
   //review로 들어오면 바로 페이징 처리
-  res.redirect("/community/review/pasing/" + 1);
+  res.redirect('/community/review/pasing/' + 1);
 });
 
 //삭제
-router.get("/delete/:id", function (req, res) {
-  jsboard.delete(req, res, "review");
+router.get('/delete/:id', function (req, res) {
+  jsboard.delete(req, res, 'review');
 });
 
 //삽입 페이지
-router.get("/insert", function (req, res) {
+router.get('/insert', function (req, res) {
   const adarr = home_admin.get_adlist();
 
-  fs.readFile("./views/review_insert.html", "utf-8", function (error, data) {
+  fs.readFile('./views/review_insert.html', 'utf-8', function (error, data) {
     res.send(
       ejs.render(data, {
-        boardtype: "review",
-        filename: "views/board_insert.html",
+        boardtype: 'review',
+        filename: 'views/board_insert.html',
         session: req.session,
         adarr: adarr,
-      })
+      }),
     );
   });
 });
 
-router.post("/insert", function (req, res) {
-  jsboard.insert(req, res, "review");
+router.post('/insert', function (req, res) {
+  jsboard.insert(req, res, 'review');
 });
 
-router.get("/edit/:id", function (req, res) {
+router.get('/edit/:id', function (req, res) {
   const adarr = home_admin.get_adlist();
 
   const errhandler = function (res, err) {
@@ -56,9 +56,9 @@ router.get("/edit/:id", function (req, res) {
     res.end(err);
   };
 
-  const queryString = "select * from review where id = " + req.params.id;
+  const queryString = 'select * from review where id = ' + req.params.id;
 
-  fs.readFile("./views/review_edit.html", "utf-8", function (err, data) {
+  fs.readFile('./views/review_edit.html', 'utf-8', function (err, data) {
     if (err) {
       res.send(err);
     } else {
@@ -73,11 +73,11 @@ router.get("/edit/:id", function (req, res) {
           ejs.render(data, {
             data: result[0],
             contents: v3,
-            boardtype: "review",
-            filename: "views/board_edit.html",
+            boardtype: 'review',
+            filename: 'views/board_edit.html',
             session: req.session,
             adarr: adarr,
-          })
+          }),
         );
       };
       mysql.get(queryString, req, res, handler, errhandler);
@@ -85,12 +85,12 @@ router.get("/edit/:id", function (req, res) {
   });
 });
 
-router.post("/edit/:id", function (req, res) {
-  jsboard.edit(req, res, "review");
+router.post('/edit/:id', function (req, res) {
+  jsboard.edit(req, res, 'review');
 });
 
 //글상세보기
-router.get("/detail/:id", function (req, res) {
+router.get('/detail/:id', function (req, res) {
   const adarr = home_admin.get_adlist();
 
   const errhandler = function (res, err) {
@@ -103,7 +103,7 @@ router.get("/detail/:id", function (req, res) {
   const queryString2 =
     "select id,board_id,comment,user_id,user_name,date_format(reg_date, '%Y-%m-%d') as reg_date from review_comment where board_id = " +
     req.params.id;
-  fs.readFile("./views/review_detail.html", "utf-8", function (err, data) {
+  fs.readFile('./views/review_detail.html', 'utf-8', function (err, data) {
     if (err) {
       res.send(err);
     } else {
@@ -113,11 +113,11 @@ router.get("/detail/:id", function (req, res) {
             ejs.render(data, {
               data: result[0],
               data2: result2,
-              boardtype: "review",
-              filename: "views/board_edit.html",
+              boardtype: 'review',
+              filename: 'views/board_edit.html',
               session: req.session,
               adarr: adarr,
-            })
+            }),
           );
         };
         mysql.zero_get(queryString2, req, res, comment_handler, errhandler);
@@ -132,12 +132,12 @@ router.get("/detail/:id", function (req, res) {
   });
 });
 
-router.post("/comment/insert", function (req, res, next) {
-  jsboard.comment_insert(req, res, "review");
+router.post('/comment/insert', function (req, res, next) {
+  jsboard.comment_insert(req, res, 'review');
 });
 
-router.get("/comment/delete/:id/:board_id", function (req, res, next) {
-  jsboard.comment_delete(req, res, "review");
+router.get('/comment/delete/:id/:board_id', function (req, res, next) {
+  jsboard.comment_delete(req, res, 'review');
 });
 
 module.exports = router;
