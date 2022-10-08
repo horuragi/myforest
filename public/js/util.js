@@ -1,3 +1,3 @@
 function page_move(renderpage) {
-        location.href = renderpage;
+  location.href = renderpage;
 }

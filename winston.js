@@ -1,11 +1,11 @@
-const winston = require("winston");
-const winstonDaily = require("winston-daily-rotate-file");
+const winston = require('winston');
+const winstonDaily = require('winston-daily-rotate-file');
 
 const { combine, timestamp, printf, colorize } = winston.format;
 
-const logDir = "logs";
+const logDir = 'logs';
 
-const logFormat = printf((info) => {
+const logFormat = printf(info => {
   return `${info.timestamp} ${info.level}: ${info.message}`;
 });
 /*
@@ -15,33 +15,33 @@ const logFormat = printf((info) => {
 const logger = winston.createLogger({
   format: combine(
     timestamp({
-      format: "YYYY-MM-DD HH:mm:ss",
+      format: 'YYYY-MM-DD HH:mm:ss',
     }),
-    logFormat
+    logFormat,
   ),
   transports: [
     new winstonDaily({
-      level: "info",
-      datePattern: "YYYY-MM-DD",
-      dirname: logDir + "/info",
+      level: 'info',
+      datePattern: 'YYYY-MM-DD',
+      dirname: logDir + '/info',
       filename: `%DATE%.log`,
       maxFiles: 30,
       zippedArchive: true,
     }),
 
     new winstonDaily({
-      level: "warn",
-      datePattern: "YYYY-MM-DD",
-      dirname: logDir + "/warn",
+      level: 'warn',
+      datePattern: 'YYYY-MM-DD',
+      dirname: logDir + '/warn',
       filename: `%DATE%.warn.log`,
       maxFiles: 30,
       zippedArchive: true,
     }),
 
     new winstonDaily({
-      level: "error",
-      datePattern: "YYYY-MM-DD",
-      dirname: logDir + "/error",
+      level: 'error',
+      datePattern: 'YYYY-MM-DD',
+      dirname: logDir + '/error',
       filename: `%DATE%.error.log`,
       maxFiles: 30,
       zippedArchive: true,
@@ -50,16 +50,16 @@ const logger = winston.createLogger({
 });
 
 logger.stream = {
-  write: (message) => {
+  write: message => {
     logger.info(message);
   },
 };
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== 'production') {
   logger.add(
     new winston.transports.Console({
       format: combine(colorize({ all: true }), logFormat),
-    })
+    }),
   );
 }
 
