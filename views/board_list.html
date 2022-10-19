@@ -1,116 +1,86 @@
 <div class="ui container">
-<br>
-<table class="ui selectable table" style="text-align: center">
-<thead>
-<tr>
-<th width="8%">번호</th>
-<th width="50%">제목</th>
-<th width="17%">닉네임</th>
-<th width="15%">작성일</th>
-<th width="10%">조회수</th>
-</tr>
-</thead>
-<tbody>
-
-<% data.forEach(function (item,index){ %>
-<tr>
-<td>
-<%= item.id %>
-</td>
-<td>
-<a href='/<%= boardtype %>/detail/<%= item.id %>' style="color: green"><%= item.subject.substring(0,19) %></a>
-</td>
-<td>
-<%= item.user_name %>
-</td>
-<td>
-        <%= item.reg_date %>
+  <br />
+  <table class="ui selectable table" style="text-align: center">
+    <thead>
+      <tr>
+        <th width="8%">번호</th>
+        <th width="50%">제목</th>
+        <th width="17%">닉네임</th>
+        <th width="15%">작성일</th>
+        <th width="10%">조회수</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.forEach(function (item,index){ %>
+      <tr>
+        <td><%= item.id %></td>
+        <td>
+          <a href="/community/<%= boardtype %>/detail/<%= item.id %>" style="color: green"
+            ><%= item.subject.substring(0,19) %></a
+          >
         </td>
-<td>
-<%= item.hits %>
-</td>
-</tr>
-<% })%>
-</tbody>
-</table>
+        <td><%= item.user_name %></td>
+        <td><%= item.reg_date %></td>
+        <td><%= item.hits %></td>
+      </tr>
+      <% })%>
+    </tbody>
+  </table>
 </div>
 <div class="ui container" style="text-align: center">
-<ul class="pager">
+  <ul class="pager">
+    <% const curSet = pasing.curSet; const endPage = pasing.endPage; const startPage =
+    pasing.startPage; const totalSet = pasing.totalSet; const totalPage = pasing.totalPage; const
+    page_list_size = pasing.page_list_size; const page_size = pasing.page_size; const curPage =
+    pasing.curPage; %> <% if(curSet > 1){ %>
+    <a
+      href="/<%= boardtype %>/pasing/<%= ( startPage - 1) %>"
+      style="margin-left: 10px; color: black"
+      >이전페이지</a
+    >
 
+    <% } %> <% for(let i = startPage; i <= endPage; i++){ if(i > totalPage){break;} if(i ==
+    curPage){ %>
 
+    <a
+      href="/<%= boardtype %>/pasing/<%= i %>"
+      style="margin-left: 10px; color: green; font-size: 2em"
+    >
+      <%= i %>
+    </a>
 
-<%
-var curSet = pasing.curSet
-var endPage = pasing.endPage
-var startPage = pasing.startPage
-var totalSet = pasing.totalSet
-var totalPage = pasing.totalPage
-var page_list_size = pasing.page_list_size
-var page_size = pasing.page_size
-var curPage = pasing.curPage
-%>
+    <% }else{ %>
 
+    <a href="/<%= boardtype %>/pasing/<%= i %>" style="margin-left: 10px; color: black">
+      <%= i %>
+    </a>
 
-<%
-if(curSet > 1){
-%>
-<a href='/<%= boardtype %>/pasing/<%= ( startPage - 1) %>' style="margin-left:10px;color:black">이전페이지</a>
+    <% } %> <% } %> <% if(curSet < totalSet){ %>
 
-<%
-}
-%>
+    <a href="/<%= boardtype %>/pasing/<%= ( endPage + 1) %>" style="margin-left: 10px; color: black"
+      >다음페이지</a
+    >
 
-
-<%
-for(var i = startPage; i <= endPage; i++){
-if(i > totalPage){break;}
-
-if(i == curPage){
-%>
-
-<a href='/<%= boardtype %>/pasing/<%= i %>' style="margin-left:10px;color:green;font-size: 2em">
-<%= i %>
-</a>
-
-<%
-}else{
-%>
-
-
-<a href='/<%= boardtype %>/pasing/<%= i %>' style="margin-left:10px;color:black">
-<%= i %>
-</a>
-
-
-<%
-}
-%>
-
-<%
-}
-%>
-
-<%
-if(curSet < totalSet){
-%>
-
-<a href='/<%= boardtype %>/pasing/<%= ( endPage + 1) %>' style="margin-left:10px;color:black">다음페이지</a>
-
-<%
-}
-%>
-
-</ul>
+    <% } %>
+  </ul>
 </div>
 <div class="ui container" style="text-align: right">
-        <% if(session.logined == "yes"){
-                if(boardtype=="notice"){
-                        if(session.isadmin){ 
-                                %>
-                                <button class="ui positive button" type="button" onclick="location.href='/<%= boardtype %>/insert'">글쓰기</button>
-                        <% } }else{  %>
-    <button class="ui positive button" type="button" onclick="location.href='/<%= boardtype %>/insert'">글쓰기</button>
-        <!--<a href="/<%= boardtype %>/insert">글쓰기</a>-->
-        <% } %>
-      <%  } %>
+  <% if(session.logined == "yes"){ if(boardtype=="notice"){ if(session.isadmin){ %>
+  <button
+    class="ui positive button"
+    type="button"
+    onclick="location.href='/community/<%= boardtype %>/insert'"
+  >
+    글쓰기
+  </button>
+  <% } }else{ %>
+  <button
+    class="ui positive button"
+    type="button"
+    onclick="location.href='/community/<%= boardtype %>/insert'"
+  >
+    글쓰기
+  </button>
+  <!--<a href="/<%= boardtype %>/insert">글쓰기</a>-->
+  <% } %> <% } %>
 </div>

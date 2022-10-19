@@ -5,7 +5,7 @@ services:
     image: mysql:5.7.33
     ports:
       - 3306:3306
-    volumes: 
+    volumes:
       - ./db/conf.d:/etc/mysql/conf.d
       - ./db/data:/var/lib/mysql
       - ./db/initdb.d:/docker-entrypoint-initdb.d
@@ -26,7 +26,7 @@ services:
       - -c
       - |
         /app/wait-for-it.sh db:3306 -t 20
-        npm run start
+        npm run dev
     volumes:
       - ./:/app/
     networks:
