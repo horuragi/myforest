@@ -15,7 +15,7 @@ module.exports = {
       const [data] = await pool.query(sql, args);
 
       result.isSuccess = true;
-      result.data = data[0] || null;
+      result.data = data;
     } catch (err) {
       result.isSuccess = false;
       result.data = err;
