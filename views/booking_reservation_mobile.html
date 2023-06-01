@@ -2,22 +2,19 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0">
-  <title>내안의 숲</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0">
+<title>내안의 숲</title>
 
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="/js/reserve_timer.js"></script>
 
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
   <style>
     #load {
@@ -65,102 +62,97 @@
     }
   </style>
   <script>
-    $(window).on('load', function () {
-      setTimeout(function () {
-        loading_hide();
-      }, 400);
-    });
-    function loading_show() {
-      $('#load').show();
-    }
-    function loading_hide() {
-      //$('#load').hide();
-      $('#load')
-        .fadeOut('slow');
-    }
-    function page_move(renderpage) {
-      location.href = renderpage;
-    }
+        $(window).on('load',function() {
+          setTimeout(function(){
+            loading_hide();
+          },400);
+      });
+      function loading_show(){
+          $('#load').show();
+          }
+          function loading_hide(){
+          //$('#load').hide();
+          $('#load')
+          .fadeOut('slow');
+          }
+          function page_move(renderpage){
+                location.href=renderpage;
+              }
 
-    function inputPhoneNumber(obj) {
+function inputPhoneNumber(obj) {
+  
+    var number = obj.value.replace(/[^0-9]/g, "");
+    var phone = "";
 
-      var number = obj.value.replace(/[^0-9]/g, "");
-      var phone = "";
 
 
-
-      if (number.length < 4) {
+    if(number.length < 4) {
         return number;
-      } else if (number.length <= 7) {
+    } else if(number.length <= 7) {
         phone += number.substr(0, 3);
         phone += "-";
         phone += number.substr(3);
-      } else {
+    } else {
         phone += number.substr(0, 3);
         phone += "-";
         phone += number.substr(3, 4);
         phone += "-";
         phone += number.substr(7);
-      }
-      obj.value = phone;
     }
+    obj.value = phone;
+}
   </script>
 </head>
 
 <body>
   <div id="load">
-    <div id="img"><img src="/images/loading1.gif"></div>
+    <div id="img"><img src="/images/loading1.gif" ></div>
   </div>
 
-  <% include header_mobile.html %>
+<% include header_mobile.html %>
     <div class="container">
-      <div class="alert alert-success" role="alert">
-        <strong>예약현황안내</strong>
-        <hr>
-        <span style="font-size:12px">
-          - 예약신청후 12시간 이내에 예약금이 되지않으면 예약이 자동취소됩니다.<br>
-          <span style="color:red;font-weight:600">- 환불신청을 하신 경우 반드시 내안의숲( 010 5691 5058 )으로 환불받으실 계좌번호와 예약자 성함을 문자로
-            보내주세요.</span><br>
-          <span style="color:red;font-weight:600;font-size:1.1em;">- 환불날짜는 계좌번호를 보내주신 문자의 날짜를 기준으로
-            책정됩니다.</span><br>
-          - 입금전 예약취소가 가능하며, 예약승인후에는 환불신청버튼을 사용하여주세요.<br>
-          - 이름과 휴대폰번호를 다음과같이 명확히 입력하셔야 정보확인이 가능합니다.<br>
-          - 비로그인상태에서 예약 -> 이름과 휴대폰번호로 조회<br>
-          - 로그인상태에서 예약 -> 로그인후에 예약확인시 확인가능 <br>
-          예시) <br>이름 : 계백장군<br>
-          휴대폰번호 : 010-1234-5678<br>
-        </span>
+<div class="alert alert-success" role="alert">
+<strong>예약현황안내</strong><hr>
+<span style="font-size:12px">
+- 예약신청후 12시간 이내에 예약금이 되지않으면 예약이 자동취소됩니다.<br>
+<span style="color:red;font-weight:600">- 환불신청을 하신 경우 반드시 내안의숲( 010 5691 5058 )으로 환불받으실 계좌번호와 예약자 성함을 문자로 보내주세요.</span><br>
+- 입금전 예약취소가 가능하며, 예약승인후에는 환불신청버튼을 사용하여주세요.<br>
+- 이름과 휴대폰번호를 다음과같이 명확히 입력하셔야 정보확인이 가능합니다.<br>
+- 비로그인상태에서 예약 -> 이름과 휴대폰번호로 조회<br> 
+- 로그인상태에서 예약 -> 로그인후에 예약확인시 확인가능 <br>
+예시) <br>이름 : 계백장군<br>
+      휴대폰번호 : 010-1234-5678<br>
+</span>
 
-      </div>
-      <div class="card" style="margin-bottom:60px">
-        <div class="card-header">
-          예약정보확인
-        </div>
-        <div class="card-body">
-          <form method="post" action="/mobile/booking_reservation">
-            <br>
-            <div class="form-group">
-              <label>이름</label>
-              <input type="text" class="form-control" name="username" placeholder="홍길동">
-            </div>
-            <div class="form-group">
-              <label>휴대폰번호</label>
-              <input type="text" class="form-control" name="userphone" onKeyup="inputPhoneNumber(this);"
-                placeholder="010-1234-5678">
-            </div>
-            <br>
-            <button class="btn btn-success btn-lg btn-block" type="submit">예약확인</button>
-          </form>
-        </div>
-      </div>
-      <!--footer-->
-      <% include footer_mobile.html %>
-    </div><!-- container -->
-    <script>
-      setTimeout(function () {
-        loading_hide();
-      }, 400);
-    </script>
+</div>
+<div class="card" style="margin-bottom:60px">
+<div class="card-header">
+예약정보확인
+  </div>
+  <div class="card-body">
+    <form method="post" action="/mobile/booking_reservation">
+<br>
+    <div class="form-group">
+    <label>이름</label>
+    <input type="text" class="form-control" name="username" placeholder="홍길동">
+    </div>
+    <div class="form-group">
+    <label>휴대폰번호</label>
+    <input type="text" class="form-control" name="userphone" onKeyup="inputPhoneNumber(this);" placeholder="010-1234-5678">
+    </div>
+<br>
+  <button class="btn btn-success btn-lg btn-block" type="submit">예약확인</button>
+</form>
+  </div>
+</div>
+    <!--footer-->
+    <% include footer_mobile.html %>
+</div><!-- container -->
+<script>
+  setTimeout(function() {
+    loading_hide();
+  }, 400);
+</script>
 
 </body>
 

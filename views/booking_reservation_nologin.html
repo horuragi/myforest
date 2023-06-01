@@ -4,11 +4,9 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="/semantic.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -18,28 +16,28 @@
 
 
   <script>
-    function call_reservation_nologin() {
-      $.ajax({
-        type: "POST"
-        , url: "/reserve/rev_timer"
-        , data: { username: "<%= username %>", userphone: "<%= userphone %>", limit: 0 }
-        , cache: false
-        , success: function (data) {
-          create_table(data.timer);
-          set_timer(data.timer);
-          rev_pagenavi(data.max_rev, data.cnt);
-
-        }
-        , error: function (data) {
-          alert("err");
-        }
-      });
+	  function call_reservation_nologin(){
+		  $.ajax({
+    type: "POST"
+    ,url: "/reserve/rev_timer"
+			  ,data:{username:"<%= username %>",userphone:"<%= userphone %>",limit:0}
+    ,cache: false
+    ,success:function(data) {
+            create_table(data.timer);
+            set_timer(data.timer);
+            rev_pagenavi(data.max_rev, data.cnt);
 
     }
+    ,error:function(data){
+            alert("err");
+    }
+});
+
+	  }
     $(document)
-      .ready(function () {
+      .ready(function() {
         // fix main menu to page on passing
-        call_reservation_nologin();
+          call_reservation_nologin();
         // show dropdown on hover
         $('.ui.dropdown').dropdown({
           on: 'hover',
@@ -249,134 +247,124 @@
   </div>
   <div id="main">
     <% include header.html %>
-      <div id="border"></div>
-      <div id="border2"></div>
-      <div id=container
-        style="background:url('/images/introtop.jpg');background-size:cover;background-repeat: no-repeat;">
-      </div>
-      <div id="container2" class="ui container">
-        <div class="ui stackable two column grid">
-          <div id="content_left" class="column">
-            <table border=1 cellspacing="0" cellpadding="20px"
-              style="width:100%;border-collapse:collapse; border:1px;border-color: rgb(148, 148, 148)">
-              <tr>
-                <td style="height:100px;text-align: center;color:white;background:green;font-size:18px;">
-                  <strong>실시간 예약</strong>
-                </td>
-              </tr>
-              <tr>
-                <td style="cursor:pointer" onmouseover="mouse_on(this)" onmouseout="mouse_off(this)"
-                  onclick="location.href='/booking_price'">
-                  <i class="fas fa-check" style="margin-right: 10px;display:none;"></i>요금 안내
-                </td>
-              </tr>
-              <tr>
-                <td style="cursor:pointer" onmouseover="mouse_on(this)" onmouseout="mouse_off(this)"
-                  onclick="location.href='/booking'">
-                  <i class="fas fa-check" style="margin-right: 10px;display:none;"></i>예약 하기
-                </td>
-              </tr>
-              <tr>
-                <td style="background: #cecece;">
-                  <i class="fas fa-check" style="margin-right: 10px;display:inline"></i>
-                  <strong>현재 예약 정보</strong>
-                </td>
-              </tr>
-              <% if(session.logined=="yes" ){%>
-                <tr>
-                  <td style="cursor:pointer" onmouseover="mouse_on(this)" onmouseout="mouse_off(this)"
-                    onclick="location.href='/last_reservation'">
-                    <i class="fas fa-check" style="margin-right: 10px;display:none;"></i>이전 예약 정보
-                  </td>
-                </tr>
-                <%}%>
+    <div id="border"></div>
+    <div id="border2"></div>
+    <div id=container style="background:url('/images/introtop.jpg');background-size:cover;background-repeat: no-repeat;">
+    </div>
+    <div id="container2" class="ui container">
+      <div class="ui stackable two column grid">
+        <div id="content_left" class="column">
+          <table border=1 cellspacing="0" cellpadding="20px" style="width:100%;border-collapse:collapse; border:1px;border-color: rgb(148, 148, 148)">
+            <tr>
+              <td style="height:100px;text-align: center;color:white;background:green;font-size:18px;">
+                <strong>실시간 예약</strong>
+              </td>
+            </tr>
+            <tr>
+              <td style="cursor:pointer" onmouseover="mouse_on(this)" onmouseout="mouse_off(this)" onclick="location.href='/booking_price'">
+                <i class="fas fa-check" style="margin-right: 10px;display:none;"></i>요금 안내
+              </td>
+            </tr>
+            <tr>
+              <td style="cursor:pointer" onmouseover="mouse_on(this)" onmouseout="mouse_off(this)" onclick="location.href='/booking'">
+                <i class="fas fa-check" style="margin-right: 10px;display:none;"></i>예약 하기
+              </td>
+            </tr>
+            <tr>
+              <td style="background: #cecece;">
+                <i class="fas fa-check" style="margin-right: 10px;display:inline"></i>
+                <strong>현재 예약 정보</strong>
+              </td>
+	    </tr>
+	    <% if(session.logined=="yes"){%>
+	    <tr>
+              <td style="cursor:pointer" onmouseover="mouse_on(this)" onmouseout="mouse_off(this)" onclick="location.href='/last_reservation'">
+                <i class="fas fa-check" style="margin-right: 10px;display:none;"></i>이전 예약 정보
+              </td>
+            </tr>
+	    <%}%>
 
 
-            </table>
-          </div>
-          <div id="content_right" class="column">
-            <table border=0 cellspacing="0" cellpadding="15px"
-              style="margin-top:20px;width:100%;border-collapse:collapse; border:1px;border-color: rgb(148, 148, 148)">
-              <tr>
-                <td style="width: 60%"><strong>
-                    <h2>예약 현황 안내</h2>
-                  </strong>
-                  <p style="margin-top:10px">예약 현황 목록입니다.<br>
-                    -<span style="font-size:12px"> 입금 전 예약 취소는 예약 취소 버튼을 사용해주세요.<br>
-                      - 입금 완료후 예약 취소는 환불 신청 버튼을 사용해주세요.<br>
-                      - 비로그인상태에서 예약 -> 이름과 휴대폰번호로 조회<br>
-                      - 로그인상태에서 예약 -> 로그인후에 예약확인시 확인가능<br>
-                      <span style="color:red;font-weight:600">- 환불신청을 하신 경우 반드시 내안의숲( 010 5691 5058 )으로 환불받으실 계좌번호와 예약자
-                        성함을 문자로 보내주세요.</span><br>
-                      <span style="color:red;font-weight:600;font-size:1.1em;">- 환불날짜는 계좌번호를 보내주신 문자의 날짜를 기준으로
-                        책정됩니다.</span>
-                    </span></p>
-                  <hr align="left" style="width: 15%;border:solid 2px green">
-                </td>
-                <td style="width: 40%;text-align: right;vertical-align: text-top"><i class="fas fa-home"
-                    style="color: green"></i>&nbsp;&nbsp;HOME&nbsp;&nbsp;<i class="fas fa-angle-right"></i>
-                  &nbsp;&nbsp;실시간 예약&nbsp;&nbsp;<i class="fas fa-angle-right"></i>&nbsp;&nbsp;예약 확인&nbsp;&nbsp;
-                </td>
-              </tr>
-            </table>
+          </table>
+        </div>
+        <div id="content_right" class="column">
+          <table border=0 cellspacing="0" cellpadding="15px" style="margin-top:20px;width:100%;border-collapse:collapse; border:1px;border-color: rgb(148, 148, 148)">
+            <tr>
+              <td style="width: 60%"><strong>
+                  <h2>예약 현황 안내</h2>
+                </strong>
+                <p style="margin-top:10px">예약 현황 목록입니다.<br>
+                -<span style="font-size:12px"> 입금 전 예약 취소는 예약 취소 버튼을 사용해주세요.<br> 
+                - 입금 완료후 예약 취소는 환불 신청 버튼을 사용해주세요.<br> 
+                - 비로그인상태에서 예약 -> 이름과 휴대폰번호로 조회<br> 
+                - 로그인상태에서 예약 -> 로그인후에 예약확인시 확인가능<br>
+                <span style="color:red;font-weight:600">- 환불신청을 하신 경우 반드시 내안의숲( 010 5691 5058 )으로 환불받으실 계좌번호와 예약자 성함을 문자로 보내주세요.</span>
+                </span></p>
+                <hr align="left" style="width: 15%;border:solid 2px green">
+              </td>
+              <td style="width: 40%;text-align: right;vertical-align: text-top"><i class="fas fa-home" style="color: green"></i>&nbsp;&nbsp;HOME&nbsp;&nbsp;<i class="fas fa-angle-right"></i>
+                &nbsp;&nbsp;실시간 예약&nbsp;&nbsp;<i class="fas fa-angle-right"></i>&nbsp;&nbsp;예약 확인&nbsp;&nbsp;
+              </td>
+            </tr>
+          </table>
 
 
 
-            <div style="margin-top:30px;width:100%">
-              <h3 class="ui dividing header">
-                예약 확인
-              </h3>
-              <div class="two wide column" style="text-align:right;">
-                <input type="button" id="cancel" value="예약 취소">
-                <input type="button" id="refund" value="환불 신청">
+          <div style="margin-top:30px;width:100%">
+            <h3 class="ui dividing header">
+              예약 확인
+            </h3>
+            <div class="two wide column" style="text-align:right;">
+              <input type="button" id="cancel" value="예약 취소">
+              <input type="button" id="refund" value="환불 신청">
 
-              </div>
-
-              <div id="rev_table" class="ui fluid container" style="padding:1rem;">
-                <table class="ui small striped table" style="text-align:center;">
-                  <thead>
-                    <tr>
-                      <td>선택</td>
-                      <td>순서</td>
-                      <td>방 번호</td>
-                      <td>예약 상태</td>
-                      <td>금액</td>
-                      <td>입실</td>
-                      <td>퇴실</td>
-                      <td>잔여 시간</td>
-                    </tr>
-                  </thead>
-                  <tbody id="table_body">
-                </table>
-              </div>
-
-              <div style="text-align:center" ;>
-                <div class="ui pagination menu" id="rev_page">
-                </div>
-
-              </div>
             </div>
 
-            <form name="rev_frm" method="post">
-              <input type="hidden" name="args">
-            </form>
+            <div id="rev_table" class="ui fluid container" style="padding:1rem;">
+              <table class="ui small striped table" style="text-align:center;">
+                <thead>
+                  <tr>
+                    <td>선택</td>
+                    <td>순서</td>
+                    <td>방 번호</td>
+                    <td>예약 상태</td>
+                    <td>금액</td>
+                    <td>입실</td>
+                    <td>퇴실</td>
+                    <td>잔여 시간</td>
+                  </tr>
+	</thead>
+	<tbody id="table_body">
+              </table>
+            </div>
 
+            <div style="text-align:center" ;>
+              <div class="ui pagination menu" id="rev_page">
+              </div>
 
-
-            <div style="height:100px"></div>
+            </div>
           </div>
+
+          <form name="rev_frm" method="post">
+            <input type="hidden" name="args">
+          </form>
+
+
+
+          <div style="height:100px"></div>
         </div>
-        <!--내안의숲소개 캠핑장안내도 요금안내 예약하기 예약확인
-				공지사항ㅡ문의사항 찾아오시는길-->
       </div>
-      <!--footer-->
-      <% include footer.html %>
+      <!--내안의숲소개 캠핑장안내도 요금안내 예약하기 예약확인
+				공지사항ㅡ문의사항 찾아오시는길-->
+    </div>
+    <!--footer-->
+    <% include footer.html %>
   </div>
-  <script>
-    setTimeout(function () {
-      loading_hide();
-    }, 400);
-  </script>
+<script>
+  setTimeout(function() {
+    loading_hide();
+  }, 400);
+</script>
 
 </body>
 
