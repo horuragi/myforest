@@ -71,17 +71,7 @@ function start_timer(data, date_time) {
   });
 
   $('#refund').click(function () {
-    if ($('table input:checkbox').length < 1) {
-      alert('하나 이상 선택해 주세요.');
-    } else {
-      $('tbody input:checkbox:checked').each(function (index) {
-        var tr = $(this).parent().parent();
-        var td = tr.children();
-        rev_frm.args.value = td.eq(2).text();
-        rev_frm.action = '/reser/reservation_refund';
-        rev_frm.submit();
-      });
-    }
+    RESERVATION_MANAGEMENT.PC.refund_button_click_handler();
   });
 }
 

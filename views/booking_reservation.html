@@ -12,7 +12,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="/semantic.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/reserve_timer.js"></script>
   <script src="/semantic.min.js"></script>
 
 
@@ -385,10 +384,9 @@
             </div>
 
             <form name="rev_frm" method="post">
-              <input type="hidden" name="args">
             </form>
 
-
+            <% include refund_request.html %>
 
             <div style="height:100px"></div>
           </div>
@@ -399,6 +397,8 @@
       <!--footer-->
       <% include footer.html %>
   </div>
+  <script defer src="/js/reservation_management.js"></script>
+  <script defer src="/js/reserve_timer.js"></script>
   <script>
     setTimeout(function () {
       loading_hide();

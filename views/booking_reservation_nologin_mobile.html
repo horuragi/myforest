@@ -14,7 +14,6 @@
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/reserve_timer_mobile.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
@@ -170,13 +169,14 @@
       <button type="button" class="btn btn-danger btn-lg btn-block" id="refund">환불신청</button>
 
       <form name="rev_frm" method="post">
-        <input type="hidden" name="args">
       </form>
 
       <div style="height:100px"></div>
       <!--footer-->
       <% include footer_mobile.html %>
     </div>
+    <script defer src="/js/reservation_management.js"></script>
+    <script defer src="/js/reserve_timer_mobile.js"></script>
     <script>
       setTimeout(function () {
         loading_hide();
