@@ -34,9 +34,14 @@ router.post('/reservation_cancel', function (req, res) {
   reservationmgt.reservation_cancel(req, res);
 });
 
-//환불신청
+//환불신청 (환불 신청 정보 등록 x)
 router.post('/reservation_refund', function (req, res) {
   reservationmgt.reservation_refund(req, res);
+});
+
+//환불신청 (환불 신청 정보 등록 o)
+router.post('/reservation_refund_with_info', function (req, res) {
+  reservationmgt.reservation_refund_with_info(req, res);
 });
 
 //환불완료
