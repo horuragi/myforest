@@ -1,1 +1,38 @@
 <!-- used framework: bootstrap-->
+<div class="modal" tabindex="-1" id="refund_modal" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">환불 신청</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <!-- 예금주, 은행, 계좌번홍 입력 받기-->
+            <div>예금주</div>
+            <div class="input-group mb-3">
+              <input name="name" class="form-control" id="refund_name" type="text" placeholder="계백장군">
+            </div>
+            <div>은행 이름</div>
+            <div class="input-group mb-3">
+              <input name="bank" class="form-control" id="refund_bank" type="text" placeholder="하나은행">
+            </div>
+            <div>계좌 번호</div>
+            <div class="input-group mb-3">
+              <input name="account_number" class="form-control" id="refund_account_number" type="text" placeholder="012-333444-55555">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="row">
+                <div class="col">
+                    <button type="button" id="refund_request" class="btn btn-success">신청</button>
+                </div>
+                <div class="col">
+                    <button type="button" id="refund_cancel" class="btn btn-danger">취소</button>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>

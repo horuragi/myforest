@@ -1,9 +1,10 @@
 class RESERVATION_MANAGEMENT_PC {
     refund_button_click_handler () {
+        const self = this;
         if ($('table input:checkbox:checked').length < 1) {
                 alert('하나 이상 선택해 주세요.');
         } else {
-            show_refund_modal(function () {
+            self.show_refund_modal(function () {
                 // false 를 리턴하면 모달 안닫힘.
                 return set_refund_info(function (name, bank, account_number) {
                     $('tbody input:checkbox:checked').each(function (index) {
@@ -14,17 +15,30 @@ class RESERVATION_MANAGEMENT_PC {
                         request_fund_with_info(rev_id, name, bank, account_number);
                     });
                 });
-            }, function () {});
+            }, function () {
+                console.log('cancel');
+            });
         }
+    }
+
+    show_refund_modal (approve_handler, deny_handler) {
+        $('.ui.modal.refund ')
+        .modal({
+            closable  : false,
+            onDeny    : deny_handler,
+            onApprove : approve_handler
+        })
+        .modal('show');
     }
 }
 
 class RESERVATION_MANAGEMENT_MOBILE {
     refund_button_click_handler () {
+        const self = this;
         if ($('input[name=rev_index]:checkbox:checked').length < 1) {
                 alert('하나 이상 선택해 주세요.');
         } else {
-            show_refund_modal(function () {
+            self.show_refund_modal(function () {
                 // false 를 리턴하면 모달 안닫힘.
                 return set_refund_info(function (name, bank, account_number) {
                     $('#table_body input:checkbox:checked').each(function (index) {
@@ -35,21 +49,28 @@ class RESERVATION_MANAGEMENT_MOBILE {
                         request_fund_with_info(rev_id, name, bank, account_number);
                     });
                 });
-            }, function () {});
+            }, function () {
+                console.log('mobile cancel');
+            });
             
         }
     }
-}
 
-function show_refund_modal (approve_handler, deny_handler) {
-    $('.ui.modal.refund ')
-    .modal({
-        closable  : false,
-        onDeny    : deny_handler,
-        onApprove : approve_handler
-    })
-    .modal('show')
-;
+    show_refund_modal (approve_handler, deny_handler) {
+        const modal = $('#refund_modal');
+        modal.modal('show'); // show
+
+        //버튼 이벤트 등록 (매번 초기화를 위해 off 호출)
+        $('#refund_request').off('click').on('click', function () {
+            if(approve_handler()) {
+                modal.modal('hide');
+            }
+        });
+        $('#refund_cancel').off('click').on('click', function () {
+            deny_handler();
+            modal.modal('hide');
+        });
+    }
 }
 
 /**
@@ -110,7 +131,7 @@ function request_fund_with_info(rev_id, name, bank, account_number) {
         name: 'account_number',
         value: account_number
     }];
-    
+
     const form = rev_frm;
     parameters.forEach(function (p) {
         const input = document.createElement('input');
