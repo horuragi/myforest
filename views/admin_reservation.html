@@ -460,7 +460,7 @@ function query_addprice(row,td){
                   td.html("예약 승인");
                   break;
                 case 3:
-                  td.html("환불 신청");
+                  td.html("환불 신청 <span onclick=\"get_refund_info(this)\" style=\"background: #555; color: white; border-radius: 3px; font-size: 0.8em; padding: 2px; cursor: pointer;\">정보</span>");
                   break;
                 case 5:
                   td.html("환불 완료");
@@ -539,6 +539,13 @@ function query_addprice(row,td){
 
       });
 
+    }
+
+    function get_refund_info(elem) {
+      const $elem = $(elem);
+      const rev_id = $elem.parent().parent().find("#hide").text(); // 예약 구역 key
+      
+      
     }
 active_check("book");
   </script>
