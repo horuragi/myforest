@@ -1,5 +1,5 @@
 /* 예약 post 요청 */
-
+// /reser/{api}
 /* 내부 모듈 */
 var reservationmgt = require('../lib/reservationmgt.js');
 
@@ -30,7 +30,6 @@ router.post('/reservation_admin_refund_query', function (req, res) {
 
 //예약취소
 router.post('/reservation_cancel', function (req, res) {
-  console.log('123');
   reservationmgt.reservation_cancel(req, res);
 });
 
@@ -47,6 +46,10 @@ router.post('/reservation_refund_with_info', function (req, res) {
 //환불완료
 router.post('/reservation_refund_auth', function (req, res) {
   reservationmgt.reservation_refund_auth(req, res);
+});
+
+router.get('/get_reservation_refund_info', function (req, res) {
+  reservationmgt.get_reservation_refund_info(req, res);
 });
 
 //예약승인
