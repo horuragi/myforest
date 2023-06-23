@@ -63,6 +63,11 @@ function start_timer(data, date_time) {
       $('tbody input:checkbox:checked').each(function (index) {
         var tr = $(this).parent().parent();
         var td = tr.children();
+        
+        const argsInput = document.createElement("input");
+        argsInput.type = "hidden";
+        argsInput.name = "args";
+        rev_frm.appendChild(argsInput);
         rev_frm.args.value = td.eq(2).text();
         rev_frm.action = '/reser/reservation_cancel';
         rev_frm.submit();
