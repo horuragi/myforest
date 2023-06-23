@@ -63,6 +63,11 @@ function start_timer(data, date_time) {
       $('tbody input:checkbox:checked').each(function (index) {
         var tr = $(this).parent().parent();
         var td = tr.children();
+        
+        const argsInput = document.createElement("input");
+        argsInput.type = "hidden";
+        argsInput.name = "args";
+        rev_frm.appendChild(argsInput);
         rev_frm.args.value = td.eq(2).text();
         rev_frm.action = '/reser/reservation_cancel';
         rev_frm.submit();
@@ -71,17 +76,7 @@ function start_timer(data, date_time) {
   });
 
   $('#refund').click(function () {
-    if ($('table input:checkbox').length < 1) {
-      alert('하나 이상 선택해 주세요.');
-    } else {
-      $('tbody input:checkbox:checked').each(function (index) {
-        var tr = $(this).parent().parent();
-        var td = tr.children();
-        rev_frm.args.value = td.eq(2).text();
-        rev_frm.action = '/reser/reservation_refund';
-        rev_frm.submit();
-      });
-    }
+    RESERVATION_MANAGEMENT.PC.refund_button_click_handler();
   });
 }
 
@@ -206,7 +201,7 @@ function create_table(data) {
             $('<td>예약 승인</td>').appendTo(tr);
             break;
           case 3:
-            $('<td>환불 신청</td>').appendTo(tr);
+            $('<td>환불 신청 <span onclick=\"get_refund_info(this)\" style=\"background: #555; color: white; border-radius: 3px; font-size: 0.8em; padding: 2px; cursor: pointer;\">정보</span></td>').appendTo(tr);
             break;
           case 5:
             $('<td>환불 완료</td>').appendTo(tr);
@@ -251,6 +246,58 @@ function create_table(data) {
       }
     });
   });
+}
+function get_refund_info(elem) {
+  const $elem = $(elem);
+  const tr = $elem.parent().parent();
+  const rev_id = tr.find("#hide").text(); // 예약 구역 key
+  const tds = tr.find("td");
+  const reserve_type = tds.eq(3).text();
+  const price = tds.eq(5).text();
+  const reserve_date = tds.eq(6).text() + " ~ " + tds.eq(7).text();
+
+  // [GET] 환불 정보: /reser/get_reservation_refund_info
+  $.ajax({
+      type: "GET",
+      url: "/reser/get_reservation_refund_info",
+      data: { 
+        rev_id: rev_id 
+      },
+      success: function(response) {
+        if (response.hasOwnProperty("status") === false || response.status !== "success") {
+          alert("환불 정보가 존재하지 않습니다.");
+        } else {
+          const refund_info = response.result;
+
+          $("#refund_reserve_type").html(reserve_type);
+          $("#refund_reserve_date").html(reserve_date);
+          $("#refund_reserve_price").html(price);
+          $("#refund_info_name").html(refund_info.name);
+          $("#refund_info_bank").html(refund_info.bank);
+          $("#refund_info_account_number").html(refund_info.account_number);
+          $("#refund_info_date").html(formatDate(refund_info.refund_date));
+
+          $('.ui.modal.refund_info').modal('show');
+        }
+      },
+      error: function(xhr, status, error) {
+        alert("환불 정보를 불러오지 못했습니다.");
+      }
+  });
+}
+
+function formatDate (dateString) {
+  const date = new Date(dateString);
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    timeZone: "Asia/Seoul"
+  };
+  return date.toLocaleString("ko-KR", options);
 }
 
 function query_addprice(row, td) {

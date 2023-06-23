@@ -1,0 +1,35 @@
+<!-- used framework: semantic ui -->
+<div class="ui modal refund hidden">
+    <div class="header">환불신청</div>
+    <div class="content">
+      <div class="description">
+        <span style="color:red;font-weight:bold;font-size:0.8em">
+          * 환불 날짜는 환불 신청 날짜를 기준으로 책정됩니다.
+        </span><br />
+        <span style="font-weight:bold;font-size:0.8em">
+          * 환불 받으실 계좌 정보를 입력해주세요.
+        </span>
+      </div>
+      <br />
+      <div class="parameter">
+        <div>
+          <div>예금주</div>
+          <div class="ui fluid input">
+            <input name="name" id="refund_name" type="text" placeholder="계백장군">
+          </div> </br>
+          <div>은행 이름</div>
+          <div class="ui fluid input">
+            <input name="bank" id="refund_bank" type="text" placeholder="하나은행">
+          </div></br>
+          <div>계좌 번호</div>
+          <div class="ui fluid input">
+            <input name="account_number" id="refund_account_number" type="text" placeholder="012-333444-55555">
+          </div></br>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="positive ui approve button">신청</div>
+        <div class="negative ui deny button">취소</div>
+      </div>
+    </div>
+</div>

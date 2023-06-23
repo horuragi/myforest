@@ -12,7 +12,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="/semantic.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/reserve_timer.js"></script>
   <script src="/semantic.min.js"></script>
 
 
@@ -306,10 +305,6 @@
                       - 입금 완료후 예약 취소는 환불 신청 버튼을 사용해주세요.<br>
                       - 비로그인상태에서 예약 -> 이름과 휴대폰번호로 조회<br>
                       - 로그인상태에서 예약 -> 로그인후에 예약확인시 확인가능<br>
-                      <span style="color:red;font-weight:600">- 환불신청을 하신 경우 반드시 내안의숲( 010 5691 5058 )으로 환불받으실 계좌번호와 예약자
-                        성함을 문자로 보내주세요.</span><br>
-                      <span style="color:red;font-weight:600;font-size:1.1em;">- 환불날짜는 계좌번호를 보내주신 문자의 날짜를 기준으로
-                        책정됩니다.</span>
                     </span></p>
                   <hr align="left" style="width: 15%;border:solid 2px green">
                 </td>
@@ -358,10 +353,13 @@
             </div>
 
             <form name="rev_frm" method="post">
-              <input type="hidden" name="args">
             </form>
 
+            <!-- 환불 신청 모달-->
+            <% include refund_request.html %>
 
+            <!-- 환불 정보 모달-->
+            <% include refund_info.html %>
 
             <div style="height:100px"></div>
           </div>
@@ -372,6 +370,8 @@
       <!--footer-->
       <% include footer.html %>
   </div>
+  <script defer src="/js/reservation_management.js"></script>
+  <script defer src="/js/reserve_timer.js"></script>
   <script>
     setTimeout(function () {
       loading_hide();
