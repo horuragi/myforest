@@ -229,7 +229,9 @@ function create_table(data) {
             $('<li class="list-group-item">예약상태 : 예약 승인</li>').appendTo(drow);
             break;
           case 3:
-            $('<li class="list-group-item">예약상태 : 환불 신청</li>').appendTo(drow);
+            $('<li class="list-group-item">예약상태 : 환불 신청 '
+              + '<span onclick=\"get_refund_info(this)\" style=\"background: #555; color: white; border-radius: 3px; font-size: 0.8em; padding: 2px; cursor: pointer;\">정보</span>'
+              + '</li>').appendTo(drow);
             break;
           case 5:
             $('<li class="list-group-item">예약상태 : 환불 완료</li>').appendTo(drow);
@@ -339,6 +341,61 @@ function clear() {
     clearInterval(pid[i]);
   }
 }
+
+function get_refund_info(elem) {
+  const $elem = $(elem);
+  const ul = $elem.parent().parent();
+  const lis = ul.find("li");
+  const rev_id = lis.eq(2).text(); // 예약 구역 key
+  const reserve_type = lis.eq(3).text().split(":")[1];
+  const price = lis.eq(5).text().split(":")[1];
+  const reserve_date = lis.eq(6).text().split(":")[1] + " ~ " + lis.eq(7).text().split(":")[1];
+
+  // [GET] 환불 정보: /reser/get_reservation_refund_info
+  $.ajax({
+      type: "GET",
+      url: "/reser/get_reservation_refund_info",
+      data: { 
+        rev_id: rev_id 
+      },
+      success: function(response) {
+        if (response.hasOwnProperty("status") === false || response.status !== "success") {
+          alert("환불 정보가 존재하지 않습니다.");
+        } else {
+          const refund_info = response.result;
+
+          $("#refund_reserve_type").html(reserve_type);
+          $("#refund_reserve_date").html(reserve_date);
+          $("#refund_reserve_price").html(price);
+          $("#refund_info_name").html(refund_info.name);
+          $("#refund_info_bank").html(refund_info.bank);
+          $("#refund_info_account_number").html(refund_info.account_number);
+          $("#refund_info_date").html(formatDate(refund_info.refund_date));
+
+          const modal = $('.modal.refund_info');
+          modal.modal('show'); // show
+        }
+      },
+      error: function(xhr, status, error) {
+        alert("환불 정보를 불러오지 못했습니다.");
+      }
+  });
+}
+
+function formatDate (dateString) {
+  const date = new Date(dateString);
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    timeZone: "Asia/Seoul"
+  };
+  return date.toLocaleString("ko-KR", options);
+}
+
 /*
 
 function navi_move(cnt) {

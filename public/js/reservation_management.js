@@ -73,6 +73,36 @@ class RESERVATION_MANAGEMENT_MOBILE {
     }
 }
 
+function get_refund_info(rev_id) {
+    $.ajax({
+        type: "GET",
+        url: "/reser/get_reservation_refund_info",
+        data: { 
+          rev_id: rev_id 
+        },
+        success: function(response) {
+          if (response.hasOwnProperty("status") === false || response.status !== "success") {
+            alert("환불 정보가 존재하지 않습니다.");
+          } else {
+            const refund_info = response.result;
+
+            $("#refund_reserve_type").html(reserve_type);
+            $("#refund_reserve_date").html(reserve_date);
+            $("#refund_reserve_price").html(price);
+            $("#refund_name").html(refund_info.name);
+            $("#refund_bank").html(refund_info.bank);
+            $("#refund_account_number").html(refund_info.account_number);
+            $("#refund_date").html(formatDate(refund_info.refund_date));
+
+            $('.ui.modal.refund_info').modal('show');
+          }
+        },
+        error: function(xhr, status, error) {
+          alert("환불 정보를 불러오지 못했습니다.");
+        }
+    });
+}
+
 /**
  * 환불 요청 정보 셋팅
  * @param {*} callback 콜백 함수 
