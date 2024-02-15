@@ -655,7 +655,11 @@ var swiper = new Swiper('.swiper-container', {
 //var MinRange = new Date('2019-09-01');
 //var MaxRange = new Date('2019-09-30');
 var MinRange = new Date();
-    var MaxRange = new Date(MinRange.getFullYear(),(MinRange.getMonth()+2),0);
+<% if (session && session.isadmin === true) { %>
+var MaxRange = new Date(MinRange.getFullYear() + 2, (MinRange.getMonth() + 2), 0);
+<% } else { %>
+var MaxRange = new Date(MinRange.getFullYear(), (MinRange.getMonth() + 2), 0);
+<% } %>
     var tmpday;
     //MaxRange.setDate(MinRange.getDate() + 60);
 
