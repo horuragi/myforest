@@ -661,12 +661,12 @@ var swiper = new Swiper('.swiper-container', {
 //9월 1일에 바꾸기
 //var MinRange = new Date('2019-09-01');
 var MinRange = new Date();
-console.log(MinRange.getMonth()+2)
+var isAdmin = false;
+var MaxRange = new Date(MinRange.getFullYear(), (MinRange.getMonth() + 2), 0);
 //var TempRange = new Date(MinRange.getFullYear(),(MinRange.getMonth()+2),30);
 <% if (session && session.isadmin === true) { %>
-var MaxRange = new Date(MinRange.getFullYear() + 2, (MinRange.getMonth() + 2), 0);
-<% } else { %>
-var MaxRange = new Date(MinRange.getFullYear(), (MinRange.getMonth() + 2), 0);
+MaxRange = new Date(MinRange.getFullYear() + 2, (MinRange.getMonth() + 2), 0);
+isAdmin = true;
 <% } %>
 //var MaxRange = new Date();
     var tmpday;
@@ -723,7 +723,7 @@ $('#custom_calendar').datepicker({
                     date = new Date(firstdate);
                     inst.clear();
                     inst.selectDate(date);
-                } else if (tmpnum > 4) {
+                } else if (tmpnum > 4 && isAdmin == false) {
                     alert("최대 4박까지 가능합니다.");
                     inst.clear();
                     $('#first_select_day').text("");
